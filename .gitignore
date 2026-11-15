@@ -3,3 +3,4 @@ dist/
 .astro/
 screenshots/
 .DS_Store
+design-system/

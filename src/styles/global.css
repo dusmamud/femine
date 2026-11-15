@@ -183,6 +183,10 @@ body {
    legal links — lift it above the footer bar instead. */
 #to-top.is-near-bottom { bottom: 10rem; }
 
+/* Hide scrollbars on horizontally scrolling rows (still scrollable) */
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .marquee-track, .float-soft { animation: none; }

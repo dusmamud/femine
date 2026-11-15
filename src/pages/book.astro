@@ -18,7 +18,7 @@ const steps = [
 
     <section class="bg-white py-16 sm:py-20 lg:py-24">
       <div class="mx-auto grid max-w-6xl gap-12 px-5 lg:grid-cols-[1fr_1.4fr] lg:gap-16 lg:px-8">
-        <div data-reveal>
+        <div class="min-w-0" data-reveal>
           <p class="text-[13px] font-semibold uppercase tracking-[0.18em] text-rose-deep">What happens on the call</p>
           <h2 class="mt-2 font-display text-[28px] font-semibold leading-tight text-ink sm:text-[32px]">A relaxed chat — not a sales pitch</h2>
           <ol class="mt-8 space-y-7">
@@ -44,18 +44,18 @@ const steps = [
           <p class="mt-6 text-[15px] text-muted">Want to know the prices first? <a href="/pricing" class="font-medium text-wine hover:underline">See pricing →</a></p>
         </div>
 
-        <div data-reveal>
-          <div class="rounded-[2rem] bg-cream px-6 py-8 sm:px-8" data-reveal>
+        <div class="min-w-0" data-reveal>
+          <div class="min-w-0 rounded-[2rem] bg-cream px-6 py-8 sm:px-8" data-reveal>
             <p class="text-[13px] font-semibold uppercase tracking-[0.18em] text-rose-deep">Pick a time</p>
             <h2 class="mt-2 font-display text-[22px] font-semibold text-ink">Choose a day &amp; time that suits you</h2>
             <p class="mt-2 text-sm leading-relaxed text-muted">Times are in IST, Monday to Saturday. Your slot is added to your message automatically — we confirm it within 24 hours.</p>
             <input type="hidden" id="cf-date" value="" />
             <input type="hidden" id="cf-time" value="" />
-            <div id="slot-days" class="mt-6 flex gap-2 overflow-x-auto pb-2" role="group" aria-label="Choose a day"></div>
+            <div id="slot-days" class="no-scrollbar mt-6 flex min-w-0 gap-2 overflow-x-auto pb-2" role="group" aria-label="Choose a day"></div>
             <div id="slot-times" class="mt-4 grid grid-cols-4 gap-2 sm:grid-cols-4" role="group" aria-label="Choose a time"></div>
             <p id="slot-summary" class="mt-5 rounded-2xl bg-white px-4 py-3 text-sm font-medium text-wine" role="status">Pick a day and a time above.</p>
           </div>
-          <div class="mt-6">
+          <div class="mt-6 min-w-0">
             <ContactForm />
           </div>
         </div>

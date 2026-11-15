@@ -38,10 +38,17 @@ const siteLd = {
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://femine.pages.dev/og.png" />
-    <!-- Preload only the two above-fold fonts (headings + body), with
-         crossorigin even though they are same-origin — required for fonts. -->
+    <!-- Preload ALL six weights: every weight is used on nearly every page
+         (Playfair 500/600/700 for headings, Jost 400/500/600 for body/buttons),
+         total only ~108 KB. Preloading just two left the other four flashing
+         the fallback font on every navigation. crossorigin is required for
+         fonts even when same-origin. -->
+    <link rel="preload" href="/fonts/playfair-500.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/playfair-600.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/playfair-700.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/jost-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/jost-500.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/jost-600.woff2" as="font" type="font/woff2" crossorigin />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

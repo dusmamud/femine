@@ -1,0 +1,5 @@
+# Fonts are versioned by filename and never change in place, so browsers
+# may cache them for a year and reuse them instantly on every page —
+# no revalidation round trip, no default-font flash on navigation.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable

@@ -5,10 +5,11 @@ import problemImg from '../assets/service-problem-solving.jpg';
 import relationshipsImg from '../assets/service-relationships.jpg';
 import passionImg from '../assets/service-passion.jpg';
 import careerImg from '../assets/service-career.jpg';
+import corporateImg from '../assets/service-corporate.jpg';
 
 export interface Service {
   slug: string;
-  icon: 'bulb' | 'heart' | 'target' | 'chart';
+  icon: 'bulb' | 'heart' | 'target' | 'chart' | 'users';
   title: string;
   short: string;
   long: string;
@@ -97,6 +98,25 @@ export const services: Service[] = [
       'Build a personal brand people remember',
     ],
     outcomes: ['Be seen for the work you do', 'Ask for more — and get it', 'A career plan that moves every quarter'],
+  },
+  {
+    slug: 'corporate-workshops',
+    icon: 'users',
+    title: 'Corporate Workshops',
+    short: 'Half-day and full-day workshops that help teams communicate, lead and collaborate better.',
+    long: 'One confident person changes a team — a confident team changes a company. Our workshops bring Femine\'s practical coaching into the workplace: communication, presentation skills, feedback without friction, and leadership presence. Designed with your HR team, delivered online or on-site for teams of 8 to 40.',
+    duration: 'Half-day · 3 hours',
+    format: 'Teams of 8–40 · Online or on-site',
+    priceFrom: '₹14,999',
+    image: corporateImg,
+    imageAlt: 'A coach leading a workshop discussion with a team around a table',
+    benefits: [
+      'A workshop designed around your team\'s real challenges',
+      'Practical role-play — not slides your team will forget',
+      'Communication and feedback tools everyone can use on Monday',
+      'A follow-up report with next steps for managers',
+    ],
+    outcomes: ['Teams that speak up in meetings', 'Feedback without friction', 'Managers who lead with confidence'],
   },
 ];
 

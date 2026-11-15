@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import { contact } from '../data/site';
+---
+<Layout title="Accessibility — Femine" description="How Femine makes this website usable for everyone: keyboard navigation, screen readers, reduced motion and readable contrast.">
+  <Header />
+  <main id="main">
+    <PageHero eyebrow="Legal" title="Accessibility statement" text="Last updated: 15 November 2026" crumb="Accessibility" />
+    <section class="bg-white py-16 sm:py-20">
+      <article class="mx-auto max-w-3xl space-y-6 px-5 text-[15px] leading-relaxed text-muted lg:px-8">
+        <p>Femine wants everyone to be able to use this website — including people who navigate by keyboard, use a screen reader, or need larger text and calmer motion. We aim to meet WCAG 2.1 level AA, the widely used accessibility standard.</p>
+        <h2 class="pt-2 font-display text-2xl font-semibold text-ink">What we do</h2>
+        <p><strong class="font-semibold text-ink">Keyboard navigation.</strong> Every link, button and form field can be reached and used with the Tab key, and the focused element is always clearly visible.</p>
+        <p><strong class="font-semibold text-ink">Screen readers.</strong> Pages use proper headings, labels and landmarks. Images have text descriptions, and decorative images are hidden from screen readers.</p>
+        <p><strong class="font-semibold text-ink">Reduced motion.</strong> If your device is set to reduce motion, all animations and smooth scrolling on this site are turned off automatically.</p>
+        <p><strong class="font-semibold text-ink">Readable text.</strong> Body text is at least 15px with strong contrast against its background, and the layout works at 200% zoom without horizontal scrolling.</p>
+        <p><strong class="font-semibold text-ink">Forms.</strong> Every field has a visible label, and errors are explained in words — not colour alone.</p>
+        <h2 class="pt-2 font-display text-2xl font-semibold text-ink">What we are still improving</h2>
+        <p>Some older images carry short descriptions rather than detailed ones, and our video clips do not yet have captions. We are working through these, newest pages first.</p>
+        <h2 class="pt-2 font-display text-2xl font-semibold text-ink">Tell us about a problem</h2>
+        <p>If something on this site is hard for you to use, please tell us — we take it seriously and will fix it. Email <a href={`mailto:${contact.email}`} class="font-medium text-wine underline underline-offset-2">{contact.email}</a> or call <a href={contact.phoneHref} class="font-medium text-wine underline underline-offset-2">{contact.phoneDisplay}</a>. We aim to reply within 7 days.</p>
+      </article>
+    </section>
+  </main>
+  <Footer />
+</Layout>

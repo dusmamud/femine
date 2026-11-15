@@ -145,7 +145,7 @@ form?.addEventListener('submit', (e) => {
   }
   const subject = encodeURIComponent('Subscribe me to Femine weekly tips');
   const body = encodeURIComponent(`Hi Femine,\n\nPlease add ${input.value} to the weekly tips list.\n\nThank you!`);
-  window.location.href = `mailto:hello@femine.pages.dev?subject=${subject}&body=${body}`;
+  window.location.href = `mailto:hello@femine.in?subject=${subject}&body=${body}`;
   msg.textContent = 'Opening your email app to confirm — just press send.';
   msg.className = 'mt-3 text-sm text-white/90';
   form.reset();

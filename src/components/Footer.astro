@@ -1,17 +1,23 @@
 ---
 import { services } from '../data/services';
 import { socials } from '../data/socials';
+import { contact } from '../data/site';
 ---
 <footer class="bg-wine pb-10 pt-12 text-white/85">
   <div class="mx-auto max-w-6xl px-5 lg:px-8">
     <div class="grid grid-cols-2 gap-x-6 gap-y-10 pb-10 lg:grid-cols-4">
       <div class="col-span-2 lg:col-span-1">
-        <a href="/" class="flex w-fit items-center gap-1.5">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z" fill="#e78f8f"/></svg>
-          <span class="font-display text-2xl font-bold italic text-white">Femine</span>
+        <a href="/" class="flex w-fit items-center gap-2.5" aria-label="Femine home">
+          <svg width="34" height="34" viewBox="0 0 120 120" fill="none" aria-hidden="true"><path d="M20 108V62C20 34 38 16 60 16s40 18 40 46v46H20Z" fill="#fbe9e4"/><path d="M60 28l5.4 18.6L84 52l-18.6 5.4L60 76l-5.4-18.6L36 52l18.6-5.4Z" fill="#e78f8f"/><path d="M86 74l2.6 9.4L98 86l-9.4 2.6L86 98l-2.6-9.4L74 86l9.4-2.6Z" fill="#ffffff"/></svg>
+          <span>
+            <span class="block font-display text-2xl font-bold italic leading-none text-white">Femine</span>
+            <span class="mt-1 block text-[10px] font-medium uppercase tracking-[0.22em] text-white/60">Personality Coaching</span>
+          </span>
         </a>
         <p class="mt-4 max-w-xs text-sm leading-relaxed text-white/70">Personal coaching for confidence, relationships and career growth — practical sessions, real change.</p>
-        <p class="mt-4 text-sm text-white/70">Online sessions · Mon–Sat, 10am–7pm</p>
+        <p class="mt-4 text-sm text-white/70">Online sessions · {contact.hours}</p>
+        <p class="mt-2 text-sm"><a href={`mailto:${contact.email}`} class="text-white/85 hover:text-white">{contact.email}</a></p>
+        <p class="mt-1.5 text-sm"><a href={contact.phoneHref} class="text-white/85 hover:text-white">{contact.phoneDisplay}</a> · <a href={contact.whatsapp} target="_blank" rel="noopener" class="text-white/85 hover:text-white">WhatsApp</a></p>
         <a href="/book" class="mt-2 inline-block text-sm font-medium text-white underline decoration-rose decoration-2 underline-offset-4 hover:text-rose">Book your free session →</a>
         <div class="mt-6">
           <p class="text-[12px] font-semibold uppercase tracking-[0.16em] text-white/50">Follow us</p>
@@ -39,6 +45,8 @@ import { socials } from '../data/socials';
           <li><a href="/pricing" class="inline-block min-h-6 py-0.5 hover:text-white">Pricing</a></li>
           <li><a href="/book" class="inline-block min-h-6 py-0.5 hover:text-white">Book a Free Session</a></li>
           <li><a href="/testimonials" class="inline-block min-h-6 py-0.5 hover:text-white">Testimonials</a></li>
+          <li><a href="/results" class="inline-block min-h-6 py-0.5 hover:text-white">Results</a></li>
+          <li><a href="/free-guide" class="inline-block min-h-6 py-0.5 hover:text-white">Free Guide</a></li>
           <li><a href="/blog" class="inline-block min-h-6 py-0.5 hover:text-white">Blog</a></li>
           <li><a href="/faq" class="inline-block min-h-6 py-0.5 hover:text-white">FAQ</a></li>
           <li><a href="/sitemap" class="inline-block min-h-6 py-0.5 hover:text-white">Sitemap</a></li>
@@ -70,6 +78,7 @@ import { socials } from '../data/socials';
         <a href="/terms-and-conditions" class="hover:text-white">Terms &amp; Conditions</a>
         <a href="/cookie-policy" class="hover:text-white">Cookie Policy</a>
         <a href="/refund-policy" class="hover:text-white">Refund Policy</a>
+        <a href="/accessibility" class="hover:text-white">Accessibility</a>
         <a href="/sitemap-index.xml" class="hover:text-white">Sitemap</a>
       </nav>
     </div>

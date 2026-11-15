@@ -1,0 +1,77 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import { services, plans } from '../data/services';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+);
+const slug = (id: string) => id.replace(/\.md$/, '');
+const pages = [
+  { title: 'Home', href: '/', text: 'Personal coaching for confidence, relationships and career growth.' },
+  { title: 'About Us', href: '/about', text: 'Meet Meera Kapoor, our founder and lead coach, and the story of Femine.' },
+  { title: 'Services', href: '/services', text: 'Five coaching programmes: problem solving, relationships, passion, career and corporate workshops.' },
+  ...services.map((s) => ({ title: `${s.title} Coaching`, href: `/services/${s.slug}`, text: s.short })),
+  { title: 'Pricing', href: '/pricing', text: 'Single session ₹1,999, Growth Pack ₹6,999, Transform Pack ₹12,999. Gift a session too.' },
+  { title: 'Book a Free Session', href: '/book', text: 'Pick a day and time for your free 30-minute call.' },
+  { title: 'Results', href: '/results', text: 'Real client results: promotions, calmer relationships, careers with direction.' },
+  { title: 'Testimonials', href: '/testimonials', text: 'What clients say, Google reviews and video stories.' },
+  { title: 'Free Guide', href: '/free-guide', text: 'The Confidence First-Aid Kit — five practical tools, free.' },
+  { title: 'FAQ', href: '/faq', text: 'Pricing, privacy, rescheduling, refunds — answered honestly.' },
+  { title: 'Contact Us', href: '/contact', text: 'Email, phone and WhatsApp — we reply within 24 hours.' },
+  ...plans.map((p) => ({ title: `${p.name} — ${p.price}`, href: `/pricing`, text: p.features.join(' · ') })),
+  ...posts.map((p) => ({ title: p.data.title, href: `/blog/${slug(p.id)}`, text: p.data.excerpt })),
+];
+---
+<Layout title="Search — Femine" description="Search every page and article on the Femine website: programmes, pricing, results, guides and blog.">
+  <Header />
+  <main id="main">
+    <PageHero eyebrow="Search" title="Search the site" text="Programmes, pricing, results, guides and articles — all in one place." crumb="Search" />
+
+    <section class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-3xl px-5 lg:px-8">
+        <div class="relative" data-reveal>
+          <label for="search-input" class="sr-only">Search Femine</label>
+          <input id="search-input" type="search" autocomplete="off" placeholder="Try “pricing”, “confidence” or “refund”…" class="min-h-14 w-full rounded-full border border-ink/15 bg-cream px-6 text-[16px] focus:border-wine focus:outline-none" />
+        </div>
+        <p id="search-count" class="mt-4 text-sm text-muted" role="status">Showing all {pages.length} pages and articles.</p>
+        <ul id="search-results" class="mt-6 space-y-4">
+          {pages.map((p) => (
+            <li class="search-item rounded-[1.5rem] bg-cream px-6 py-5" data-title={p.title.toLowerCase()} data-text={p.text.toLowerCase()}>
+              <a href={p.href} class="font-display text-lg font-semibold text-ink hover:text-wine">{p.title}</a>
+              <p class="mt-1 text-sm leading-relaxed text-muted">{p.text}</p>
+            </li>
+          ))}
+        </ul>
+        <p id="search-empty" class="mt-8 hidden rounded-[2rem] bg-cream px-6 py-8 text-center text-[15px] text-muted">Nothing found for that search. Try a different word — or <a href="/contact" class="font-medium text-wine underline underline-offset-2">ask us directly</a>.</p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  // Client-side search over the static index above — no server needed.
+  const input = document.getElementById('search-input') as HTMLInputElement | null;
+  const items = [...document.querySelectorAll<HTMLElement>('.search-item')];
+  const count = document.getElementById('search-count');
+  const empty = document.getElementById('search-empty');
+  const run = () => {
+    const q = (input?.value ?? '').trim().toLowerCase();
+    let shown = 0;
+    items.forEach((el) => {
+      const hit = !q || (el.dataset.title + ' ' + el.dataset.text).includes(q);
+      el.classList.toggle('hidden', !hit);
+      if (hit) shown++;
+    });
+    if (count) count.textContent = q ? `${shown} result${shown === 1 ? '' : 's'} for “${input?.value.trim()}”.` : `Showing all ${items.length} pages and articles.`;
+    empty?.classList.toggle('hidden', shown > 0);
+  };
+  input?.addEventListener('input', run);
+  // Support ?q= links from anywhere on the site.
+  const preset = new URLSearchParams(location.search).get('q');
+  if (preset && input) { input.value = preset; run(); }
+</script>

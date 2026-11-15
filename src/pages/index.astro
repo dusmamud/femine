@@ -14,6 +14,7 @@ import avatarKavya from '../assets/avatar-kavya.jpg';
 import { getCollection } from 'astro:content';
 import { services, faqs } from '../data/services';
 import { testimonials } from '../data/testimonials';
+import { outcomeStats } from '../data/results';
 
 const latestPosts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
@@ -35,16 +36,36 @@ const steps = [
 
 const marqueeItems = ['Confidence', 'Self Growth', 'Relationships', 'Career', 'Communication', 'Leadership'];
 
+const problems = [
+  'I rehearse what to say in the meeting — then stay quiet anyway.',
+  'I say yes to everything, then resent it all week.',
+  'I know I am good at my work. Nobody else seems to notice.',
+  'I have three career ideas — and zero decisions.',
+];
+
 const orgLd = {
-  '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
   name: 'Femine',
   url: 'https://femine.pages.dev',
   description: 'Personal coaching for confidence, relationships, passion and career growth.',
   priceRange: '₹₹',
 };
+const pageLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    orgLd,
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.slice(0, 5).map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
 ---
-<Layout jsonLd={orgLd}>
+<Layout jsonLd={pageLd}>
   <Header />
   <main id="main">
   <!-- ============ HERO ============ -->
@@ -172,6 +193,28 @@ const orgLd = {
     </div>
   </section>
 
+  <!-- ============ DOES THIS SOUND FAMILIAR ============ -->
+  <section class="bg-cream py-16 sm:py-20 lg:py-24" aria-label="Does this sound familiar">
+    <div class="mx-auto max-w-6xl px-5 lg:px-8">
+      <div class="text-center" data-reveal>
+        <p class="text-[13px] font-semibold uppercase tracking-[0.18em] text-rose-deep">Does This Sound Familiar?</p>
+        <h2 class="fluid-h2 mt-2 font-display font-semibold text-ink">In your own words</h2>
+        <p class="mx-auto mt-3 max-w-lg text-base text-muted">If any of these sound like you, you are exactly who Femine is for.</p>
+      </div>
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" data-reveal-group>
+        {problems.map((p) => (
+          <figure class="rounded-[2rem] bg-white px-6 py-8 shadow-sm">
+            <span class="font-display text-4xl font-bold text-rose/40" aria-hidden="true">&ldquo;</span>
+            <blockquote class="mt-2 font-display text-[19px] leading-snug text-ink">{p}</blockquote>
+          </figure>
+        ))}
+      </div>
+      <p class="mt-10 text-center" data-reveal>
+        <a href="/book" class="inline-flex min-h-12 items-center rounded-full bg-rose px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Book a free call →</a>
+      </p>
+    </div>
+  </section>
+
   <!-- ============ SERVICES ============ -->
   <section id="services" class="relative scroll-mt-24 overflow-hidden bg-cream py-16 sm:py-20 lg:py-24">
     <span class="watermark top-6 left-1/2 -translate-x-1/2 text-[56px] sm:text-[110px]" aria-hidden="true">Our Services</span>
@@ -179,10 +222,10 @@ const orgLd = {
       <div class="text-center" data-reveal>
         <p class="text-[13px] font-semibold uppercase tracking-[0.18em] text-rose-deep">Our Services</p>
         <h2 class="fluid-h2 mt-2 font-display font-semibold text-ink">We Can Help Transform You</h2>
-        <p class="mx-auto mt-3 max-w-lg text-base text-muted">Four focused programmes — pick one, or combine them into your own growth plan.</p>
+        <p class="mx-auto mt-3 max-w-lg text-base text-muted">Five focused programmes — pick one, or combine them into your own growth plan.</p>
       </div>
 
-      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:mt-14 lg:grid-cols-4 lg:gap-6" data-reveal-group>
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:mt-14 lg:grid-cols-3 lg:gap-6" data-reveal-group>
         {services.map((s) => (
           <article class={`group relative rounded-[2rem] px-6 py-9 text-center transition duration-300 hover:-translate-y-1.5 focus-within:-translate-y-1.5 ${s.slug === 'relationships' ? 'bg-rose text-white shadow-xl shadow-rose/30' : 'bg-white text-ink shadow-sm hover:shadow-lg'}`}>
             <span class={`mx-auto grid h-14 w-14 place-items-center rounded-full transition duration-300 group-hover:scale-110 ${s.slug === 'relationships' ? 'bg-white/20 text-white' : 'bg-cream text-wine'}`}>
@@ -190,6 +233,7 @@ const orgLd = {
               {s.icon === 'heart' && <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.3-9.3-9A5.2 5.2 0 0 1 12 6.5 5.2 5.2 0 0 1 21.3 11C19 15.7 12 20 12 20z"/><path d="M12 6.5L14 9l2.5.5"/></svg>}
               {s.icon === 'target' && <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>}
               {s.icon === 'chart' && <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M7 16v-5M12 16V8M17 16v-3"/></svg>}
+              {s.icon === 'users' && <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>}
             </span>
             <h3 class="mt-5 font-display text-[21px] font-semibold">{s.title}</h3>
             <p class={`mt-2.5 text-sm leading-relaxed ${s.slug === 'relationships' ? 'text-white/85' : 'text-muted'}`}>{s.short}</p>
@@ -251,6 +295,25 @@ const orgLd = {
       <p class="mt-10 text-center" data-reveal>
         <a href="/testimonials" class="inline-flex min-h-12 items-center rounded-full bg-white px-7 text-[15px] font-medium text-wine shadow-sm transition hover:bg-blush-soft">Read all client stories →</a>
       </p>
+    </div>
+  </section>
+
+  <!-- ============ RESULTS STRIP ============ -->
+  <section class="bg-cream px-5 py-4 sm:py-6" aria-label="Results">
+    <div class="mx-auto max-w-6xl">
+      <div class="rounded-[2rem] bg-wine px-6 py-10 text-white sm:px-10" data-reveal>
+        <div class="grid gap-8 text-center sm:grid-cols-2 lg:grid-cols-4">
+          {outcomeStats.map((s) => (
+            <div>
+              <p class="font-display text-3xl font-bold sm:text-4xl">{s.value}</p>
+              <p class="mt-2 text-sm leading-relaxed text-white/80">{s.label}</p>
+            </div>
+          ))}
+        </div>
+        <p class="mt-8 text-center">
+          <a href="/results" class="inline-flex min-h-12 items-center rounded-full bg-white px-7 text-[15px] font-medium text-wine shadow-lg transition hover:bg-cream">See real client results →</a>
+        </p>
+      </div>
     </div>
   </section>
 

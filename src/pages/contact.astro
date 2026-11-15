@@ -7,9 +7,13 @@ import Footer from '../components/Footer.astro';
 import Faq from '../components/Faq.astro';
 import PageHero from '../components/PageHero.astro';
 import { faqs } from '../data/services';
+import { contact } from '../data/site';
 import ContactForm from '../components/ContactForm.astro';
 
-const info = [
+interface InfoCard { title: string; text: string; href?: string; label?: string; }
+const info: InfoCard[] = [
+  { title: 'Email us', text: contact.email, href: `mailto:${contact.email}`, label: `${contact.email} →` },
+  { title: 'Call or WhatsApp', text: `${contact.phoneDisplay} · Mon–Sat, 10am–7pm IST`, href: contact.whatsapp, label: 'Chat on WhatsApp →' },
   { title: 'Online sessions', text: 'Video call, from anywhere in the world. All you need is a quiet room.' },
   { title: 'Timings', text: 'Monday to Saturday, 10am – 7pm IST. Sunday is a rest day — for us too.' },
   { title: 'Reply time', text: 'We reply to every message within 24 hours, usually much faster.' },
@@ -33,6 +37,7 @@ const info = [
             <div class="rounded-[2rem] bg-cream px-6 py-6">
               <h2 class="font-display text-xl font-semibold text-ink">{c.title}</h2>
               <p class="mt-2 text-[15px] leading-relaxed text-muted">{c.text}</p>
+              {c.href && <p class="mt-3"><a href={c.href} {...(c.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})} class="text-[15px] font-medium text-wine hover:underline">{c.label}</a></p>}
             </div>
           ))}
           <div class="rounded-[2rem] bg-wine px-6 py-6 text-white">

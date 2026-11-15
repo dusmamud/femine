@@ -1,7 +1,6 @@
-// Femine's social profiles — one place to update them everywhere.
-// TODO: replace each '#' with Femine's real profile URL when Dus shares
-// them (e.g. 'https://www.instagram.com/femine'). Until then the icons
-// link nowhere — do not point them at a stranger's account.
+// Femine's social profiles — MOCK handles for the client demo.
+// TODO: replace each URL with Femine's real profile URL when Dus shares
+// them. These handles are invented for the presentation only.
 export interface Social {
   label: string;
   href: string;
@@ -9,9 +8,9 @@ export interface Social {
 }
 
 export const socials: Social[] = [
-  { label: 'Femine on Instagram', href: '#', icon: 'instagram' },
-  { label: 'Femine on Facebook', href: '#', icon: 'facebook' },
-  { label: 'Femine on YouTube', href: '#', icon: 'youtube' },
-  { label: 'Femine on LinkedIn', href: '#', icon: 'linkedin' },
-  { label: 'Femine on X', href: '#', icon: 'x' },
+  { label: 'Femine on Instagram', href: 'https://www.instagram.com/femine.coaching', icon: 'instagram' },
+  { label: 'Femine on Facebook', href: 'https://www.facebook.com/femine.coaching', icon: 'facebook' },
+  { label: 'Femine on YouTube', href: 'https://www.youtube.com/@feminecoaching', icon: 'youtube' },
+  { label: 'Femine on LinkedIn', href: 'https://www.linkedin.com/company/femine-coaching', icon: 'linkedin' },
+  { label: 'Femine on X', href: 'https://x.com/feminecoaching', icon: 'x' },
 ];

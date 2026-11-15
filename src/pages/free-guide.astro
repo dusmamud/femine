@@ -1,0 +1,90 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+
+const chapters = [
+  { n: '01', title: 'The 2-minute confidence reset', text: 'A short routine to do before any meeting, call or difficult conversation — so you walk in steady instead of shaky.' },
+  { n: '02', title: 'Saying no without guilt', text: 'Three exact sentences you can use when someone asks for more than you can give — kind, clear, and final.' },
+  { n: '03', title: 'The decision filter', text: 'Four questions that cut through overthinking and tell you what actually matters in a decision.' },
+  { n: '04', title: 'Speak up in meetings', text: 'The 3-sentence method: one observation, one idea, one question. No long speeches needed.' },
+  { n: '05', title: 'Your 7-day confidence plan', text: 'One small brave thing a day for a week — with a checklist you can tick off as you go.' },
+];
+---
+<Layout title="Free Guide: The Confidence First-Aid Kit — Femine" description="A free 8-page guide from Femine: five practical tools for confidence, difficult conversations and decisions — no email course, no spam.">
+  <Header />
+  <main id="main">
+    <PageHero eyebrow="Free Guide" title="The Confidence First-Aid Kit" text="Five practical tools you can use today — for meetings, difficult conversations and decisions. Free, 8 pages, no fluff." crumb="Free Guide" />
+
+    <section class="bg-white py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto grid max-w-6xl gap-12 px-5 lg:grid-cols-[1.2fr_1fr] lg:gap-16 lg:px-8">
+        <div data-reveal>
+          <h2 class="fluid-h2 font-display font-semibold text-ink">What&rsquo;s inside</h2>
+          <ol class="mt-8 space-y-6">
+            {chapters.map((c) => (
+              <li class="flex gap-5">
+                <span class="font-display text-2xl font-bold text-rose-deep" aria-hidden="true">{c.n}</span>
+                <div>
+                  <h3 class="font-display text-lg font-semibold text-ink">{c.title}</h3>
+                  <p class="mt-1 text-[15px] leading-relaxed text-muted">{c.text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+          <p class="mt-9 text-sm text-muted">Written by Femine&rsquo;s coaches, based on tools we actually use in sessions — not theory from a textbook.</p>
+        </div>
+
+        <div data-reveal>
+          <form id="guide-form" class="rounded-[2rem] bg-cream px-6 py-8 sm:px-8 lg:sticky lg:top-24" novalidate>
+            <h2 class="font-display text-2xl font-semibold text-ink">Get the free guide</h2>
+            <p class="mt-2 text-[15px] leading-relaxed text-muted">Enter your email and the guide is yours. One gentle tip a week after that — unsubscribe anytime.</p>
+            <div class="mt-6">
+              <label for="guide-name" class="mb-2 block text-sm font-medium text-ink">Your name *</label>
+              <input id="guide-name" type="text" required autocomplete="name" placeholder="Your full name" class="min-h-12 w-full rounded-2xl border border-ink/10 bg-white px-4 text-[15px] focus:border-wine focus:outline-none" />
+            </div>
+            <div class="mt-5">
+              <label for="guide-email" class="mb-2 block text-sm font-medium text-ink">Email address *</label>
+              <input id="guide-email" type="email" required autocomplete="email" placeholder="you@example.com" class="min-h-12 w-full rounded-2xl border border-ink/10 bg-white px-4 text-[15px] focus:border-wine focus:outline-none" />
+            </div>
+            <p id="guide-error" class="mt-4 hidden text-sm font-medium text-rose-deep" role="alert"></p>
+            <div id="guide-success" class="mt-4 hidden rounded-2xl bg-white px-4 py-3 text-sm font-medium text-wine" role="status"></div>
+            <button type="submit" class="mt-6 inline-flex min-h-12 w-full cursor-pointer items-center justify-center rounded-full bg-rose px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Send me the guide →</button>
+            <p class="mt-3 text-center text-[13px] text-muted">No spam. No sharing your email with anyone.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  // Lead-magnet form (demo): no backend on this static site, so a valid
+  // submission reveals the PDF download. The visitor's email is not stored
+  // anywhere — Dus will wire a real email list later.
+  const form = document.getElementById('guide-form') as HTMLFormElement | null;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const err = document.getElementById('guide-error');
+    const ok = document.getElementById('guide-success');
+    const name = (document.getElementById('guide-name') as HTMLInputElement)?.value.trim() ?? '';
+    const email = (document.getElementById('guide-email') as HTMLInputElement)?.value.trim() ?? '';
+    if (!name) {
+      if (err) { err.textContent = 'Please enter your name.'; err.classList.remove('hidden'); }
+      (document.getElementById('guide-name') as HTMLElement)?.focus();
+      return;
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      if (err) { err.textContent = 'Please enter a valid email address.'; err.classList.remove('hidden'); }
+      (document.getElementById('guide-email') as HTMLElement)?.focus();
+      return;
+    }
+    err?.classList.add('hidden');
+    if (ok) {
+      ok.innerHTML = `Thank you, ${name.split(' ')[0]} — your guide is ready. <a href="/free-guide.pdf" class="font-semibold underline underline-offset-2">Download the PDF →</a>`;
+      ok.classList.remove('hidden');
+    }
+    form.querySelector('button[type="submit"]')?.setAttribute('disabled', '');
+  });
+</script>

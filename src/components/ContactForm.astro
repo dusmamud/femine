@@ -3,9 +3,13 @@
 // submission opens the visitor's own email app with everything prefilled.
 // Used by /contact and /book — keep the ids (cf-*) unique per page by
 // rendering this component only once per page.
+// MOCK: the mailto goes to hello@femine.in (demo address — Dus will replace
+// it). ?plan= in the URL (from /pricing) preselects a plan note client-side.
 import { services } from '../data/services';
 ---
 <form id="contact-form" class="rounded-[2rem] bg-cream px-6 py-8 sm:px-8" novalidate data-reveal>
+  <p id="cf-plan-note" class="mb-5 hidden rounded-2xl bg-white px-4 py-3 text-sm font-medium text-wine" role="status"></p>
+  <input type="hidden" id="cf-plan" value="" />
   <div class="grid gap-5 sm:grid-cols-2">
     <div>
       <label for="cf-name" class="mb-2 block text-sm font-medium text-ink">Your name *</label>
@@ -36,6 +40,7 @@ import { services } from '../data/services';
               {s.icon === 'heart' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.3-9.3-9A5.2 5.2 0 0 1 12 6.5 5.2 5.2 0 0 1 21.3 11C19 15.7 12 20 12 20z"/><path d="M12 6.5L14 9l2.5.5"/></svg>}
               {s.icon === 'target' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>}
               {s.icon === 'chart' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M7 16v-5M12 16V8M17 16v-3"/></svg>}
+              {s.icon === 'users' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>}
             </span>
             <span class="min-w-0 flex-1">
               <span class="block text-[15px] font-medium text-ink">{s.title}</span>
@@ -55,6 +60,28 @@ import { services } from '../data/services';
           <svg class="svc-check hidden h-5 w-5 shrink-0 text-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
         </li>
       </ul>
+    </div>
+  </div>
+  <div class="mt-5 grid gap-5 sm:grid-cols-2">
+    <div>
+      <label for="cf-pref-time" class="mb-2 block text-sm font-medium text-ink">Preferred time <span class="font-normal text-muted">(optional)</span></label>
+      <select id="cf-pref-time" name="pref-time" class="min-h-12 w-full cursor-pointer appearance-none rounded-2xl border border-ink/10 bg-white px-4 text-[15px] focus:border-wine focus:outline-none">
+        <option value="">Any time</option>
+        <option value="Morning (10am – 1pm)">Morning (10am – 1pm)</option>
+        <option value="Afternoon (1pm – 4pm)">Afternoon (1pm – 4pm)</option>
+        <option value="Evening (4pm – 7pm)">Evening (4pm – 7pm)</option>
+      </select>
+    </div>
+    <div>
+      <label for="cf-source" class="mb-2 block text-sm font-medium text-ink">How did you hear about us? <span class="font-normal text-muted">(optional)</span></label>
+      <select id="cf-source" name="source" class="min-h-12 w-full cursor-pointer appearance-none rounded-2xl border border-ink/10 bg-white px-4 text-[15px] focus:border-wine focus:outline-none">
+        <option value="">Choose…</option>
+        <option value="Google search">Google search</option>
+        <option value="Instagram">Instagram</option>
+        <option value="YouTube">YouTube</option>
+        <option value="A friend">A friend</option>
+        <option value="Something else">Something else</option>
+      </select>
     </div>
   </div>
   <div class="mt-5">
@@ -124,6 +151,28 @@ import { services } from '../data/services';
     else if (e.key === 'Tab') setSvcOpen(false);
   });
 
+  // Plan preselect from ?plan= (linked from /pricing and gift cards).
+  // Runs client-side: the site is static, so the query string only exists
+  // in the browser. Unknown values are ignored.
+  const planNames: Record<string, string> = {
+    single: 'Single Session',
+    growth: 'Growth Pack',
+    transform: 'Transform Pack',
+    'gift-1999': 'Gift Card · ₹1,999',
+    'gift-3999': 'Gift Card · ₹3,999',
+    'gift-6999': 'Gift Card · ₹6,999',
+  };
+  const planInput = document.getElementById('cf-plan') as HTMLInputElement | null;
+  const planNote = document.getElementById('cf-plan-note');
+  const planQ = new URLSearchParams(location.search).get('plan');
+  if (planQ && planNames[planQ]) {
+    if (planInput) planInput.value = planNames[planQ];
+    if (planNote) {
+      planNote.textContent = `You picked the ${planNames[planQ]} — we will confirm it on your free call.`;
+      planNote.classList.remove('hidden');
+    }
+  }
+
   // Contact form — no backend on this static site, so a valid submission
   // opens the visitor's own email app with everything prefilled.
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
@@ -132,6 +181,8 @@ import { services } from '../data/services';
     const err = document.getElementById('cf-error');
     const get = (id: string) => (document.getElementById(id) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement)?.value.trim() ?? '';
     const name = get('cf-name'), email = get('cf-email'), phone = get('cf-phone'), service = get('cf-service'), message = get('cf-message');
+    const plan = get('cf-plan'), prefTime = get('cf-pref-time'), source = get('cf-source');
+    const date = get('cf-date'), time = get('cf-time');
     const showErr = (text: string, focusId: string) => {
       if (!err) return;
       err.textContent = text;
@@ -150,7 +201,7 @@ import { services } from '../data/services';
     if (!message) return showErr('Please tell us a little about what you would like to work on.', 'cf-message');
     err?.classList.add('hidden');
     const subject = encodeURIComponent(`Femine enquiry — ${service} (${name})`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone || '—'}\nProgramme: ${service}\n\n${message}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone || '—'}\nProgramme: ${service}\nPlan: ${plan || '—'}\nPreferred day: ${date || '—'}\nPreferred time slot: ${time || '—'}\nPreferred time of day: ${prefTime || '—'}\nHeard about us: ${source || '—'}\n\n${message}`);
     // Show the confirmation first, then open the mail app — setting
     // location.href first can interrupt the DOM update.
     const ok = document.getElementById('cf-success');
@@ -159,7 +210,10 @@ import { services } from '../data/services';
       ok.classList.remove('hidden');
     }
     setTimeout(() => {
-      window.location.href = `mailto:hello@femine.pages.dev?subject=${subject}&body=${body}`;
+      // MOCK email — keep in sync with src/data/site.ts. (Was define:vars,
+      // but define:vars scripts are not type-stripped, so the `as` casts
+      // in this script threw a SyntaxError and killed the whole form.)
+      window.location.href = `mailto:hello@femine.in?subject=${subject}&body=${body}`;
     }, 300);
   });
 </script>

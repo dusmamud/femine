@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 96">
+  <!-- Femine horizontal lockup: mark + wordmark + tagline.
+       NOTE: the wordmark is live text — it renders in Playfair Display when
+       the site font is loaded (inline use), and falls back to Georgia serif
+       when the file is opened on its own. -->
+  <path d="M12 84V48C12 28 24 14 40 14s28 14 28 34v36H12Z" fill="#fbe9e4"/>
+  <path d="M40 24l3.6 12.4L56 40l-12.4 3.6L40 56l-3.6-12.4L24 40l12.4-3.6Z" fill="#e78f8f"/>
+  <path d="M58 62l1.8 6.2L66 70l-6.2 1.8L58 78l-1.8-6.2L50 70l6.2-1.8Z" fill="#6e2434"/>
+  <text x="82" y="56" font-family="Playfair Display, Georgia, serif" font-size="44" font-weight="700" font-style="italic" fill="#2b1a1e">Femine</text>
+  <text x="84" y="78" font-family="Jost, Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="4.5" fill="#6e2434">PERSONALITY COACHING</text>
+</svg>

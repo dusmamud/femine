@@ -6,10 +6,10 @@ import Footer from '../../components/Footer.astro';
 import PageHero from '../../components/PageHero.astro';
 import { services, plans } from '../../data/services';
 ---
-<Layout title="Services — Femine" description="Four focused coaching programmes: Problem Solving, Relationships, Identifying Passion and Growth Career. 1-to-1 online sessions from ₹1,999.">
+<Layout title="Services — Femine" description="Five focused coaching programmes: Problem Solving, Relationships, Identifying Passion, Growth Career and Corporate Workshops. 1-to-1 online sessions from ₹1,999.">
   <Header />
   <main id="main">
-    <PageHero eyebrow="Our Services" title="Four programmes, one goal: a stronger you" text="Every programme is 1-to-1, online, and built around your real life — not a generic course. Pick one, or combine them." crumb="Services" />
+    <PageHero eyebrow="Our Services" title="Five programmes, one goal: a stronger you" text="Every programme is 1-to-1, online, and built around your real life — not a generic course. Pick one, or combine them." crumb="Services" />
 
     <section class="bg-white py-16 sm:py-20 lg:py-24">
       <div class="mx-auto max-w-6xl px-5 lg:px-8">
@@ -27,6 +27,7 @@ import { services, plans } from '../../data/services';
                   {s.icon === 'heart' && <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.3-9.3-9A5.2 5.2 0 0 1 12 6.5 5.2 5.2 0 0 1 21.3 11C19 15.7 12 20 12 20z"/><path d="M12 6.5L14 9l2.5.5"/></svg>}
                   {s.icon === 'target' && <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>}
                   {s.icon === 'chart' && <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M7 16v-5M12 16V8M17 16v-3"/></svg>}
+                  {s.icon === 'users' && <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>}
                 </span>
               </div>
               <h2 class="mt-5 font-display text-2xl font-semibold text-ink">{s.title}</h2>

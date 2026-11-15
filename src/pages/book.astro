@@ -44,9 +44,96 @@ const steps = [
           <p class="mt-6 text-[15px] text-muted">Want to know the prices first? <a href="/pricing" class="font-medium text-wine hover:underline">See pricing →</a></p>
         </div>
 
-        <ContactForm />
+        <div data-reveal>
+          <div class="rounded-[2rem] bg-cream px-6 py-8 sm:px-8" data-reveal>
+            <p class="text-[13px] font-semibold uppercase tracking-[0.18em] text-rose-deep">Pick a time</p>
+            <h2 class="mt-2 font-display text-[22px] font-semibold text-ink">Choose a day &amp; time that suits you</h2>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Times are in IST, Monday to Saturday. Your slot is added to your message automatically — we confirm it within 24 hours.</p>
+            <input type="hidden" id="cf-date" value="" />
+            <input type="hidden" id="cf-time" value="" />
+            <div id="slot-days" class="mt-6 flex gap-2 overflow-x-auto pb-2" role="group" aria-label="Choose a day"></div>
+            <div id="slot-times" class="mt-4 grid grid-cols-4 gap-2 sm:grid-cols-4" role="group" aria-label="Choose a time"></div>
+            <p id="slot-summary" class="mt-5 rounded-2xl bg-white px-4 py-3 text-sm font-medium text-wine" role="status">Pick a day and a time above.</p>
+          </div>
+          <div class="mt-6">
+            <ContactForm />
+          </div>
+        </div>
       </div>
     </section>
   </main>
   <Footer />
 </Layout>
+
+<script>
+  // Mock booking calendar (demo): builds the next 14 days (Mon–Sat) and
+  // 8 time slots client-side. A few slots are shown as taken, using a
+  // stable hash of day+slot so the same slot is taken on every load.
+  // The chosen day/time go into the hidden #cf-date / #cf-time inputs,
+  // which ContactForm includes in the message. No real calendar account
+  // is connected — Dus will wire Calendly / Cal.com later.
+  const dayRow = document.getElementById('slot-days');
+  const timeGrid = document.getElementById('slot-times');
+  const dateInput = document.getElementById('cf-date') as HTMLInputElement | null;
+  const timeInput = document.getElementById('cf-time') as HTMLInputElement | null;
+  const summary = document.getElementById('slot-summary');
+  const slots = ['10:00 AM', '11:00 AM', '12:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM'];
+  const fmtDay = (d: Date) => d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+  const fmtLong = (d: Date) => d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+  const hash = (s: string) => { let h = 0; for (const c of s) h = (h * 31 + c.charCodeAt(0)) >>> 0; return h; };
+  const days: Date[] = [];
+  const cursor = new Date(); cursor.setDate(cursor.getDate() + 1);
+  while (days.length < 14) { if (cursor.getDay() !== 0) days.push(new Date(cursor)); cursor.setDate(cursor.getDate() + 1); }
+  let selectedDay: Date | null = null;
+  let selectedTime: string | null = null;
+
+  function updateSummary() {
+    if (selectedDay && selectedTime && summary) {
+      summary.textContent = `Your slot: ${fmtLong(selectedDay)} · ${selectedTime} IST — it will be added to your message below.`;
+    }
+    if (dateInput) dateInput.value = selectedDay ? fmtLong(selectedDay) : '';
+    if (timeInput) timeInput.value = selectedTime ?? '';
+  }
+  function renderTimes() {
+    if (!timeGrid || !selectedDay) return;
+    const iso = selectedDay.toISOString().slice(0, 10);
+    timeGrid.innerHTML = '';
+    slots.forEach((t) => {
+      const taken = hash(iso + t) % 4 === 0;
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = t;
+      b.disabled = taken;
+      b.setAttribute('aria-pressed', String(selectedTime === t));
+      b.className = 'min-h-11 rounded-full border px-2 text-sm font-medium transition ' + (taken
+        ? 'cursor-not-allowed border-ink/10 bg-white/60 text-muted/50 line-through'
+        : selectedTime === t
+          ? 'border-wine bg-wine text-white shadow-md shadow-wine/25'
+          : 'border-ink/10 bg-white text-ink hover:border-wine');
+      if (!taken) b.addEventListener('click', () => { selectedTime = t; renderTimes(); updateSummary(); });
+      timeGrid.appendChild(b);
+    });
+  }
+  days.forEach((d, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-pressed', String(i === 0));
+    b.className = 'shrink-0 rounded-2xl border px-4 py-3 text-center transition ' + (i === 0 ? 'border-wine bg-wine text-white shadow-md shadow-wine/25' : 'border-ink/10 bg-white text-ink hover:border-wine');
+    b.innerHTML = `<span class="block text-[12px] font-medium opacity-80">${d.toLocaleDateString('en-GB', { weekday: 'short' })}</span><span class="block font-display text-lg font-bold leading-tight">${d.getDate()}</span><span class="block text-[12px] opacity-80">${d.toLocaleDateString('en-GB', { month: 'short' })}</span>`;
+    b.addEventListener('click', () => {
+      selectedDay = d; selectedTime = null;
+      dayRow?.querySelectorAll('button').forEach((x) => {
+        x.setAttribute('aria-pressed', 'false');
+        x.className = 'shrink-0 rounded-2xl border px-4 py-3 text-center transition border-ink/10 bg-white text-ink hover:border-wine';
+      });
+      b.setAttribute('aria-pressed', 'true');
+      b.className = 'shrink-0 rounded-2xl border px-4 py-3 text-center transition border-wine bg-wine text-white shadow-md shadow-wine/25';
+      renderTimes(); updateSummary();
+    });
+    dayRow?.appendChild(b);
+  });
+  // Preselect the first day and its first free slot, so the demo shows a slot.
+  selectedDay = days[0];
+  selectedTime = slots.find((t) => hash(days[0].toISOString().slice(0, 10) + t) % 4 !== 0) ?? null;
+  renderTimes(); updateSummary();
+</script>

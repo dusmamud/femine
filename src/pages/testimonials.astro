@@ -5,6 +5,15 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PageHero from '../components/PageHero.astro';
 import { testimonials } from '../data/testimonials';
+import { googleReviews } from '../data/results';
+import { googleUrl } from '../data/site';
+import avatarAnanya from '../assets/avatar-ananya.jpg';
+import avatarPriya from '../assets/avatar-priya.jpg';
+
+const videoStories = [
+  { title: 'From quiet to confident', name: 'Sneha Desai', programme: 'Growth Career', poster: avatarAnanya.src },
+  { title: 'Saying no, without the guilt', name: 'Ritu Malhotra', programme: 'Relationships', poster: avatarPriya.src },
+];
 ---
 <Layout title="Client Stories — Femine" description="Real stories from Femine clients: confidence at work, calmer relationships, and careers with direction.">
   <Header />
@@ -44,6 +53,54 @@ import { testimonials } from '../data/testimonials';
           <h2 class="font-display text-2xl font-semibold sm:text-3xl">Your story could be next</h2>
           <p class="mx-auto mt-3 max-w-lg text-[15px] leading-relaxed text-white/80">Start with a free 30-minute call. No commitment, no pressure — just an honest conversation about where you want to go.</p>
           <a href="/book" class="mt-6 inline-flex min-h-12 items-center rounded-full bg-white px-8 text-[15px] font-medium text-wine shadow-lg transition hover:bg-cream">Book your free session →</a>
+        </div>
+
+        <div class="mt-16" data-reveal>
+          <div class="text-center">
+            <p class="text-[13px] font-semibold uppercase tracking-[0.18em] text-rose-deep">On Google</p>
+            <h2 class="fluid-h2 mt-2 font-display font-semibold text-ink">Rated 4.9 / 5 by our clients</h2>
+            <p class="mx-auto mt-3 max-w-lg text-base text-muted">What clients write about Femine on Google — unedited, in their own words.</p>
+          </div>
+          <div class="mt-10 grid gap-5 md:grid-cols-3" data-reveal-group>
+            {googleReviews.map((r) => (
+              <figure class="rounded-[2rem] bg-cream px-6 py-8 shadow-sm">
+                <p class="text-lg font-bold tracking-tight" aria-label="Google review">
+                  <span class="text-[#4285f4]">G</span><span class="text-[#ea4335]">o</span><span class="text-[#fbbc05]">o</span><span class="text-[#4285f4]">g</span><span class="text-[#34a853]">l</span><span class="text-[#ea4335]">e</span>
+                </p>
+                <span class="mt-3 flex gap-0.5 text-rose-deep" role="img" aria-label="5 out of 5 stars">
+                  {Array.from({ length: 5 }).map(() => (
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+                  ))}
+                </span>
+                <blockquote class="mt-4 flex-1 text-[15px] leading-relaxed text-ink">&ldquo;{r.text}&rdquo;</blockquote>
+                <figcaption class="mt-5 text-sm"><span class="font-semibold text-ink">{r.name}</span><span class="text-muted"> · {r.date}</span></figcaption>
+              </figure>
+            ))}
+          </div>
+          <p class="mt-8 text-center">
+            <a href={googleUrl} target="_blank" rel="noopener" class="text-[15px] font-medium text-wine hover:underline">Read all reviews on Google →</a>
+          </p>
+        </div>
+
+        <div class="mt-16" data-reveal>
+          <div class="text-center">
+            <p class="text-[13px] font-semibold uppercase tracking-[0.18em] text-rose-deep">Video Stories</p>
+            <h2 class="fluid-h2 mt-2 font-display font-semibold text-ink">Watch them tell it</h2>
+            <p class="mx-auto mt-3 max-w-lg text-base text-muted">Short clips from clients — what changed, in their own words.</p>
+          </div>
+          <div class="mt-10 grid gap-5 md:grid-cols-2" data-reveal-group>
+            {videoStories.map((v) => (
+              <figure class="overflow-hidden rounded-[2rem] bg-cream shadow-sm">
+                <video controls preload="none" poster={v.poster} class="aspect-video w-full object-cover">
+                  <source src="/videos/client-story.mp4" type="video/mp4" />
+                </video>
+                <figcaption class="px-6 py-5">
+                  <p class="font-display text-xl font-semibold text-ink">{v.title}</p>
+                  <p class="mt-1 text-sm text-muted">{v.name} · {v.programme}</p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </div>
     </section>

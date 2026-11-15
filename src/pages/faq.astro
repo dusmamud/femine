@@ -5,8 +5,18 @@ import Footer from '../components/Footer.astro';
 import Faq from '../components/Faq.astro';
 import PageHero from '../components/PageHero.astro';
 import { faqs } from '../data/services';
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
-<Layout title="Frequently Asked Questions — Femine" description="Everything you want to know before your first session: pricing, privacy, rescheduling, and what happens on the free call.">
+<Layout title="Frequently Asked Questions — Femine" description="Everything you want to know before your first session: pricing, privacy, rescheduling, and what happens on the free call." jsonLd={faqLd}>
   <Header />
   <main id="main">
     <PageHero eyebrow="FAQ" title="Questions, answered honestly" text="If your question is not here, ask us directly — we reply within 24 hours." crumb="FAQ" />

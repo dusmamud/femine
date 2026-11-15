@@ -11,6 +11,13 @@ const included = [
   { title: 'Free rescheduling', text: 'Life happens. Reschedule any session free of charge up to 12 hours before it starts.' },
   { title: 'No subscription', text: 'You pay per plan, not per month. When your sessions are done, nothing renews itself.' },
 ];
+const planSlug = (name: string) => (name === 'Single Session' ? 'single' : name === 'Growth Pack' ? 'growth' : 'transform');
+const gifts = [
+  { amount: '₹1,999', text: 'One 60-minute session — a thoughtful nudge for someone you care about.' },
+  { amount: '₹3,999', text: 'Two sessions — enough to start a real change.' },
+  { amount: '₹6,999', text: 'The full Growth Pack — four sessions, a complete fresh start.' },
+];
+const giftSlug = (amount: string) => 'gift-' + amount.replace(/[₹,]/g, '');
 ---
 <Layout title="Pricing — Femine" description="Simple, honest pricing: a single session at ₹1,999, a 4-session Growth Pack at ₹6,999, or an 8-session Transform Pack at ₹12,999. Your first 30-minute call is always free.">
   <Header />
@@ -36,9 +43,31 @@ const included = [
                   </li>
                 ))}
               </ul>
-              <a href="/book" class={`mt-8 inline-flex min-h-12 items-center justify-center rounded-full text-[15px] font-medium transition ${p.featured ? 'bg-white text-wine shadow-lg hover:bg-cream' : 'bg-rose text-white shadow-md shadow-rose/30 hover:bg-rose-deep'}`}>Book a free call →</a>
+              <a href={`/book?plan=${planSlug(p.name)}`} class={`mt-8 inline-flex min-h-12 items-center justify-center rounded-full text-[15px] font-medium transition ${p.featured ? 'bg-white text-wine shadow-lg hover:bg-cream' : 'bg-rose text-white shadow-md shadow-rose/30 hover:bg-rose-deep'}`}>Book a free call →</a>
             </article>
           ))}
+        </div>
+
+        <div class="mt-10 flex flex-wrap items-center justify-center gap-3" data-reveal>
+          <span class="text-sm font-medium text-muted">Pay securely with</span>
+          {['UPI', 'Visa', 'Mastercard', 'RuPay', 'NetBanking'].map((m) => (
+            <span class="rounded-full border border-ink/10 bg-white px-4 py-2 text-[13px] font-semibold text-ink">{m}</span>
+          ))}
+          <span class="text-sm text-muted">· No card is stored on this site.</span>
+        </div>
+
+        <div class="mt-16" data-reveal>
+          <h2 class="text-center font-display text-2xl font-semibold text-ink sm:text-3xl">Gift a session</h2>
+          <p class="mx-auto mt-3 max-w-lg text-center text-base text-muted">Know someone who could use a little confidence? Gift them coaching — we send a beautiful gift card by email, valid for 12 months.</p>
+          <div class="mt-8 grid gap-5 sm:grid-cols-3">
+            {gifts.map((g) => (
+              <div class="rounded-[2rem] border-2 border-dashed border-rose/40 bg-cream px-6 py-7 text-center">
+                <p class="font-display text-3xl font-bold text-wine">{g.amount}</p>
+                <p class="mt-2 text-sm leading-relaxed text-muted">{g.text}</p>
+                <a href={`/book?plan=${giftSlug(g.amount)}`} class="mt-5 inline-flex min-h-11 items-center rounded-full bg-rose px-6 text-sm font-medium text-white transition hover:bg-rose-deep">Gift {g.amount} →</a>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div class="mt-16" data-reveal>
@@ -58,7 +87,7 @@ const included = [
             <h2 class="font-display text-2xl font-semibold text-ink">How payment works</h2>
             <ol class="mt-5 list-decimal space-y-3 pl-5 text-[15px] leading-relaxed text-muted">
               <li><strong class="font-semibold text-ink">Book a free call.</strong> We talk for 30 minutes and agree on the right plan together.</li>
-              <li><strong class="font-semibold text-ink">We send a payment link.</strong> You pay for the plan you chose — no account, no card stored.</li>
+              <li><strong class="font-semibold text-ink">We send a secure payment link.</strong> Pay by UPI, card or net banking — no account, no card stored on this site.</li>
               <li><strong class="font-semibold text-ink">We schedule your sessions.</strong> Weekly, at times that suit you, Monday to Saturday.</li>
             </ol>
             <p class="mt-5 text-[15px] leading-relaxed text-muted">Not sure which plan fits? Most clients notice a real change in 4 sessions and deeper change in 8 — and a single session is enough for one specific decision. We will help you choose on the free call.</p>

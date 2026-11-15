@@ -181,7 +181,7 @@ body {
 #to-top[data-show="false"] { opacity: 0; transform: translateY(12px); pointer-events: none; }
 /* At the very bottom of the page the button would cover the footer's
    legal links — lift it above the footer bar instead. */
-#to-top.is-near-bottom { bottom: 6.5rem; }
+#to-top.is-near-bottom { bottom: 10rem; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

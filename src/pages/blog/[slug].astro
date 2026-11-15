@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
@@ -34,7 +34,7 @@ const slug = (id: string) => id.replace(/\.md$/, '');
       </div>
       <div class="mx-auto mt-8 max-w-4xl px-5 lg:px-8" data-reveal>
         <div class="overflow-hidden rounded-[2rem] shadow-lg shadow-rose/10">
-          <Image src={post.data.image} alt={post.data.imageAlt} widths={[768, 1200]} sizes="(max-width: 1024px) 100vw, 900px" format="avif" quality={80} loading="eager" class="aspect-[16/9] w-full object-cover" />
+          <Picture src={post.data.image} alt={post.data.imageAlt} widths={[768, 1200]} sizes="(max-width: 1024px) 100vw, 900px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="eager" fetchpriority="high" class="aspect-[16/9] w-full object-cover" />
         </div>
       </div>
     </section>
@@ -67,7 +67,7 @@ const slug = (id: string) => id.replace(/\.md$/, '');
             {others.map((p) => (
               <article class="flex flex-col overflow-hidden rounded-[2rem] bg-white shadow-sm transition hover:shadow-lg">
                 <a href={`/blog/${slug(p.id)}`} class="block" aria-label={p.data.title}>
-                  <Image src={p.data.image} alt={p.data.imageAlt} widths={[480, 960]} sizes="(max-width: 768px) 100vw, 50vw" format="avif" quality={80} loading="lazy" class="aspect-[16/10] w-full object-cover" />
+                  <Picture src={p.data.image} alt={p.data.imageAlt} widths={[480, 960]} sizes="(max-width: 768px) 100vw, 50vw" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="lazy" class="aspect-[16/10] w-full object-cover" />
                 </a>
                 <div class="flex flex-1 flex-col px-6 py-6">
                   <p class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] font-medium text-muted">

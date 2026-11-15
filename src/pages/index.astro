@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -74,9 +74,9 @@ const orgLd = {
         </div>
         <div data-hero class="mt-8 flex items-center gap-3">
           <span class="flex -space-x-2" aria-hidden="true">
-            <Image src={avatarAnanya} alt="" widths={[72]} sizes="36px" format="avif" quality={80} loading="eager" class="h-9 w-9 rounded-full object-cover ring-2 ring-cream" />
-            <Image src={avatarPriya} alt="" widths={[72]} sizes="36px" format="avif" quality={80} loading="eager" class="h-9 w-9 rounded-full object-cover ring-2 ring-cream" />
-            <Image src={avatarKavya} alt="" widths={[72]} sizes="36px" format="avif" quality={80} loading="eager" class="h-9 w-9 rounded-full object-cover ring-2 ring-cream" />
+            <Picture src={avatarAnanya} alt="" widths={[72]} sizes="36px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="eager" class="h-9 w-9 rounded-full object-cover ring-2 ring-cream" />
+            <Picture src={avatarPriya} alt="" widths={[72]} sizes="36px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="eager" class="h-9 w-9 rounded-full object-cover ring-2 ring-cream" />
+            <Picture src={avatarKavya} alt="" widths={[72]} sizes="36px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="eager" class="h-9 w-9 rounded-full object-cover ring-2 ring-cream" />
           </span>
           <div class="text-sm leading-tight">
             <span class="flex gap-0.5 text-rose-deep" role="img" aria-label="Rated 4.9 out of 5">
@@ -91,7 +91,7 @@ const orgLd = {
 
       <div data-hero-img class="relative mx-auto w-full max-w-[340px] sm:max-w-[420px]">
         <div class="arch relative overflow-hidden bg-blush shadow-xl shadow-rose/20">
-          <Image src={heroImg} alt="Smiling woman holding a notebook" widths={[360, 720]} sizes="(max-width: 640px) 340px, 420px" format="avif" quality={80} loading="eager" class="aspect-[3/4] w-full object-cover object-top" data-parallax />
+          <Picture src={heroImg} alt="Smiling woman holding a notebook" widths={[360, 720]} sizes="(max-width: 640px) 340px, 420px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="eager" fetchpriority="high" class="aspect-[3/4] w-full object-cover object-top" data-parallax />
         </div>
         <Branch class="absolute -left-10 bottom-2 hidden h-56 w-auto sm:block lg:-left-16" />
         <div class="absolute -right-2 top-1/2 flex -translate-y-1/2 flex-col gap-3 lg:-right-6" aria-hidden="true">
@@ -126,7 +126,7 @@ const orgLd = {
     <div class="relative mx-auto grid max-w-6xl items-center gap-10 px-5 sm:gap-12 lg:grid-cols-2 lg:gap-16 lg:px-8">
       <div class="relative mx-auto w-full max-w-[340px] sm:max-w-[420px]" data-reveal>
         <div class="arch-flip relative overflow-hidden bg-blush shadow-xl shadow-rose/20">
-          <Image src={welcomeImg} alt="Woman looking up with confidence" widths={[360, 720]} sizes="(max-width: 640px) 340px, 420px" format="avif" quality={80} loading="lazy" class="aspect-[4/5] w-full object-cover object-top" />
+          <Picture src={welcomeImg} alt="Woman looking up with confidence" widths={[360, 720]} sizes="(max-width: 640px) 340px, 420px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="lazy" class="aspect-[4/5] w-full object-cover object-top" />
         </div>
         <Branch flip class="absolute -right-8 bottom-2 hidden h-52 w-auto sm:block lg:-right-12" />
         <div class="absolute -left-2 top-1/2 flex -translate-y-1/2 flex-col gap-3 lg:-left-6" aria-hidden="true">
@@ -242,7 +242,7 @@ const orgLd = {
             </span>
             <blockquote class="mt-4 font-display text-[19px] leading-snug text-ink">“{t.quote}”</blockquote>
             <figcaption class="mt-5 flex items-center gap-3">
-              <Image src={t.img} alt={`Portrait of ${t.name}`} widths={[96]} sizes="44px" format="avif" quality={80} loading="lazy" class="h-11 w-11 rounded-full object-cover ring-2 ring-cream" />
+              <Picture src={t.img} alt={`Portrait of ${t.name}`} widths={[96]} sizes="44px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="lazy" class="h-11 w-11 rounded-full object-cover ring-2 ring-cream" />
               <span><span class="block text-sm font-semibold text-ink">{t.name}</span><span class="block text-[13px] text-muted">{t.role}</span></span>
             </figcaption>
           </figure>
@@ -268,7 +268,7 @@ const orgLd = {
         {latestPosts.map((p) => (
           <article class="flex flex-col overflow-hidden rounded-[2rem] bg-white shadow-sm transition hover:shadow-lg">
             <a href={`/blog/${postSlug(p.id)}`} class="block" aria-label={p.data.title}>
-              <Image src={p.data.image} alt={p.data.imageAlt} widths={[480, 960]} sizes="(max-width: 768px) 100vw, 33vw" format="avif" quality={80} loading="lazy" class="aspect-[16/10] w-full object-cover" />
+              <Picture src={p.data.image} alt={p.data.imageAlt} widths={[480, 960]} sizes="(max-width: 768px) 100vw, 33vw" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="lazy" class="aspect-[16/10] w-full object-cover" />
             </a>
             <div class="flex flex-1 flex-col px-6 py-6">
               <p class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] font-medium text-muted">
@@ -316,7 +316,7 @@ const orgLd = {
 
       <div class="relative mx-auto w-full max-w-[340px] sm:max-w-[420px]" data-reveal>
         <div class="arch relative overflow-hidden bg-blush shadow-xl shadow-rose/20">
-          <Image src={expertiseImg} alt="Woman in a striped shirt smiling" widths={[360, 720]} sizes="(max-width: 640px) 340px, 420px" format="avif" quality={80} loading="lazy" class="aspect-[3/4] w-full object-cover object-top" data-parallax />
+          <Picture src={expertiseImg} alt="Woman in a striped shirt smiling" widths={[360, 720]} sizes="(max-width: 640px) 340px, 420px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="lazy" class="aspect-[3/4] w-full object-cover object-top" data-parallax />
         </div>
         <Branch class="absolute -left-10 bottom-2 hidden h-56 w-auto sm:block lg:-left-16" />
         <div class="absolute -right-2 top-1/2 flex -translate-y-1/2 flex-col gap-3 lg:-right-6" aria-hidden="true">

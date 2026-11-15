@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
@@ -23,7 +23,7 @@ const slug = (id: string) => id.replace(/\.md$/, '');
           {posts.map((p) => (
             <article class="flex flex-col overflow-hidden rounded-[2rem] bg-cream shadow-sm transition hover:shadow-lg">
               <a href={`/blog/${slug(p.id)}`} class="block" aria-label={p.data.title}>
-                <Image src={p.data.image} alt={p.data.imageAlt} widths={[480, 960]} sizes="(max-width: 768px) 100vw, 33vw" format="avif" quality={80} loading="lazy" class="aspect-[16/10] w-full object-cover" />
+                <Picture src={p.data.image} alt={p.data.imageAlt} widths={[480, 960]} sizes="(max-width: 768px) 100vw, 33vw" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="lazy" class="aspect-[16/10] w-full object-cover" />
               </a>
               <div class="flex flex-1 flex-col px-6 py-6">
                 <p class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] font-medium text-muted">

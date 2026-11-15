@@ -12,6 +12,7 @@ import avatarAnanya from '../assets/avatar-ananya.jpg';
 import avatarPriya from '../assets/avatar-priya.jpg';
 import avatarKavya from '../assets/avatar-kavya.jpg';
 import { services, faqs } from '../data/services';
+import { testimonials } from '../data/testimonials';
 
 const skills = [
   { label: 'Confidence', value: 85 },
@@ -225,11 +226,7 @@ const orgLd = {
         <h2 class="fluid-h2 mt-2 font-display font-semibold text-ink">Loved By Our Clients</h2>
       </div>
       <div class="mt-12 grid gap-5 md:grid-cols-3" data-reveal-group>
-        {[
-          { quote: 'I walked in doubting myself at work. Three months later I led my first team presentation — calmly.', name: 'Ananya Sharma', role: 'Marketing Manager', img: avatarAnanya },
-          { quote: 'Femine taught me to say no without guilt. My relationships feel lighter and more honest now.', name: 'Priya Verma', role: 'School Teacher', img: avatarPriya },
-          { quote: 'The sessions are practical, never preachy. Every week I left with one small change that stuck.', name: 'Kavya Nair', role: 'Startup Founder', img: avatarKavya },
-        ].map((t) => (
+        {testimonials.slice(0, 3).map((t) => (
           <figure class="rounded-[2rem] bg-white px-6 py-8 shadow-sm">
             <span class="flex gap-0.5 text-rose-deep" role="img" aria-label="5 out of 5 stars">
               {Array.from({ length: 5 }).map(() => (
@@ -244,6 +241,9 @@ const orgLd = {
           </figure>
         ))}
       </div>
+      <p class="mt-10 text-center" data-reveal>
+        <a href="/testimonials" class="inline-flex min-h-12 items-center rounded-full bg-white px-7 text-[15px] font-medium text-wine shadow-sm transition hover:bg-blush-soft">Read all client stories →</a>
+      </p>
     </div>
   </section>
 
@@ -296,7 +296,10 @@ const orgLd = {
         <h2 class="fluid-h2 mt-2 font-display font-semibold text-ink">Questions, Answered</h2>
       </div>
       <div class="mt-10" data-reveal-group>
-        <Faq id="home-faq" items={faqs} />
+        <Faq id="home-faq" items={faqs.slice(0, 5)} />
+        <p class="mt-8 text-center" data-reveal>
+          <a href="/faq" class="text-[15px] font-medium text-wine hover:underline">View all frequently asked questions →</a>
+        </p>
       </div>
       <p class="mt-8 text-center text-sm text-muted">Still unsure? <a href="/contact" class="font-semibold text-wine underline underline-offset-4">Ask us anything →</a></p>
     </div>

@@ -1,0 +1,65 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import { services } from '../data/services';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+);
+const slug = (id: string) => id.replace(/\.md$/, '');
+const groups = [
+  {
+    title: 'Main pages',
+    links: [
+      { label: 'Home', href: '/' },
+      { label: 'About Us', href: '/about' },
+      { label: 'Services', href: '/services' },
+      { label: 'Testimonials', href: '/testimonials' },
+      { label: 'Blog', href: '/blog' },
+      { label: 'FAQ', href: '/faq' },
+      { label: 'Contact Us', href: '/contact' },
+    ],
+  },
+  {
+    title: 'Programmes',
+    links: services.map((s) => ({ label: s.title, href: `/services/${s.slug}` })),
+  },
+  {
+    title: 'Blog articles',
+    links: posts.map((p) => ({ label: p.data.title, href: `/blog/${slug(p.id)}` })),
+  },
+  {
+    title: 'Legal',
+    links: [
+      { label: 'Privacy Policy', href: '/privacy-policy' },
+      { label: 'Terms & Conditions', href: '/terms-and-conditions' },
+      { label: 'Cookie Policy', href: '/cookie-policy' },
+    ],
+  },
+];
+---
+<Layout title="Sitemap — Femine" description="Every page on the Femine website: main pages, programmes, blog articles and legal pages.">
+  <Header />
+  <main id="main">
+    <PageHero eyebrow="Sitemap" title="Every page, in one place" text="A human-readable map of the whole site. Search engines use the XML sitemap; this one is for you." crumb="Sitemap" />
+
+    <section class="bg-white py-16 sm:py-20">
+      <div class="mx-auto grid max-w-6xl gap-10 px-5 sm:grid-cols-2 lg:px-8" data-reveal-group>
+        {groups.map((g) => (
+          <div>
+            <h2 class="font-display text-xl font-semibold text-ink">{g.title}</h2>
+            <ul class="mt-4 space-y-2.5 text-[15px]">
+              {g.links.map((l) => (
+                <li><a href={l.href} class="text-muted underline decoration-cream-2 underline-offset-4 transition hover:text-wine">{l.label}</a></li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

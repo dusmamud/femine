@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+---
+<Layout title="Cookie Policy — Femine" description="What cookies Femine uses (almost none) and how to control them in your browser.">
+  <Header />
+  <main id="main">
+    <PageHero eyebrow="Legal" title="Cookie Policy" text="Last updated: 15 November 2026" crumb="Cookie Policy" />
+    <section class="bg-white py-16 sm:py-20">
+      <article class="mx-auto max-w-3xl space-y-6 px-5 text-[15px] leading-relaxed text-muted lg:px-8">
+        <p>Femine (femine.pages.dev) uses almost no cookies. This page explains the few that exist and how you can control them.</p>
+        <h2 class="pt-2 font-display text-2xl font-semibold text-ink">What cookies are</h2>
+        <p>Cookies are small text files your browser stores when you visit a website. They can remember preferences, keep you signed in, or track you across sites. Most of those uses do not apply here.</p>
+        <h2 class="pt-2 font-display text-2xl font-semibold text-ink">Cookies this site sets</h2>
+        <p><strong class="font-semibold text-ink">None of our own.</strong> Femine sets no cookies itself. There are no accounts, no sign-in, and no preferences stored in your browser.</p>
+        <h2 class="pt-2 font-display text-2xl font-semibold text-ink">Third-party cookies</h2>
+        <p>We do not use analytics, advertising or tracking cookies, and we do not embed third-party content that sets them. Our host, Cloudflare Pages, may set a security cookie to protect the site from abuse. See Cloudflare's privacy policy for details.</p>
+        <h2 class="pt-2 font-display text-2xl font-semibold text-ink">How to control cookies</h2>
+        <p>You can block or delete cookies in your browser settings at any time — this site will keep working, because it does not depend on them. Every modern browser lets you clear cookies for a single site from its settings or privacy menu.</p>
+        <h2 class="pt-2 font-display text-2xl font-semibold text-ink">Changes</h2>
+        <p>If this policy changes, we will update the date above. Continued use of the site after a change means you accept the new policy.</p>
+      </article>
+    </section>
+  </main>
+  <Footer />
+</Layout>

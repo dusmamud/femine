@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Faq from '../components/Faq.astro';
+import PageHero from '../components/PageHero.astro';
+import { faqs } from '../data/services';
+---
+<Layout title="Frequently Asked Questions — Femine" description="Everything you want to know before your first session: pricing, privacy, rescheduling, and what happens on the free call.">
+  <Header />
+  <main id="main">
+    <PageHero eyebrow="FAQ" title="Questions, answered honestly" text="If your question is not here, ask us directly — we reply within 24 hours." crumb="FAQ" />
+
+    <section class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-3xl px-5 lg:px-8">
+        <div data-reveal-group>
+          <Faq id="faq-page" items={faqs} />
+        </div>
+        <div class="mt-14 rounded-[2rem] bg-cream px-6 py-8 text-center" data-reveal>
+          <h2 class="font-display text-2xl font-semibold text-ink">Still unsure about something?</h2>
+          <p class="mx-auto mt-2 max-w-md text-[15px] leading-relaxed text-muted">The free 30-minute call is the easiest way to find out if Femine is right for you — ask us anything there.</p>
+          <a href="/contact" class="mt-5 inline-flex min-h-12 items-center rounded-full bg-rose px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Book your free session →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

@@ -1,11 +1,5 @@
 ---
 import '../styles/global.css';
-import '@fontsource/playfair-display/500.css';
-import '@fontsource/playfair-display/600.css';
-import '@fontsource/playfair-display/700.css';
-import '@fontsource/jost/400.css';
-import '@fontsource/jost/500.css';
-import '@fontsource/jost/600.css';
 
 interface Props {
   title?: string;
@@ -39,7 +33,15 @@ const siteLd = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content="https://femine.pages.dev/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://femine.pages.dev/og.png" />
+    <!-- Preload only the two above-fold fonts (headings + body), with
+         crossorigin even though they are same-origin — required for fonts. -->
+    <link rel="preload" href="/fonts/playfair-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/jost-400.woff2" as="font" type="font/woff2" crossorigin />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

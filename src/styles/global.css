@@ -1,5 +1,32 @@
 @import "tailwindcss";
 
+/* Self-hosted fonts — woff2 files live in public/fonts/ (latin subset only,
+   font-display: swap). No CDN, no Google Fonts request anywhere. */
+@font-face {
+  font-family: "Playfair Display"; font-style: normal; font-weight: 500;
+  font-display: swap; src: url("/fonts/playfair-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Playfair Display"; font-style: normal; font-weight: 600;
+  font-display: swap; src: url("/fonts/playfair-600.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Playfair Display"; font-style: normal; font-weight: 700;
+  font-display: swap; src: url("/fonts/playfair-700.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Jost"; font-style: normal; font-weight: 400;
+  font-display: swap; src: url("/fonts/jost-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Jost"; font-style: normal; font-weight: 500;
+  font-display: swap; src: url("/fonts/jost-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Jost"; font-style: normal; font-weight: 600;
+  font-display: swap; src: url("/fonts/jost-600.woff2") format("woff2");
+}
+
 @view-transition {
   navigation: auto;
 }

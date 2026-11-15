@@ -20,7 +20,13 @@ let lenis: Lenis | null = null;
 
 function setScrolled(y: number) {
   header?.classList.toggle('is-scrolled', y > 24);
-  if (toTop) toTop.dataset.show = String(y > 700);
+  if (toTop) {
+    toTop.dataset.show = String(y > 700);
+    // Lift the button when the page bottom is reached so it never covers
+    // the footer's legal links (mobile + desktop).
+    const nearBottom = window.innerHeight + y >= document.documentElement.scrollHeight - 8;
+    toTop.classList.toggle('is-near-bottom', nearBottom && y > 700);
+  }
 }
 
 // Back-to-top works in both modes (bug fix: it previously had no click

@@ -7,8 +7,23 @@ import '@fontsource/jost/400.css';
 import '@fontsource/jost/500.css';
 import '@fontsource/jost/600.css';
 
-interface Props { title?: string; description?: string; }
-const { title = 'Femine — Your Personality is What Makes You Character', description = 'Femine helps you transform your personality — problem solving, relationships, passion and career growth.' } = Astro.props;
+interface Props {
+  title?: string;
+  description?: string;
+  jsonLd?: Record<string, unknown>;
+}
+const {
+  title = 'Femine — Your Personality is What Makes You Character',
+  description = 'Femine helps you transform your personality — problem solving, relationships, passion and career growth, with practical 1-to-1 coaching.',
+  jsonLd,
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const siteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Femine',
+  url: 'https://femine.pages.dev',
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -18,7 +33,18 @@ const { title = 'Femine — Your Personality is What Makes You Character', descr
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#fff6ee" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Femine" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json" set:html={JSON.stringify(siteLd)} />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
   </head>
   <body class="bg-cream font-sans text-ink antialiased">
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-wine focus:px-5 focus:py-3 focus:text-white">Skip to content</a>

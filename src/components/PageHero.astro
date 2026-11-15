@@ -1,0 +1,21 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  text?: string;
+  crumb: string;
+}
+const { eyebrow, title, text, crumb } = Astro.props;
+---
+<section class="curve-bottom overflow-hidden bg-cream pb-14 pt-32 sm:pb-16 lg:pt-36">
+  <div class="mx-auto max-w-6xl px-5 text-center lg:px-8">
+    <nav aria-label="Breadcrumb" class="text-sm text-muted">
+      <a href="/" class="hover:text-wine">Home</a>
+      <span aria-hidden="true" class="mx-2">/</span>
+      <span aria-current="page" class="text-ink">{crumb}</span>
+    </nav>
+    <p class="mt-6 text-[13px] font-semibold uppercase tracking-[0.18em] text-rose-deep">{eyebrow}</p>
+    <h1 class="fluid-h1 mx-auto mt-3 max-w-3xl font-display font-semibold text-ink">{title}</h1>
+    {text && <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted sm:text-[17px]">{text}</p>}
+  </div>
+</section>

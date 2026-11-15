@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+---
+<Layout title="Privacy Policy — Femine" description="How Femine handles your information: what we collect, what we never store, and how to reach us.">
+  <Header />
+  <main id="main">
+    <PageHero eyebrow="Legal" title="Privacy Policy" text="Last updated: 15 November 2026" crumb="Privacy Policy" />
+    <section class="bg-white py-16 sm:py-20">
+      <article class="mx-auto max-w-3xl space-y-6 px-5 text-[15px] leading-relaxed text-muted lg:px-8">
+        <p>Femine (femine.pages.dev) is a personal coaching website. We keep this policy short and honest: we collect very little, and we never sell or share your information.</p>
+        <h2 class="pt-2 font-display text-2xl font-semibold text-ink">What we collect</h2>
+        <p><strong class="font-semibold text-ink">Contact form.</strong> When you send us a message, the form opens in your own email app. Your name, email and message go to us by email — they are never stored on this website or in a database.</p>
+        <p><strong class="font-semibold text-ink">Newsletter.</strong> Subscribing opens a prefilled email to us. We add your address to our mailing list only after you send that email, and you can unsubscribe at any time by replying “unsubscribe”.</p>
+        <p><strong class="font-semibold text-ink">Sessions.</strong> Notes from coaching sessions are kept privately by your coach and are never shared with anyone else.</p>
+        <h2 class="pt-2 font-display text-2xl font-semibold text-ink">What we do not collect</h2>
+        <p>There are no accounts, no sign-ups and no payments on this website. We do not use analytics, advertising or tracking cookies. The site itself sets no cookies.</p>
+        <h2 class="pt-2 font-display text-2xl font-semibold text-ink">Hosting</h2>
+        <p>This site is hosted on Cloudflare Pages. When you visit, Cloudflare may process technical data (such as your IP address) to deliver the pages securely. See Cloudflare’s privacy policy for details.</p>
+        <h2 class="pt-2 font-display text-2xl font-semibold text-ink">Your rights</h2>
+        <p>You can ask us at any time what information we hold about you, ask us to correct it, or ask us to delete it. Email us at hello@femine.pages.dev and we will respond within 7 days.</p>
+        <h2 class="pt-2 font-display text-2xl font-semibold text-ink">Changes</h2>
+        <p>If this policy changes, we will update the date above. Continued use of the site after a change means you accept the new policy.</p>
+      </article>
+    </section>
+  </main>
+  <Footer />
+</Layout>

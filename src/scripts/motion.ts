@@ -108,7 +108,9 @@ if (reduced) {
   toTop?.addEventListener('click', () => lenis.scrollTo(0, { duration: 1.2 }));
 }
 
-// Newsletter — no backend; validate + confirm inline.
+// Newsletter — no mailing backend yet, so subscribing opens the visitor's
+// own email app with a prefilled subscribe request (nothing is faked).
+// When Dus connects a real email/list, this becomes a direct submit.
 const form = document.getElementById('newsletter-form') as HTMLFormElement | null;
 form?.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -121,7 +123,10 @@ form?.addEventListener('submit', (e) => {
     input.focus();
     return;
   }
-  msg.textContent = 'Thank you — you are on the list. Welcome to Femine!';
+  const subject = encodeURIComponent('Subscribe me to Femine weekly tips');
+  const body = encodeURIComponent(`Hi Femine,\n\nPlease add ${input.value} to the weekly tips list.\n\nThank you!`);
+  window.location.href = `mailto:hello@femine.pages.dev?subject=${subject}&body=${body}`;
+  msg.textContent = 'Opening your email app to confirm — just press send.';
   msg.className = 'mt-3 text-sm text-white/90';
   form.reset();
 });

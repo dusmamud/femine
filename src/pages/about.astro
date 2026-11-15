@@ -1,0 +1,95 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import welcomeImg from '../assets/welcome.jpg';
+
+const values = [
+  { title: 'Practical, never preachy', text: 'Every session ends with one small thing you can actually do this week — not a lecture you forget by dinner.' },
+  { title: 'Honest feedback', text: 'We tell you what you need to hear, kindly. Growth does not happen inside a comfort zone.' },
+  { title: 'Your pace, your goals', text: 'There is no fixed mould. Your plan is built around your life, your work and your values.' },
+  { title: 'Privacy, always', text: 'What you share in a session stays in the session. No exceptions, no small print.' },
+];
+
+const timeline = [
+  { year: '2012', text: 'Femine begins with one-to-one coaching sessions in a small studio.' },
+  { year: '2016', text: 'Our 100th client completes a programme — and refers her sister.' },
+  { year: '2020', text: 'Sessions move online, reaching women across India and beyond.' },
+  { year: '2026', text: '500+ women coached, 28 certifications, and still one conversation at a time.' },
+];
+---
+<Layout title="About Us — Femine" description="Femine began in 2012 helping women build confidence, one conversation at a time. Meet the approach, the values and the story behind it.">
+  <Header />
+  <main id="main">
+    <PageHero eyebrow="About Us" title="Coaching that respects who you already are" text="We do not fix people. We help them see what is already strong in them — and build the skills to show it." crumb="About Us" />
+
+    <section class="bg-white py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto grid max-w-6xl items-center gap-10 px-5 sm:gap-12 lg:grid-cols-2 lg:gap-16 lg:px-8">
+        <div class="relative mx-auto w-full max-w-[340px] sm:max-w-[420px]" data-reveal>
+          <div class="arch relative overflow-hidden bg-blush shadow-xl shadow-rose/20">
+            <Image src={welcomeImg} alt="Woman looking up with confidence" widths={[360, 720]} sizes="(max-width: 640px) 340px, 420px" format="avif" quality={80} loading="eager" class="aspect-[4/5] w-full object-cover object-top" />
+          </div>
+        </div>
+        <div data-reveal>
+          <h2 class="fluid-h2 font-display font-semibold text-ink">Our story</h2>
+          <p class="mt-5 text-base leading-relaxed text-muted">
+            Femine started in 2012, when our founder kept meeting the same woman in
+            different rooms: brilliant at her work, quiet in the meeting, and doubting
+            herself on the way home. The problem was never ability — it was the
+            belief that confidence belongs to other people.
+          </p>
+          <p class="mt-4 text-base leading-relaxed text-muted">
+            Fourteen years later, the method is the same: listen first, judge never,
+            and practise the hard moments in a safe room before you face them in
+            real life. That is how 500+ women found their voice — and kept it.
+          </p>
+          <dl class="mt-8 grid grid-cols-3 gap-3 text-center sm:gap-4">
+            <div class="rounded-2xl bg-cream px-2 py-4"><dd class="font-display text-[28px] font-semibold text-ink">14</dd><dt class="mt-1 text-[13px] text-muted">Years coaching</dt></div>
+            <div class="rounded-2xl bg-cream px-2 py-4"><dd class="font-display text-[28px] font-semibold text-ink">500+</dd><dt class="mt-1 text-[13px] text-muted">Women coached</dt></div>
+            <div class="rounded-2xl bg-cream px-2 py-4"><dd class="font-display text-[28px] font-semibold text-ink">4.9</dd><dt class="mt-1 text-[13px] text-muted">Average rating</dt></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-cream py-16 sm:py-20 lg:py-24" aria-label="Our values">
+      <div class="mx-auto max-w-6xl px-5 lg:px-8">
+        <div class="text-center" data-reveal>
+          <p class="text-[13px] font-semibold uppercase tracking-[0.18em] text-rose-deep">What We Believe</p>
+          <h2 class="fluid-h2 mt-2 font-display font-semibold text-ink">Four things we never compromise on</h2>
+        </div>
+        <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" data-reveal-group>
+          {values.map((v) => (
+            <article class="rounded-[2rem] bg-white px-6 py-8 shadow-sm">
+              <h3 class="font-display text-[20px] font-semibold text-ink">{v.title}</h3>
+              <p class="mt-2.5 text-sm leading-relaxed text-muted">{v.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white py-16 sm:py-20 lg:py-24" aria-label="Timeline">
+      <div class="mx-auto max-w-3xl px-5 lg:px-8">
+        <div class="text-center" data-reveal>
+          <p class="text-[13px] font-semibold uppercase tracking-[0.18em] text-rose-deep">The Journey</p>
+          <h2 class="fluid-h2 mt-2 font-display font-semibold text-ink">Fourteen years, one idea</h2>
+        </div>
+        <ol class="mt-12 space-y-6" data-reveal-group>
+          {timeline.map((t) => (
+            <li class="flex gap-5 rounded-[1.5rem] bg-cream px-6 py-5">
+              <span class="font-display text-2xl font-bold text-rose-deep">{t.year}</span>
+              <span class="text-[15px] leading-relaxed text-muted">{t.text}</span>
+            </li>
+          ))}
+        </ol>
+        <div class="mt-12 text-center" data-reveal>
+          <a href="/contact" class="inline-flex min-h-12 items-center rounded-full bg-rose px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Start your story →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,77 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import { plans } from '../data/services';
+
+const included = [
+  { title: '60-minute 1-to-1 sessions', text: 'Just you and your coach, over video call, at a time that suits you.' },
+  { title: 'A personal action plan', text: 'After every session you leave with one clear thing to practise — never vague homework.' },
+  { title: 'Free rescheduling', text: 'Life happens. Reschedule any session free of charge up to 12 hours before it starts.' },
+  { title: 'No subscription', text: 'You pay per plan, not per month. When your sessions are done, nothing renews itself.' },
+];
+---
+<Layout title="Pricing — Femine" description="Simple, honest pricing: a single session at ₹1,999, a 4-session Growth Pack at ₹6,999, or an 8-session Transform Pack at ₹12,999. Your first 30-minute call is always free.">
+  <Header />
+  <main id="main">
+    <PageHero eyebrow="Pricing" title="Simple, honest pricing" text="Your first 30-minute call is always free. After that, you pay per plan — never per month, and there is no subscription." crumb="Pricing" />
+
+    <section class="bg-white py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-6xl px-5 lg:px-8">
+        <div class="grid gap-6 md:grid-cols-3" data-reveal-group>
+          {plans.map((p) => (
+            <article class={`relative flex flex-col rounded-[2rem] px-7 py-9 ${p.featured ? 'bg-wine text-white shadow-xl shadow-wine/25 md:-translate-y-3' : 'bg-cream shadow-sm'}`}>
+              {p.featured && (
+                <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-rose px-4 py-1.5 text-[13px] font-semibold text-white shadow">Most popular</span>
+              )}
+              <h2 class={`font-display text-2xl font-semibold ${p.featured ? 'text-white' : 'text-ink'}`}>{p.name}</h2>
+              <p class={`mt-3 font-display text-4xl font-bold ${p.featured ? 'text-white' : 'text-ink'}`}>{p.price}</p>
+              <p class={`mt-1 text-sm ${p.featured ? 'text-white/75' : 'text-muted'}`}>{p.per}</p>
+              <ul class="mt-6 flex-1 space-y-3 text-[15px] leading-relaxed">
+                {p.features.map((f) => (
+                  <li class="flex gap-2.5">
+                    <svg class={`mt-0.5 h-5 w-5 shrink-0 ${p.featured ? 'text-rose' : 'text-wine'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
+                    <span class={p.featured ? 'text-white/90' : 'text-muted'}>{f}</span>
+                  </li>
+                ))}
+              </ul>
+              <a href="/book" class={`mt-8 inline-flex min-h-12 items-center justify-center rounded-full text-[15px] font-medium transition ${p.featured ? 'bg-white text-wine shadow-lg hover:bg-cream' : 'bg-rose text-white shadow-md shadow-rose/30 hover:bg-rose-deep'}`}>Book a free call →</a>
+            </article>
+          ))}
+        </div>
+
+        <div class="mt-16" data-reveal>
+          <h2 class="text-center font-display text-2xl font-semibold text-ink sm:text-3xl">Included in every plan</h2>
+          <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {included.map((i) => (
+              <div class="rounded-[2rem] bg-cream px-6 py-7">
+                <h3 class="font-display text-lg font-semibold text-ink">{i.title}</h3>
+                <p class="mt-2 text-[15px] leading-relaxed text-muted">{i.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="mt-16 grid gap-6 lg:grid-cols-2" data-reveal-group>
+          <div class="rounded-[2rem] bg-cream px-7 py-8">
+            <h2 class="font-display text-2xl font-semibold text-ink">How payment works</h2>
+            <ol class="mt-5 list-decimal space-y-3 pl-5 text-[15px] leading-relaxed text-muted">
+              <li><strong class="font-semibold text-ink">Book a free call.</strong> We talk for 30 minutes and agree on the right plan together.</li>
+              <li><strong class="font-semibold text-ink">We send a payment link.</strong> You pay for the plan you chose — no account, no card stored.</li>
+              <li><strong class="font-semibold text-ink">We schedule your sessions.</strong> Weekly, at times that suit you, Monday to Saturday.</li>
+            </ol>
+            <p class="mt-5 text-[15px] leading-relaxed text-muted">Not sure which plan fits? Most clients notice a real change in 4 sessions and deeper change in 8 — and a single session is enough for one specific decision. We will help you choose on the free call.</p>
+          </div>
+          <div class="rounded-[2rem] bg-wine px-7 py-8 text-white">
+            <h2 class="font-display text-2xl font-semibold">Our promise</h2>
+            <p class="mt-4 text-[15px] leading-relaxed text-white/85">If a plan is not working for you, you are not locked in. Unused sessions in a pack can be refunded within 30 days of purchase, and a single session is refundable up to 12 hours before it starts.</p>
+            <p class="mt-4"><a href="/refund-policy" class="font-medium text-white underline underline-offset-4 hover:text-rose">Read the full refund policy →</a></p>
+            <p class="mt-6"><a href="/faq" class="font-medium text-white underline underline-offset-4 hover:text-rose">Questions about pricing? See the FAQ →</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

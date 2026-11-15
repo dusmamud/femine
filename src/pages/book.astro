@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactForm from '../components/ContactForm.astro';
+
+const steps = [
+  { n: '01', title: 'You talk, we listen', text: 'Thirty minutes about where you are and what you want to change. No forms to fill in advance, no judgement — just an honest conversation.' },
+  { n: '02', title: 'We map one clear next step', text: 'Before the call ends, we agree on the one thing worth working on first — and which programme fits it best.' },
+  { n: '03', title: 'You decide, no pressure', text: 'If Femine feels right, we pick a plan and a schedule together. If not, you still keep everything we discussed. The call costs nothing either way.' },
+];
+---
+<Layout title="Book a Free Session — Femine" description="Book your free 30-minute coaching call with Femine. No pressure, no obligation — just an honest conversation about where you want to go.">
+  <Header />
+  <main id="main">
+    <PageHero eyebrow="Book a Free Session" title="Your first session is free" text="Thirty minutes, online, with a real coach. Fill in the form and it will open in your email app — just press send, and we will reply within 24 hours." crumb="Book a Free Session" />
+
+    <section class="bg-white py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto grid max-w-6xl gap-12 px-5 lg:grid-cols-[1fr_1.4fr] lg:gap-16 lg:px-8">
+        <div data-reveal>
+          <p class="text-[13px] font-semibold uppercase tracking-[0.18em] text-rose-deep">What happens on the call</p>
+          <h2 class="mt-2 font-display text-[28px] font-semibold leading-tight text-ink sm:text-[32px]">A relaxed chat — not a sales pitch</h2>
+          <ol class="mt-8 space-y-7">
+            {steps.map((s) => (
+              <li class="flex gap-4">
+                <span class="font-display text-2xl font-bold text-rose-deep" aria-hidden="true">{s.n}</span>
+                <div>
+                  <h3 class="font-display text-lg font-semibold text-ink">{s.title}</h3>
+                  <p class="mt-1 text-[15px] leading-relaxed text-muted">{s.text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+          <div class="mt-9 rounded-[2rem] bg-cream px-6 py-6">
+            <h3 class="font-display text-lg font-semibold text-ink">Good to know</h3>
+            <ul class="mt-3 space-y-2 text-[15px] leading-relaxed text-muted">
+              <li>✦ Free — the 30-minute call costs nothing.</li>
+              <li>✦ Online over video, Monday to Saturday, 10am – 7pm IST.</li>
+              <li>✦ Private — nothing you say is shared with anyone.</li>
+              <li>✦ No preparation needed — just bring yourself.</li>
+            </ul>
+          </div>
+          <p class="mt-6 text-[15px] text-muted">Want to know the prices first? <a href="/pricing" class="font-medium text-wine hover:underline">See pricing →</a></p>
+        </div>
+
+        <ContactForm />
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

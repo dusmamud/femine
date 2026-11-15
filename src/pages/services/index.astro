@@ -61,10 +61,13 @@ import { services, plans } from '../../data/services';
                   <li class="flex gap-2.5"><span aria-hidden="true" class={p.featured ? 'text-white' : 'text-rose-deep'}>✓</span>{f}</li>
                 ))}
               </ul>
-              <a href="/contact" class={`mt-7 inline-flex min-h-12 items-center justify-center rounded-full px-7 text-[15px] font-medium ${p.featured ? 'bg-white text-wine' : 'bg-rose text-white hover:bg-rose-deep'}`}>Book now</a>
+              <a href="/book" class={`mt-7 inline-flex min-h-12 items-center justify-center rounded-full px-7 text-[15px] font-medium ${p.featured ? 'bg-white text-wine' : 'bg-rose text-white hover:bg-rose-deep'}`}>Book now</a>
             </article>
           ))}
         </div>
+        <p class="mt-10 text-center" data-reveal>
+          <a href="/pricing" class="text-[15px] font-medium text-wine hover:underline">See full pricing details, what's included and how payment works →</a>
+        </p>
       </div>
     </section>
   </main>

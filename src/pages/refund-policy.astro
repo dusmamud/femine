@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+---
+<Layout title="Refund Policy — Femine" description="Femine's refund policy: when sessions and packs are refundable, how to ask, and how long a refund takes.">
+  <Header />
+  <main id="main">
+    <PageHero eyebrow="Legal" title="Refund Policy" text="Last updated: 15 November 2026" crumb="Refund Policy" />
+    <section class="bg-white py-16 sm:py-20">
+      <article class="mx-auto max-w-3xl space-y-6 px-5 text-[15px] leading-relaxed text-muted lg:px-8">
+        <p>We want you to book with confidence. This policy explains when you can get a refund, and how to ask for one. It applies to all paid coaching sessions and packs bought from Femine.</p>
+        <h2 class="pt-2 font-display text-2xl font-semibold text-ink">The free call</h2>
+        <p>Your first 30-minute call is always free. No payment is taken for it, so there is nothing to refund.</p>
+        <h2 class="pt-2 font-display text-2xl font-semibold text-ink">Single sessions</h2>
+        <p>A single session (₹1,999) is fully refundable if you cancel at least 12 hours before the session starts. If you cancel within 12 hours of the session, we cannot refund it — your coach has reserved that hour for you — but you can reschedule it once, free of charge, to another time within 14 days.</p>
+        <h2 class="pt-2 font-display text-2xl font-semibold text-ink">Session packs</h2>
+        <p>Unused sessions in a pack (Growth Pack, ₹6,999 for 4 sessions; Transform Pack, ₹12,999 for 8 sessions) can be refunded within 30 days of purchase. The refund is the pack price minus the sessions you have already taken. Sessions already attended are not refundable.</p>
+        <h2 class="pt-2 font-display text-2xl font-semibold text-ink">How to request a refund</h2>
+        <p>Email us at hello@femine.pages.dev with your name, the plan you bought, and the date of purchase. We will confirm within 2 working days and process approved refunds within 7 working days, back to the same payment method you used.</p>
+        <h2 class="pt-2 font-display text-2xl font-semibold text-ink">If we cancel</h2>
+        <p>If we ever need to cancel a session, you can choose a full refund for that session or reschedule it at a time that suits you — whichever you prefer.</p>
+        <h2 class="pt-2 font-display text-2xl font-semibold text-ink">Changes</h2>
+        <p>If this policy changes, we will update the date above. Purchases made before a change are covered by the policy in force at the time of purchase.</p>
+      </article>
+    </section>
+  </main>
+  <Footer />
+</Layout>

@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PageHero from '../components/PageHero.astro';
+import PaymentIcons from '../components/PaymentIcons.astro';
 import { plans } from '../data/services';
 
 const included = [
@@ -50,9 +51,7 @@ const giftSlug = (amount: string) => 'gift-' + amount.replace(/[₹,]/g, '');
 
         <div class="mt-10 flex flex-wrap items-center justify-center gap-3" data-reveal>
           <span class="text-sm font-medium text-muted">Pay securely with</span>
-          {['UPI', 'Visa', 'Mastercard', 'RuPay', 'NetBanking'].map((m) => (
-            <span class="rounded-full border border-ink/10 bg-white px-4 py-2 text-[13px] font-semibold text-ink">{m}</span>
-          ))}
+          <PaymentIcons />
           <span class="text-sm text-muted">· No card is stored on this site.</span>
         </div>
 

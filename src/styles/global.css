@@ -120,6 +120,18 @@ body {
 .marquee:hover .marquee-track,
 .marquee:focus-within .marquee-track { animation-play-state: paused; }
 
+/* Programme picker pop-in */
+#cf-service-list:not(.hidden) {
+  animation: svc-pop 160ms ease-out;
+}
+@keyframes svc-pop {
+  from { opacity: 0; transform: translateY(-4px) scale(0.99); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #cf-service-list:not(.hidden) { animation: none; }
+}
+
 /* Gentle float for decorative dots (transform + opacity only) */
 @keyframes float-y {
   from { transform: translateY(-4px); }

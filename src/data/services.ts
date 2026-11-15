@@ -1,5 +1,11 @@
 // Single source of truth for the four Femine programmes.
 // Used by the home page, /services and /services/[slug].
+import type { ImageMetadata } from 'astro';
+import problemImg from '../assets/service-problem-solving.jpg';
+import relationshipsImg from '../assets/service-relationships.jpg';
+import passionImg from '../assets/service-passion.jpg';
+import careerImg from '../assets/service-career.jpg';
+
 export interface Service {
   slug: string;
   icon: 'bulb' | 'heart' | 'target' | 'chart';
@@ -9,6 +15,8 @@ export interface Service {
   duration: string;
   format: string;
   priceFrom: string;
+  image: ImageMetadata;
+  imageAlt: string;
   benefits: string[];
   outcomes: string[];
 }
@@ -23,6 +31,8 @@ export const services: Service[] = [
     duration: '60 minutes',
     format: '1-to-1 · Online',
     priceFrom: '₹1,999',
+    image: problemImg,
+    imageAlt: 'Notebook and laptop with a planning session in progress',
     benefits: [
       'A simple 4-step decision framework you can reuse for any problem',
       'How to separate facts from fears before you decide',
@@ -40,6 +50,8 @@ export const services: Service[] = [
     duration: '60 minutes',
     format: '1-to-1 · Online',
     priceFrom: '₹1,999',
+    image: relationshipsImg,
+    imageAlt: 'Two people in a warm, focused conversation',
     benefits: [
       'Say no clearly, without guilt or long explanations',
       'Have difficult conversations without them becoming fights',
@@ -57,6 +69,8 @@ export const services: Service[] = [
     duration: '60 minutes',
     format: '1-to-1 · Online',
     priceFrom: '₹1,999',
+    image: passionImg,
+    imageAlt: 'Woman running at sunrise, full of energy',
     benefits: [
       'A clear map of your strengths, interests and values',
       'Small experiments to test a direction before committing',
@@ -74,6 +88,8 @@ export const services: Service[] = [
     duration: '60 minutes',
     format: '1-to-1 · Online',
     priceFrom: '₹1,999',
+    image: careerImg,
+    imageAlt: 'Confident professional woman in a blazer',
     benefits: [
       'Present your work clearly, without underselling it',
       'Speak up in meetings and handle tough questions',

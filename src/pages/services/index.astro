@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -14,15 +15,19 @@ import { services, plans } from '../../data/services';
       <div class="mx-auto max-w-6xl px-5 lg:px-8">
         <div class="grid gap-6 md:grid-cols-2" data-reveal-group>
           {services.map((s) => (
-            <article class="flex flex-col rounded-[2rem] bg-cream px-7 py-8">
-              <div class="flex items-start justify-between gap-4">
+            <article class="flex flex-col overflow-hidden rounded-[2rem] bg-cream shadow-sm">
+              <div class="relative">
+                <Image src={s.image} alt={s.imageAlt} widths={[480, 960]} sizes="(max-width: 768px) 100vw, 50vw" format="avif" quality={80} loading="lazy" class="aspect-[16/10] w-full object-cover" />
+                <span class="absolute bottom-3 right-3 rounded-full bg-white px-3 py-1.5 text-[13px] font-semibold text-wine shadow">{s.priceFrom} / session</span>
+              </div>
+              <div class="flex flex-1 flex-col px-7 py-8">
+              <div class="flex items-start gap-4">
                 <span class="grid h-14 w-14 place-items-center rounded-full bg-white text-wine shadow-sm">
                   {s.icon === 'bulb' && <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.2 1.1 2.2h5c0-1 .4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/></svg>}
                   {s.icon === 'heart' && <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.3-9.3-9A5.2 5.2 0 0 1 12 6.5 5.2 5.2 0 0 1 21.3 11C19 15.7 12 20 12 20z"/><path d="M12 6.5L14 9l2.5.5"/></svg>}
                   {s.icon === 'target' && <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>}
                   {s.icon === 'chart' && <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M7 16v-5M12 16V8M17 16v-3"/></svg>}
                 </span>
-                <span class="rounded-full bg-white px-3 py-1.5 text-[13px] font-semibold text-wine">{s.priceFrom} / session</span>
               </div>
               <h2 class="mt-5 font-display text-2xl font-semibold text-ink">{s.title}</h2>
               <p class="mt-2.5 flex-1 text-[15px] leading-relaxed text-muted">{s.long}</p>
@@ -30,6 +35,7 @@ import { services, plans } from '../../data/services';
                 <span>{s.duration}</span><span>·</span><span>{s.format}</span>
               </div>
               <a href={`/services/${s.slug}`} class="mt-6 inline-flex min-h-12 w-fit items-center rounded-full bg-rose px-6 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Explore {s.title} →</a>
+              </div>
             </article>
           ))}
         </div>

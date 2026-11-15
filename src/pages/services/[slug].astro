@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -20,7 +21,10 @@ const others = services.filter((x) => x.slug !== s.slug);
     <section class="bg-white py-16 sm:py-20 lg:py-24">
       <div class="mx-auto grid max-w-6xl gap-12 px-5 lg:grid-cols-[1.5fr_1fr] lg:gap-16 lg:px-8">
         <div data-reveal>
-          <h2 class="fluid-h2 font-display font-semibold text-ink">What this programme covers</h2>
+          <div class="overflow-hidden rounded-[2rem] shadow-lg shadow-rose/10">
+            <Image src={s.image} alt={s.imageAlt} widths={[480, 960]} sizes="(max-width: 1024px) 100vw, 60vw" format="avif" quality={80} loading="eager" class="aspect-[16/9] w-full object-cover" />
+          </div>
+          <h2 class="fluid-h2 mt-8 font-display font-semibold text-ink">What this programme covers</h2>
           <p class="mt-5 text-base leading-relaxed text-muted">{s.long}</p>
           <ul class="mt-8 space-y-3.5">
             {s.benefits.map((b) => (

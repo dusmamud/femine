@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-sans: "Jost", ui-sans-serif, system-ui, sans-serif;
+
+  --color-cream: #fff6ee;
+  --color-cream-2: #fdf0e3;
+  --color-blush: #f9b8b8;
+  --color-blush-soft: #fbd9d3;
+  --color-rose: #e78f8f;
+  --color-rose-deep: #d96f6f;
+  --color-wine: #6e2434;
+  --color-ink: #3d1e26;
+  --color-muted: #7a5a5e;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-sans); color: var(--color-ink); background: var(--color-cream); }
+
+/* Curved section edges, as in the design */
+.curve-bottom { border-radius: 0 0 50% 50% / 0 0 4.5rem 4.5rem; }
+.curve-top { border-radius: 50% 50% 0 0 / 3.5rem 3.5rem 0 0; }
+
+/* Arch image shape: full round top, soft bottom corners */
+.arch { border-radius: 999px 999px 1.75rem 1.75rem; }
+.arch-flip { border-radius: 999px 999px 1.75rem 6rem; }
+
+.watermark {
+  position: absolute;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: #f6e3d6;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

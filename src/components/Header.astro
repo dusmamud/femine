@@ -1,0 +1,51 @@
+---
+const links = [
+  { label: 'Home', href: '#home', active: true },
+  { label: 'About Us', href: '#about' },
+  { label: 'Services', href: '#services' },
+  { label: 'Pages', href: '#services', dropdown: true },
+  { label: 'Contact Us', href: '#expertise' },
+];
+---
+<header class="absolute inset-x-0 top-0 z-50">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-5 lg:px-8">
+    <a href="#home" class="flex items-center gap-1.5" aria-label="Femine home">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z" fill="#e78f8f"/><path d="M19 15l.9 3.1L23 19l-3.1.9L19 23l-.9-3.1L15 19l3.1-.9L19 15z" fill="#6e2434"/></svg>
+      <span class="font-display text-[26px] font-bold italic leading-none text-ink">Femine</span>
+    </a>
+
+    <nav class="hidden items-center gap-9 lg:flex" aria-label="Main navigation">
+      {links.map((l) => (
+        <a href={l.href} class={`flex items-center gap-1 text-[15px] font-medium ${l.active ? 'text-wine' : 'text-ink/80 hover:text-wine'}`}>
+          {l.label}
+          {l.dropdown && <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>}
+        </a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <button type="button" aria-label="Search" class="grid h-10 w-10 place-items-center rounded-full text-ink hover:bg-white/70">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      </button>
+      <button id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" class="grid h-10 w-10 place-items-center rounded-full text-ink hover:bg-white/70 lg:hidden">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <nav id="mobile-menu" class="mx-5 hidden rounded-2xl bg-white px-6 py-4 shadow-lg lg:hidden" aria-label="Mobile navigation">
+    {links.map((l) => (
+      <a href={l.href} class="block border-b border-cream-2 py-3 text-[15px] font-medium text-ink last:border-0">{l.label}</a>
+    ))}
+  </nav>
+</header>
+
+<script>
+  const btn = document.getElementById('menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', String(open));
+  });
+  menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => menu.classList.add('hidden')));
+</script>

@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Faq from '../components/Faq.astro';
 import PageHero from '../components/PageHero.astro';
 import { services, faqs } from '../data/services';
 
@@ -71,16 +72,8 @@ const info = [
     <section class="bg-cream py-16 sm:py-20" aria-label="Contact FAQ">
       <div class="mx-auto max-w-3xl px-5 lg:px-8">
         <h2 class="text-center font-display text-[28px] font-semibold text-ink sm:text-[32px]" data-reveal>Before you write…</h2>
-        <div class="mt-10 space-y-3" data-reveal-group>
-          {faqs.slice(0, 3).map((f) => (
-            <details class="group rounded-2xl bg-white px-6 py-4 shadow-sm open:shadow-md">
-              <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 font-display text-[18px] font-semibold text-ink [&::-webkit-details-marker]:hidden">
-                {f.q}
-                <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-cream text-wine transition-transform duration-300 group-open:rotate-45" aria-hidden="true">+</span>
-              </summary>
-              <p class="pb-2 pt-3 text-[15px] leading-relaxed text-muted">{f.a}</p>
-            </details>
-          ))}
+        <div class="mt-10" data-reveal-group>
+          <Faq id="contact-faq" items={faqs.slice(0, 3)} />
         </div>
       </div>
     </section>

@@ -1,0 +1,52 @@
+---
+// Smooth FAQ accordion — grid-template-rows height animation (0fr -> 1fr),
+// so expand/collapse animates smoothly without measuring heights in JS.
+// Single-open: opening one closes the others. First item starts open.
+interface Props {
+  id: string;
+  items: { q: string; a: string }[];
+}
+const { id, items } = Astro.props;
+---
+<div class="faq-list space-y-3" id={id}>
+  {items.map((f, i) => (
+    <article class="faq-item rounded-2xl bg-white px-6 py-4 shadow-sm" data-open={i === 0 ? 'true' : 'false'}>
+      <h3>
+        <button
+          type="button"
+          class="faq-btn flex min-h-11 w-full cursor-pointer list-none items-center justify-between gap-4 text-left font-display text-[18px] font-semibold text-ink"
+          aria-expanded={i === 0 ? 'true' : 'false'}
+          aria-controls={`${id}-panel-${i}`}
+          id={`${id}-btn-${i}`}
+        >
+          {f.q}
+          <span class="faq-chevron grid h-8 w-8 shrink-0 place-items-center rounded-full bg-cream text-xl leading-none text-wine" aria-hidden="true">+</span>
+        </button>
+      </h3>
+      <div class="faq-answer" id={`${id}-panel-${i}`} role="region" aria-labelledby={`${id}-btn-${i}`}>
+        <div class="faq-answer-inner">
+          <p class="pb-2 pt-3 text-[15px] leading-relaxed text-muted">{f.a}</p>
+        </div>
+      </div>
+    </article>
+  ))}
+</div>
+
+<script define:vars={{ id }}>
+  const list = document.getElementById(id);
+  list?.querySelectorAll('.faq-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      if (!item || !list) return;
+      const wasOpen = item.getAttribute('data-open') === 'true';
+      list.querySelectorAll('.faq-item').forEach((el) => {
+        el.setAttribute('data-open', 'false');
+        el.querySelector('.faq-btn')?.setAttribute('aria-expanded', 'false');
+      });
+      if (!wasOpen) {
+        item.setAttribute('data-open', 'true');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

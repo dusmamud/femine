@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Faq from '../components/Faq.astro';
 import Branch from '../components/Branch.astro';
 import heroImg from '../assets/hero.jpg';
 import welcomeImg from '../assets/welcome.jpg';
@@ -291,16 +292,8 @@ const orgLd = {
         <p class="text-[13px] font-semibold uppercase tracking-[0.18em] text-rose-deep">FAQ</p>
         <h2 class="fluid-h2 mt-2 font-display font-semibold text-ink">Questions, Answered</h2>
       </div>
-      <div class="mt-10 space-y-3" data-reveal-group>
-        {faqs.map((f) => (
-          <details class="group rounded-2xl bg-white px-6 py-4 shadow-sm open:shadow-md">
-            <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 font-display text-[18px] font-semibold text-ink [&::-webkit-details-marker]:hidden">
-              {f.q}
-              <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-cream text-wine transition-transform duration-300 group-open:rotate-45" aria-hidden="true">+</span>
-            </summary>
-            <p class="pb-2 pt-3 text-[15px] leading-relaxed text-muted">{f.a}</p>
-          </details>
-        ))}
+      <div class="mt-10" data-reveal-group>
+        <Faq id="home-faq" items={faqs} />
       </div>
       <p class="mt-8 text-center text-sm text-muted">Still unsure? <a href="/contact" class="font-semibold text-wine underline underline-offset-4">Ask us anything →</a></p>
     </div>

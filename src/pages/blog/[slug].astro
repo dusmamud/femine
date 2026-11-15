@@ -21,7 +21,7 @@ const others = (await getCollection('blog'))
 const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 const slug = (id: string) => id.replace(/\.md$/, '');
 ---
-<Layout title={`${post.data.title} — Femine Blog`} description={post.data.excerpt}>
+<Layout title={`${post.data.title} — Femine Blog`} description={post.data.excerpt} ogImage={new URL(post.data.image.src, Astro.site).href} ogImageWidth={post.data.image.width} ogImageHeight={post.data.image.height}>
   <Header />
   <main id="main">
     <section class="bg-cream pb-10 pt-28 sm:pt-32 lg:pt-36">

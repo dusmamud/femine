@@ -13,7 +13,7 @@ export function getStaticPaths() {
 const { service: s } = Astro.props;
 const others = services.filter((x) => x.slug !== s.slug);
 ---
-<Layout title={`${s.title} Coaching — Femine`} description={s.short}>
+<Layout title={`${s.title} Coaching — Femine`} description={s.short} ogImage={new URL(s.image.src, Astro.site).href} ogImageWidth={s.image.width} ogImageHeight={s.image.height}>
   <Header />
   <main id="main">
     <PageHero eyebrow="Service" title={s.title} text={s.short} crumb={s.title} />

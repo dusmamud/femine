@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout title="You're offline — Femine" description="No internet connection right now. Anything you already opened is still here — check your connection and try again.">
+  <Header />
+  <main id="main">
+    <section class="bg-cream pb-24 pt-28 sm:pt-32 lg:pt-36">
+      <div class="mx-auto max-w-xl px-5 text-center lg:px-8" data-reveal>
+        <span class="mx-auto grid h-16 w-16 place-items-center rounded-full bg-white text-wine shadow-sm" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><path d="M12 20h.01"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
+        </span>
+        <h1 class="mt-6 font-display text-3xl font-semibold text-ink sm:text-4xl">You're offline</h1>
+        <p class="mt-3 text-base leading-relaxed text-muted">No internet connection right now. Anything you already opened is still here — check your connection and try again.</p>
+        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <button type="button" onclick="window.location.reload()" class="inline-flex min-h-12 cursor-pointer items-center rounded-full bg-rose px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Try again</button>
+          <a href="/" class="inline-flex min-h-12 items-center rounded-full border border-ink/15 bg-white px-8 text-[15px] font-medium text-ink transition hover:border-wine hover:text-wine">Go to home</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

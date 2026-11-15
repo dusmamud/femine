@@ -12,7 +12,7 @@ const posts = (await getCollection('blog')).sort(
 const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 const slug = (id: string) => id.replace(/\.md$/, '');
 ---
-<Layout title="Blog — Femine" description="Practical, honest writing on confidence, relationships and career growth from the Femine coaching team.">
+<Layout title="Blog — Femine" description="Practical, honest writing on confidence, relationships and career growth from the Femine coaching team." ogImage="https://femine.pages.dev/og-blog.png">
   <Header />
   <main id="main">
     <PageHero eyebrow="Blog" title="Small ideas that actually help" text="No hype, no ten-step morning routines. Just practical thinking on confidence, relationships and work — written by coaches, not content mills." crumb="Blog" />

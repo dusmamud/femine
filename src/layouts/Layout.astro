@@ -6,11 +6,17 @@ interface Props {
   title?: string;
   description?: string;
   jsonLd?: Record<string, unknown>;
+  ogImage?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
 }
 const {
   title = 'Femine — Your Personality is What Makes You Character',
   description = 'Femine helps you transform your personality — problem solving, relationships, passion and career growth, with practical 1-to-1 coaching.',
   jsonLd,
+  ogImage = 'https://femine.pages.dev/og.png',
+  ogImageWidth = 1200,
+  ogImageHeight = 630,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const siteLd = {
@@ -62,11 +68,13 @@ const crumbLd = crumbs.length
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content="https://femine.pages.dev/og.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content={String(ogImageWidth)} />
+    <meta property="og:image:height" content={String(ogImageHeight)} />
+    <meta property="og:image:alt" content="Femine — Personality Coaching" />
+    <meta property="og:locale" content="en_IN" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://femine.pages.dev/og.png" />
+    <meta name="twitter:image" content={ogImage} />
     <!-- Preload ALL six weights: every weight is used on nearly every page
          (Playfair 500/600/700 for headings, Jost 400/500/600 for body/buttons),
          total only ~108 KB. Preloading just two left the other four flashing
@@ -81,6 +89,14 @@ const crumbLd = crumbs.length
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Femine" />
     <script type="application/ld+json" set:html={JSON.stringify(siteLd)} />
     {crumbLd && <script type="application/ld+json" set:html={JSON.stringify(crumbLd)} />}
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
@@ -97,6 +113,15 @@ const crumbLd = crumbs.length
     </button>
     <script>
       import '../scripts/motion.ts';
+    </script>
+    <script>
+      // Register the service worker after load so it never blocks first paint.
+      // The worker serves cached pages when offline and cache-first fingerprinted assets.
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+      }
     </script>
   </body>
 </html>

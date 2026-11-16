@@ -12,16 +12,25 @@ const steps = [
 ];
 const howToLd = {
   '@context': 'https://schema.org',
-  '@type': 'HowTo',
-  name: 'How to book your free Femine coaching call',
-  description: 'Book a free 30-minute coaching call with Femine in three steps: talk, map one next step, then decide with no pressure.',
-  totalTime: 'PT30M',
-  step: steps.map((s, i) => ({
-    '@type': 'HowToStep',
-    position: i + 1,
-    name: s.title,
-    text: s.text,
-  })),
+  '@graph': [
+    {
+      '@type': 'HowTo',
+      name: 'How to book your free Femine coaching call',
+      description: 'Book a free 30-minute coaching call with Femine in three steps: talk, map one next step, then decide with no pressure.',
+      totalTime: 'PT30M',
+      step: steps.map((s, i) => ({
+        '@type': 'HowToStep',
+        position: i + 1,
+        name: s.title,
+        text: s.text,
+      })),
+    },
+    {
+      '@type': 'WebPage',
+      '@id': 'https://femine.pages.dev/book/',
+      speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.lead-answer'] },
+    },
+  ],
 };
 ---
 <Layout title="Book a Free Session — Femine" description="Book your free 30-minute coaching call with Femine. No pressure, no obligation — just an honest conversation about where you want to go." jsonLd={howToLd} ogImage="https://femine.pages.dev/og-book.png">
@@ -34,6 +43,7 @@ const howToLd = {
         <div class="min-w-0" data-reveal>
           <p class="text-[13px] font-semibold uppercase tracking-[0.18em] text-rose-deep">What happens on the call</p>
           <h2 class="mt-2 font-display text-[28px] font-semibold leading-tight text-ink sm:text-[32px]">A relaxed chat — not a sales pitch</h2>
+          <p class="lead-answer mt-4 text-lg font-medium leading-relaxed text-ink">Booking a free Femine session takes three steps: pick a day and time, fill in the form, and we reply within 24 hours. The 30-minute call is free, online over video, Monday to Saturday — and there is no pressure to continue after.</p>
           <ol class="mt-8 space-y-7">
             {steps.map((s) => (
               <li class="flex gap-4">

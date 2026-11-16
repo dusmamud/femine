@@ -63,25 +63,65 @@ import { services } from '../data/services';
     </div>
   </div>
   <div class="mt-5 grid gap-5 sm:grid-cols-2">
-    <div>
-      <label for="cf-pref-time" class="mb-2 block text-sm font-medium text-ink">Preferred time <span class="font-normal text-muted">(optional)</span></label>
-      <select id="cf-pref-time" name="pref-time" class="min-h-12 w-full cursor-pointer appearance-none rounded-2xl border border-ink/10 bg-white px-4 text-[15px] focus:border-wine focus:outline-none">
-        <option value="">Any time</option>
-        <option value="Morning (10am – 1pm)">Morning (10am – 1pm)</option>
-        <option value="Afternoon (1pm – 4pm)">Afternoon (1pm – 4pm)</option>
-        <option value="Evening (4pm – 7pm)">Evening (4pm – 7pm)</option>
-      </select>
+    <div class="relative" id="cf-pref-time-wrap">
+      <span id="cf-pref-time-label-text" class="mb-2 block text-sm font-medium text-ink">Preferred time <span class="font-normal text-muted">(optional)</span></span>
+      <input type="hidden" id="cf-pref-time" name="pref-time" value="" />
+      <button type="button" id="cf-pref-time-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="cf-pref-time-label-text cf-pref-time-btn-label" class="flex min-h-12 w-full cursor-pointer items-center justify-between gap-3 rounded-2xl border border-ink/10 bg-white px-4 text-left text-[15px] text-ink transition focus:border-wine focus:outline-none">
+        <span id="cf-pref-time-btn-label" class="truncate text-muted">Any time</span>
+        <svg id="cf-pref-time-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="shrink-0 text-muted transition-transform duration-200"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <ul id="cf-pref-time-list" role="listbox" aria-labelledby="cf-pref-time-label-text" class="absolute left-0 right-0 top-full z-20 mt-2 hidden max-h-[22rem] overflow-auto rounded-2xl border border-ink/10 bg-white p-2 shadow-xl shadow-ink/10">
+        <li role="option" aria-selected="true" data-value="" tabindex="-1" class="flex cursor-pointer items-center justify-between gap-3 rounded-xl px-3 py-3 outline-none transition hover:bg-cream focus:bg-cream">
+          <span class="text-[15px] text-ink">Any time</span>
+          <svg class="pk-check h-5 w-5 shrink-0 text-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
+        </li>
+        <li role="option" aria-selected="false" data-value="Morning (10am – 1pm)" tabindex="-1" class="flex cursor-pointer items-center justify-between gap-3 rounded-xl px-3 py-3 outline-none transition hover:bg-cream focus:bg-cream">
+          <span class="text-[15px] text-ink">Morning (10am – 1pm)</span>
+          <svg class="pk-check hidden h-5 w-5 shrink-0 text-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
+        </li>
+        <li role="option" aria-selected="false" data-value="Afternoon (1pm – 4pm)" tabindex="-1" class="flex cursor-pointer items-center justify-between gap-3 rounded-xl px-3 py-3 outline-none transition hover:bg-cream focus:bg-cream">
+          <span class="text-[15px] text-ink">Afternoon (1pm – 4pm)</span>
+          <svg class="pk-check hidden h-5 w-5 shrink-0 text-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
+        </li>
+        <li role="option" aria-selected="false" data-value="Evening (4pm – 7pm)" tabindex="-1" class="flex cursor-pointer items-center justify-between gap-3 rounded-xl px-3 py-3 outline-none transition hover:bg-cream focus:bg-cream">
+          <span class="text-[15px] text-ink">Evening (4pm – 7pm)</span>
+          <svg class="pk-check hidden h-5 w-5 shrink-0 text-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
+        </li>
+      </ul>
     </div>
-    <div>
-      <label for="cf-source" class="mb-2 block text-sm font-medium text-ink">How did you hear about us? <span class="font-normal text-muted">(optional)</span></label>
-      <select id="cf-source" name="source" class="min-h-12 w-full cursor-pointer appearance-none rounded-2xl border border-ink/10 bg-white px-4 text-[15px] focus:border-wine focus:outline-none">
-        <option value="">Choose…</option>
-        <option value="Google search">Google search</option>
-        <option value="Instagram">Instagram</option>
-        <option value="YouTube">YouTube</option>
-        <option value="A friend">A friend</option>
-        <option value="Something else">Something else</option>
-      </select>
+    <div class="relative" id="cf-source-wrap">
+      <span id="cf-source-label-text" class="mb-2 block text-sm font-medium text-ink">How did you hear about us? <span class="font-normal text-muted">(optional)</span></span>
+      <input type="hidden" id="cf-source" name="source" value="" />
+      <button type="button" id="cf-source-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="cf-source-label-text cf-source-btn-label" class="flex min-h-12 w-full cursor-pointer items-center justify-between gap-3 rounded-2xl border border-ink/10 bg-white px-4 text-left text-[15px] text-ink transition focus:border-wine focus:outline-none">
+        <span id="cf-source-btn-label" class="truncate text-muted">Choose…</span>
+        <svg id="cf-source-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="shrink-0 text-muted transition-transform duration-200"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <ul id="cf-source-list" role="listbox" aria-labelledby="cf-source-label-text" class="absolute left-0 right-0 top-full z-20 mt-2 hidden max-h-[22rem] overflow-auto rounded-2xl border border-ink/10 bg-white p-2 shadow-xl shadow-ink/10">
+        <li role="option" aria-selected="false" data-value="" tabindex="-1" class="flex cursor-pointer items-center justify-between gap-3 rounded-xl px-3 py-3 outline-none transition hover:bg-cream focus:bg-cream">
+          <span class="text-[15px] text-ink">Choose…</span>
+          <svg class="pk-check hidden h-5 w-5 shrink-0 text-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
+        </li>
+        <li role="option" aria-selected="false" data-value="Google search" tabindex="-1" class="flex cursor-pointer items-center justify-between gap-3 rounded-xl px-3 py-3 outline-none transition hover:bg-cream focus:bg-cream">
+          <span class="text-[15px] text-ink">Google search</span>
+          <svg class="pk-check hidden h-5 w-5 shrink-0 text-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
+        </li>
+        <li role="option" aria-selected="false" data-value="Instagram" tabindex="-1" class="flex cursor-pointer items-center justify-between gap-3 rounded-xl px-3 py-3 outline-none transition hover:bg-cream focus:bg-cream">
+          <span class="text-[15px] text-ink">Instagram</span>
+          <svg class="pk-check hidden h-5 w-5 shrink-0 text-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
+        </li>
+        <li role="option" aria-selected="false" data-value="YouTube" tabindex="-1" class="flex cursor-pointer items-center justify-between gap-3 rounded-xl px-3 py-3 outline-none transition hover:bg-cream focus:bg-cream">
+          <span class="text-[15px] text-ink">YouTube</span>
+          <svg class="pk-check hidden h-5 w-5 shrink-0 text-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
+        </li>
+        <li role="option" aria-selected="false" data-value="A friend" tabindex="-1" class="flex cursor-pointer items-center justify-between gap-3 rounded-xl px-3 py-3 outline-none transition hover:bg-cream focus:bg-cream">
+          <span class="text-[15px] text-ink">A friend</span>
+          <svg class="pk-check hidden h-5 w-5 shrink-0 text-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
+        </li>
+        <li role="option" aria-selected="false" data-value="Something else" tabindex="-1" class="flex cursor-pointer items-center justify-between gap-3 rounded-xl px-3 py-3 outline-none transition hover:bg-cream focus:bg-cream">
+          <span class="text-[15px] text-ink">Something else</span>
+          <svg class="pk-check hidden h-5 w-5 shrink-0 text-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
+        </li>
+      </ul>
     </div>
   </div>
   <div class="mt-5">
@@ -150,6 +190,73 @@ import { services } from '../data/services';
     else if (e.key === 'Escape') { e.preventDefault(); setSvcOpen(false); svcBtn?.focus(); }
     else if (e.key === 'Tab') setSvcOpen(false);
   });
+
+  // Shared custom picker for the two simple fields (Preferred time, How did
+  // you hear about us?) — same button + listbox pattern as the programme
+  // picker, so all three dropdowns look and behave identically. The chosen
+  // value lives in the hidden input with the field's id, so the submit
+  // handler below reads it unchanged (it only ever used .value).
+  function setupPicker(cfg: { btn: string; list: string; input: string; label: string; chevron: string }) {
+    const btn = document.getElementById(cfg.btn) as HTMLButtonElement | null;
+    const list = document.getElementById(cfg.list) as HTMLUListElement | null;
+    const input = document.getElementById(cfg.input) as HTMLInputElement | null;
+    const label = document.getElementById(cfg.label) as HTMLSpanElement | null;
+    const chevron = document.getElementById(cfg.chevron) as SVGSVGElement | null;
+    const options = list ? [...list.querySelectorAll<HTMLElement>('[role="option"]')] : [];
+    let open = false;
+    function setOpen(o: boolean) {
+      open = o;
+      list?.classList.toggle('hidden', !o);
+      btn?.setAttribute('aria-expanded', String(o));
+      btn?.classList.toggle('border-wine', o);
+      if (chevron) chevron.style.transform = o ? 'rotate(180deg)' : '';
+    }
+    function select(opt: HTMLElement, focusBtn = true) {
+      options.forEach((o) => {
+        const on = o === opt;
+        o.setAttribute('aria-selected', String(on));
+        o.classList.toggle('bg-cream', on);
+        o.querySelector('.pk-check')?.classList.toggle('hidden', !on);
+      });
+      const val = opt.dataset.value ?? '';
+      if (input) input.value = val;
+      if (label) {
+        label.textContent = opt.textContent?.trim() ?? '';
+        label.classList.toggle('text-muted', val === '');
+      }
+      setOpen(false);
+      if (focusBtn) btn?.focus();
+    }
+    btn?.addEventListener('click', () => setOpen(!open));
+    options.forEach((opt) => opt.addEventListener('click', () => select(opt)));
+    document.addEventListener('click', (e) => {
+      if (open && btn && list && !btn.contains(e.target as Node) && !list.contains(e.target as Node)) setOpen(false);
+    });
+    btn?.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        if (!open) { setOpen(true); options[0]?.focus(); }
+      } else if (e.key === 'Escape' && open) {
+        e.preventDefault(); setOpen(false); btn.focus();
+      }
+    });
+    list?.addEventListener('keydown', (e) => {
+      const i = options.indexOf(document.activeElement as HTMLElement);
+      if (e.key === 'ArrowDown') { e.preventDefault(); options[Math.min(i + 1, options.length - 1)]?.focus(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); if (i <= 0) btn?.focus(); else options[i - 1]?.focus(); }
+      else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (i >= 0) select(options[i]); }
+      else if (e.key === 'Escape') { e.preventDefault(); setOpen(false); btn?.focus(); }
+      else if (e.key === 'Tab') setOpen(false);
+    });
+    // Mark the pre-selected option (only Preferred time has one: "Any time").
+    const def = options.find((o) => o.getAttribute('aria-selected') === 'true');
+    if (def) {
+      def.classList.add('bg-cream');
+      def.querySelector('.pk-check')?.classList.remove('hidden');
+    }
+  }
+  setupPicker({ btn: 'cf-pref-time-btn', list: 'cf-pref-time-list', input: 'cf-pref-time', label: 'cf-pref-time-btn-label', chevron: 'cf-pref-time-chevron' });
+  setupPicker({ btn: 'cf-source-btn', list: 'cf-source-list', input: 'cf-source', label: 'cf-source-btn-label', chevron: 'cf-source-chevron' });
 
   // Plan preselect from ?plan= (linked from /pricing and gift cards).
   // Runs client-side: the site is static, so the query string only exists

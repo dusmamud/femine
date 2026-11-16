@@ -134,6 +134,8 @@ body {
 .article-body a { color: var(--color-wine); text-decoration: underline; text-underline-offset: 3px; }
 .article-body a:hover { color: var(--color-rose-deep); }
 .article-body blockquote { margin: 0 0 1.2em; padding-left: 1.1em; border-left: 3px solid var(--color-rose); font-style: italic; color: var(--color-ink); }
+/* Answer-first lead paragraph (AEO/GEO): the direct answer, up front. */
+.article-body .lead-answer { color: var(--color-ink); font-weight: 500; border-left: 3px solid var(--color-rose); padding-left: 1.1em; }
 
 /* Programme picker pop-in */
 #cf-service-list:not(.hidden) {

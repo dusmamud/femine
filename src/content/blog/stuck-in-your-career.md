@@ -8,7 +8,11 @@ imageAlt: "Woman running at sunrise, full of energy"
 readingMinutes: 4
 ---
 
+<p class="lead-answer">Feeling stuck in your career is a signal, not a sentence. First name what is actually missing — boredom, no growth, wrong values, or no recognition — then run a two-week experiment, talk to someone who made a similar move, and write a 90-day plan with one skill, one project and one person.</p>
+
 Stuck does not usually look dramatic. You are not failing — you have a decent job, people think you are doing fine. But Sunday evenings feel heavy, Monday mornings feel grey, and somewhere in the back of your mind there is a question you keep postponing: *is this it?*
+
+That heavy Sunday feeling is often [stress](https://www.apa.org/topics/stress) — your body telling you something needs attention, not laziness.
 
 That feeling is not ingratitude. It is information. Here is what to do with it.
 
@@ -21,7 +25,7 @@ That feeling is not ingratitude. It is information. Here is what to do with it.
 - **Wrong values** — the work pays well but means nothing to you.
 - **No recognition** — you do good work and nobody sees it.
 
-Each one has a different fix. Boredom needs a new challenge, not a new career. No recognition needs visibility, not a resignation letter. Most people who feel stuck need one of these four things, not a whole new life.
+Each one has a different fix. Boredom needs a new challenge, not a new career. No recognition needs visibility, not a resignation letter. Most people who feel stuck need one of these four things, not a whole new life. Career researchers describe this as a normal stage of [career development](https://en.wikipedia.org/wiki/Career_development) — not a crisis, but a signal that something needs to change.
 
 ## Step 2: run a two-week experiment
 

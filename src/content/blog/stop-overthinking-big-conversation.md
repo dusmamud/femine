@@ -8,13 +8,15 @@ imageAlt: "Two people in a warm, focused conversation"
 readingMinutes: 4
 ---
 
+<p class="lead-answer">To stop overthinking a big conversation, prepare the point, not the script: one sentence about what you want, one recent example, and one sentence about how you feel. Then say the first sentence and let the rest be a conversation — an imperfect honest talk moves things forward; rehearsal only delays it.</p>
+
 You know the conversation is coming. Maybe it is with your partner, your manager, or a friend you have been avoiding. So you rehearse it. You play both parts in your head, you prepare for every reaction, you find the perfect sentence — and then you say none of it, because the perfect version never survives contact with a real person.
 
 Overthinking feels like preparation. It is usually the opposite: a way to delay the discomfort of actually speaking.
 
 ## Why rehearsing fails
 
-A real conversation is not a script. The other person will say something you did not predict, and the moment your mental script breaks, you freeze — because you prepared for lines, not for listening.
+A real conversation is not a script. The other person will say something you did not predict, and the moment your mental script breaks, you freeze — because you prepared for lines, not for listening. Psychologists call this pattern [rumination](https://en.wikipedia.org/wiki/Rumination_(psychology)) — replaying the same thoughts without moving toward a solution — and it reliably makes the conversation feel harder than it is.
 
 There is a second problem. Rehearsing usually means rehearsing the worst case. You imagine the defensive reply, the hurt look, the argument — and by the time you sit down to talk, you are already exhausted and defensive yourself.
 
@@ -32,7 +34,7 @@ That is your whole preparation. Three sentences, written down if it helps, and t
 
 ## The 10-second rule
 
-When it is your turn to speak and your heart is racing, give yourself ten seconds. Breathe in, breathe out, and say the first sentence — the one about what you want. It does not need to be elegant. It needs to be said.
+When it is your turn to speak and your heart is racing — that is [stress](https://www.who.int/news-room/questions-and-answers/item/stress), your body preparing for something hard — give yourself ten seconds. Breathe in, breathe out, and say the first sentence — the one about what you want. It does not need to be elegant. It needs to be said.
 
 Most difficult conversations go better than we fear, for one simple reason: the other person was probably worrying about it too. They are not waiting to attack you. They are waiting to see if it is safe to be honest.
 

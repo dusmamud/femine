@@ -11,8 +11,20 @@ const chapters = [
   { n: '04', title: 'Speak up in meetings', text: 'The 3-sentence method: one observation, one idea, one question. No long speeches needed.' },
   { n: '05', title: 'Your 7-day confidence plan', text: 'One small brave thing a day for a week — with a checklist you can tick off as you go.' },
 ];
+const guideLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'The Confidence First-Aid Kit — five tools for confidence',
+  description: 'Five practical tools you can use today for meetings, difficult conversations and decisions, from Femine’s free 8-page guide.',
+  step: chapters.map((c, i) => ({
+    '@type': 'HowToStep',
+    position: i + 1,
+    name: c.title,
+    text: c.text,
+  })),
+};
 ---
-<Layout title="Free Guide: The Confidence First-Aid Kit — Femine" description="A free 8-page guide from Femine: five practical tools for confidence, difficult conversations and decisions — no email course, no spam.">
+<Layout title="Free Guide: The Confidence First-Aid Kit — Femine" description="A free 8-page guide from Femine: five practical tools for confidence, difficult conversations and decisions — no email course, no spam." jsonLd={guideLd}>
   <Header />
   <main id="main">
     <PageHero eyebrow="Free Guide" title="The Confidence First-Aid Kit" text="Five practical tools you can use today — for meetings, difficult conversations and decisions. Free, 8 pages, no fluff." crumb="Free Guide" />

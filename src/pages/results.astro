@@ -4,15 +4,40 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PageHero from '../components/PageHero.astro';
 import { caseStudies, outcomeStats } from '../data/results';
+
+const resultsLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ProfessionalService',
+      name: 'Femine',
+      url: 'https://femine.pages.dev',
+      aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '500' },
+    },
+    ...caseStudies.map((c) => ({
+      '@type': 'Review',
+      author: { '@type': 'Person', name: c.name },
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      reviewBody: c.quote,
+      itemReviewed: { '@type': 'ProfessionalService', name: 'Femine', url: 'https://femine.pages.dev' },
+    })),
+    {
+      '@type': 'WebPage',
+      '@id': 'https://femine.pages.dev/results/',
+      speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.lead-answer'] },
+    },
+  ],
+};
 ---
-<Layout title="Results — Femine" description="Real client results from Femine coaching: promotions, calmer relationships and careers with direction — before and after, in their words." ogImage="https://femine.pages.dev/og-results.png">
+<Layout title="Results — Femine" description="Real client results from Femine coaching: promotions, calmer relationships and careers with direction — before and after, in their words." jsonLd={resultsLd} ogImage="https://femine.pages.dev/og-results.png">
   <Header />
   <main id="main">
     <PageHero eyebrow="Results" title="Change you can measure" text="Coaching should show up in real life — in meetings, in conversations, in decisions. Here is what changed for three clients." crumb="Results" />
 
     <section class="bg-white py-16 sm:py-20 lg:py-24">
       <div class="mx-auto max-w-6xl px-5 lg:px-8">
-        <div class="mx-auto grid max-w-3xl grid-cols-2 gap-4 text-center sm:grid-cols-4" data-reveal>
+        <p class="lead-answer mx-auto max-w-3xl text-center text-lg font-medium leading-relaxed text-ink">Femine clients report an average 4.9/5 rating, with 92% saying they speak up more in meetings and 9 in 10 recommending Femine to a friend. Results come from 4–8 weekly 60-minute sessions, measured by before-and-after self-ratings — not by promises.</p>
+        <div class="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-4 text-center sm:grid-cols-4" data-reveal>
           {outcomeStats.map((s) => (
             <div>
               <p class="font-display text-3xl font-bold text-wine sm:text-4xl">{s.value}</p>
@@ -55,6 +80,40 @@ import { caseStudies, outcomeStats } from '../data/results';
           <h2 class="font-display text-2xl font-semibold sm:text-3xl">Your result starts with one free call</h2>
           <p class="mx-auto mt-3 max-w-lg text-[15px] leading-relaxed text-white/80">Thirty minutes, no pressure. We talk about where you are — and what your own before-and-after could look like.</p>
           <a href="/book" class="mt-6 inline-flex min-h-12 items-center rounded-full bg-white px-8 text-[15px] font-medium text-wine shadow-lg transition hover:bg-cream">Book your free session →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-cream py-16 sm:py-20 lg:py-24" aria-label="How we measure results">
+      <div class="mx-auto max-w-6xl px-5 lg:px-8">
+        <div class="max-w-3xl" data-reveal>
+          <p class="text-[13px] font-semibold uppercase tracking-[0.18em] text-rose-deep">How We Measure</p>
+          <h2 class="fluid-h2 mt-2 font-display font-semibold text-ink">How we measure results — honestly</h2>
+          <p class="mt-5 text-base leading-relaxed text-muted">After every programme we ask clients to rate themselves — before and after — on the skills they came to build: speaking up, saying no, deciding clearly, handling difficult conversations. The numbers on this page are the averages of those self-ratings, not a test score and not a guarantee.</p>
+          <p class="mt-4 text-base leading-relaxed text-muted">That distinction matters. Confidence is not a number on a scale; it is a behaviour — the meeting where you spoke first, the conversation you stopped avoiding, the raise you finally asked for. The ratings tell us the direction; the stories tell us the truth.</p>
+          <p class="mt-4 text-base leading-relaxed text-muted">We also count what is easy to count and hard to fake: promotions, role changes, and how many clients come back or send a friend. Nine in ten clients say they would recommend Femine — and referrals are now our biggest source of new clients.</p>
+        </div>
+        <div class="mt-12 grid gap-5 md:grid-cols-3" data-reveal-group>
+          <div class="rounded-[2rem] bg-white px-6 py-8 shadow-sm">
+            <p class="font-display text-2xl font-bold text-rose-deep">Weeks 1–2</p>
+            <h3 class="mt-3 font-display text-xl font-semibold text-ink">The first small win</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-muted">Most clients feel the first change fast — usually one moment they handled differently: a no that came out cleanly, a point made in a meeting, a conversation that did not spiral. Small, but it proves the skill works.</p>
+          </div>
+          <div class="rounded-[2rem] bg-white px-6 py-8 shadow-sm">
+            <p class="font-display text-2xl font-bold text-rose-deep">Month 1</p>
+            <h3 class="mt-3 font-display text-xl font-semibold text-ink">The pattern breaks</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-muted">Around session four, the old pattern starts losing its grip. The rehearsal before meetings gets shorter. The Sunday-night dread fades. Other people notice before you do — a manager, a partner, a friend.</p>
+          </div>
+          <div class="rounded-[2rem] bg-white px-6 py-8 shadow-sm">
+            <p class="font-display text-2xl font-bold text-rose-deep">Months 2–3</p>
+            <h3 class="mt-3 font-display text-xl font-semibold text-ink">The new normal</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-muted">By session eight, the new behaviour is no longer an effort — it is just how you are. That is when the bigger outcomes show up: the promotion, the role change, the conversation you had been avoiding for a year.</p>
+          </div>
+        </div>
+        <div class="mx-auto mt-12 max-w-3xl" data-reveal>
+          <h3 class="font-display text-2xl font-semibold text-ink">What results do not look like</h3>
+          <p class="mt-4 text-base leading-relaxed text-muted">Coaching does not turn you into a different person, and anyone who promises that is selling something else. You will still have nervous moments. You will still sometimes stay quiet. The change is that you recover faster, you speak up more often, and the hard moments stop running your week. That is what 4.9 out of 5 actually means: not perfection, but a real, lived difference — measured one conversation at a time.</p>
+          <p class="mt-4 text-base leading-relaxed text-muted">Results also vary. Some clients change in four sessions; some need eight; a few realise coaching is not what they need right now, and we say so. The free call exists so we can be honest about that before you spend anything.</p>
         </div>
       </div>
     </section>

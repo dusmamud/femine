@@ -8,13 +8,15 @@ imageAlt: "Confident professional woman in a blazer"
 readingMinutes: 4
 ---
 
+<p class="lead-answer">Speaking up in meetings is a habit, not a talent. Prepare one point before the meeting, give yourself ten seconds to start when the urge comes, and build on someone else's point if starting cold feels hard. Speak once per meeting for two weeks — confidence arrives because you spoke, not before.</p>
+
 You know the feeling. You have a good point, you rehearse it in your head, you wait for the right moment — and then someone else says it, or the discussion moves on. Afterwards you replay the meeting and feel frustrated with yourself.
 
 Speaking up is not a talent. It is a habit, and habits can be built with small, repeatable steps.
 
 ## Why we freeze
 
-Most people who stay quiet in meetings are not short of ideas. They are running a quick risk calculation: *What if I sound stupid? What if I am wrong? What if I interrupt?* That calculation happens in a second, and silence usually wins because it feels safe.
+Most people who stay quiet in meetings are not short of ideas. They are running a quick risk calculation: *What if I sound stupid? What if I am wrong? What if I interrupt?* That calculation happens in a second, and silence usually wins because it feels safe — that freeze is your body's [stress response](https://www.who.int/news-room/questions-and-answers/item/stress), trying to protect you, not sabotage you. What psychologists call [assertiveness](https://en.wikipedia.org/wiki/Assertiveness) — expressing your views honestly while respecting others — is a skill, not a trait, and it can be practised like any other.
 
 The problem is that silence has a cost too. Your work becomes invisible, decisions get made without your input, and over time you start to believe your ideas are not worth hearing. They are.
 

@@ -5,8 +5,39 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import PageHero from '../../components/PageHero.astro';
 import { services, plans } from '../../data/services';
+
+const servicesLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ItemList',
+      itemListElement: services.map((s, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        item: {
+          '@type': 'Service',
+          name: `${s.title} Coaching`,
+          description: s.long,
+          url: `https://femine.pages.dev/services/${s.slug}/`,
+          provider: { '@type': 'ProfessionalService', name: 'Femine', url: 'https://femine.pages.dev' },
+          offers: {
+            '@type': 'Offer',
+            price: Number(s.priceFrom.replace(/[^0-9]/g, '')),
+            priceCurrency: 'INR',
+            availability: 'https://schema.org/InStock',
+          },
+        },
+      })),
+    },
+    {
+      '@type': 'WebPage',
+      '@id': 'https://femine.pages.dev/services/',
+      speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.lead-answer'] },
+    },
+  ],
+};
 ---
-<Layout title="Services — Femine" description="Five focused coaching programmes: Problem Solving, Relationships, Identifying Passion, Growth Career and Corporate Workshops. 1-to-1 online sessions from ₹1,999." ogImage="https://femine.pages.dev/og-services.png">
+<Layout title="Services — Femine" description="Five focused coaching programmes: Problem Solving, Relationships, Identifying Passion, Growth Career and Corporate Workshops. 1-to-1 online sessions from ₹1,999." jsonLd={servicesLd} ogImage="https://femine.pages.dev/og-services.png">
   <Header />
   <main id="main">
     <PageHero eyebrow="Our Services" title="Five programmes, one goal: a stronger you" text="Every programme is 1-to-1, online, and built around your real life — not a generic course. Pick one, or combine them." crumb="Services" />
@@ -44,6 +75,63 @@ import { services, plans } from '../../data/services';
             <p class="mt-2.5 text-[15px] leading-relaxed text-white/85">Book a free 30-minute call — we'll help you pick the programme that fits your goals, together.</p>
             <a href="/book" class="mt-6 inline-flex min-h-12 w-fit items-center rounded-full bg-white px-6 text-[15px] font-medium text-wine shadow-md transition hover:bg-cream">Book a free call →</a>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white py-16 sm:py-20 lg:py-24" aria-label="How to choose">
+      <div class="mx-auto max-w-6xl px-5 lg:px-8">
+        <div class="max-w-3xl" data-reveal>
+          <p class="text-[13px] font-semibold uppercase tracking-[0.18em] text-rose-deep">Not Sure Which One?</p>
+          <h2 class="fluid-h2 mt-2 font-display font-semibold text-ink">How to choose the right programme</h2>
+          <p class="lead-answer mt-5 text-lg font-medium leading-relaxed text-ink">Femine has five coaching programmes, all 1-to-1 and online, from ₹1,999 per 60-minute session. Pick the one that matches the problem you feel most — and if two fit, start with either, because every plan lets you mix programmes later.</p>
+          <p class="mt-4 text-base leading-relaxed text-muted">The simplest way to choose is to finish this sentence: “The thing I most want to change is…” Then match it below. And if you still cannot decide, that is exactly what the free 30-minute call is for — we help you pick, with no obligation to book anything after.</p>
+        </div>
+        <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-reveal-group>
+          <article class="rounded-[2rem] bg-cream px-6 py-8">
+            <p class="text-sm font-semibold text-wine">If you keep postponing decisions…</p>
+            <h3 class="mt-2 font-display text-xl font-semibold text-ink"><a href="/services/problem-solving" class="hover:text-wine">Problem Solving →</a></h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-muted">You replay every option at 2am, ask ten people for advice, and still feel no closer. This programme gives you a 4-step framework to break a problem down and decide without the spiral.</p>
+          </article>
+          <article class="rounded-[2rem] bg-cream px-6 py-8">
+            <p class="text-sm font-semibold text-wine">If you say yes when you mean no…</p>
+            <h3 class="mt-2 font-display text-xl font-semibold text-ink"><a href="/services/relationships" class="hover:text-wine">Relationships →</a></h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-muted">Difficult conversations turn into fights or silence, and boundaries feel impossible. This programme teaches you to say what you mean kindly — and to mean it.</p>
+          </article>
+          <article class="rounded-[2rem] bg-cream px-6 py-8">
+            <p class="text-sm font-semibold text-wine">If you have no idea what comes next…</p>
+            <h3 class="mt-2 font-display text-xl font-semibold text-ink"><a href="/services/identifying-passion" class="hover:text-wine">Identifying Passion →</a></h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-muted">Good at your job, unsure it is the right job. This programme maps your strengths, interests and values, then tests a direction with small experiments before any big change.</p>
+          </article>
+          <article class="rounded-[2rem] bg-cream px-6 py-8">
+            <p class="text-sm font-semibold text-wine">If your work is invisible…</p>
+            <h3 class="mt-2 font-display text-xl font-semibold text-ink"><a href="/services/growth-career" class="hover:text-wine">Growth Career →</a></h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-muted">You do good work and nobody notices. This programme builds visibility, speaking up in meetings, and negotiating for the role and salary you deserve.</p>
+          </article>
+          <article class="rounded-[2rem] bg-cream px-6 py-8">
+            <p class="text-sm font-semibold text-wine">If your whole team needs it…</p>
+            <h3 class="mt-2 font-display text-xl font-semibold text-ink"><a href="/services/corporate-workshops" class="hover:text-wine">Corporate Workshops →</a></h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-muted">One confident person changes a team. Half-day workshops on communication, feedback and leadership presence, designed around your team's real challenges.</p>
+          </article>
+          <article class="flex flex-col justify-center rounded-[2rem] bg-wine px-6 py-8 text-white">
+            <h3 class="font-display text-xl font-semibold">Still torn between two?</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-white/85">Book a free call. In 30 minutes we will help you pick — and if we are not the right fit, we will say so.</p>
+            <a href="/book" class="mt-5 inline-flex min-h-11 w-fit items-center rounded-full bg-white px-6 text-sm font-medium text-wine">Book a free call →</a>
+          </article>
+        </div>
+        <div class="mt-14 grid gap-6 lg:grid-cols-3" data-reveal-group>
+          <div class="rounded-[2rem] bg-cream px-6 py-7">
+            <h3 class="font-display text-lg font-semibold text-ink">How sessions work</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-muted">Every programme runs the same way: 60-minute 1-to-1 sessions over video call, Monday to Saturday, 10am–7pm IST. You bring a real situation; we work on it together; you leave with one small thing to practise that week.</p>
+          </div>
+          <div class="rounded-[2rem] bg-cream px-6 py-7">
+            <h3 class="font-display text-lg font-semibold text-ink">How many sessions?</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-muted">A single session is enough for one specific decision or conversation. Most clients notice a real change in 4 sessions and deeper change in 8. After your free call, we agree on a plan together — never more than you need.</p>
+          </div>
+          <div class="rounded-[2rem] bg-cream px-6 py-7">
+            <h3 class="font-display text-lg font-semibold text-ink">Can you mix programmes?</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-muted">Yes. Your plan is not locked to one programme. Many clients start with Relationships and move to Growth Career, or the other way round. We adjust the plan together as your goals change.</p>
+          </div>
         </div>
       </div>
     </section>

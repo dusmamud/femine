@@ -10,8 +10,21 @@ const steps = [
   { n: '02', title: 'We map one clear next step', text: 'Before the call ends, we agree on the one thing worth working on first — and which programme fits it best.' },
   { n: '03', title: 'You decide, no pressure', text: 'If Femine feels right, we pick a plan and a schedule together. If not, you still keep everything we discussed. The call costs nothing either way.' },
 ];
+const howToLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to book your free Femine coaching call',
+  description: 'Book a free 30-minute coaching call with Femine in three steps: talk, map one next step, then decide with no pressure.',
+  totalTime: 'PT30M',
+  step: steps.map((s, i) => ({
+    '@type': 'HowToStep',
+    position: i + 1,
+    name: s.title,
+    text: s.text,
+  })),
+};
 ---
-<Layout title="Book a Free Session — Femine" description="Book your free 30-minute coaching call with Femine. No pressure, no obligation — just an honest conversation about where you want to go." ogImage="https://femine.pages.dev/og-book.png">
+<Layout title="Book a Free Session — Femine" description="Book your free 30-minute coaching call with Femine. No pressure, no obligation — just an honest conversation about where you want to go." jsonLd={howToLd} ogImage="https://femine.pages.dev/og-book.png">
   <Header />
   <main id="main">
     <PageHero eyebrow="Book a Free Session" title="Your first session is free" text="Thirty minutes, online, with a real coach. Fill in the form and it will open in your email app — just press send, and we will reply within 24 hours." crumb="Book a Free Session" />

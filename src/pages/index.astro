@@ -49,11 +49,49 @@ const orgLd = {
   url: 'https://femine.pages.dev',
   description: 'Personal coaching for confidence, relationships, passion and career growth.',
   priceRange: '₹₹',
+  telephone: '+91 98765 43210',
+  email: 'hello@femine.in',
+  address: { '@type': 'PostalAddress', addressCountry: 'IN' },
+  areaServed: 'India',
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    opens: '10:00',
+    closes: '19:00',
+  },
+  sameAs: [
+    'https://www.instagram.com/femine.coaching',
+    'https://www.facebook.com/femine.coaching',
+  ],
+  logo: 'https://femine.pages.dev/logo-mark.svg',
+  founder: {
+    '@type': 'Person',
+    name: 'Meera Kapoor',
+    jobTitle: 'Founder & Lead Coach',
+    knowsAbout: ['Confidence coaching', 'Communication skills', 'Career growth', 'Relationships'],
+  },
+  aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '500' },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Coaching programmes',
+    itemListElement: [
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Problem Solving Coaching' }, price: 1999, priceCurrency: 'INR' },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Relationships Coaching' }, price: 1999, priceCurrency: 'INR' },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Identifying Passion Coaching' }, price: 1999, priceCurrency: 'INR' },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Growth Career Coaching' }, price: 1999, priceCurrency: 'INR' },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Corporate Workshops' }, price: 14999, priceCurrency: 'INR' },
+    ],
+  },
 };
 const pageLd = {
   '@context': 'https://schema.org',
   '@graph': [
     orgLd,
+    {
+      '@type': 'WebPage',
+      '@id': 'https://femine.pages.dev/',
+      speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.lead-answer'] },
+    },
     {
       '@type': 'FAQPage',
       mainEntity: faqs.slice(0, 5).map((f) => ({
@@ -79,7 +117,7 @@ const pageLd = {
         <h1 data-hero class="fluid-h1 mt-5 font-display font-semibold text-ink">
           Your Personality is<br />What Makes You<br />Character
         </h1>
-        <p data-hero class="mt-5 max-w-md text-base leading-relaxed text-muted sm:text-[17px]">
+        <p data-hero class="lead-answer mt-5 max-w-md text-base leading-relaxed text-muted sm:text-[17px]">
           Confidence is not something you are born with — it is something you practise.
           Femine gives you practical, one-to-one coaching to speak up, decide clearly
           and grow into the person you want to be.

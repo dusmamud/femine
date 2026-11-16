@@ -12,6 +12,7 @@ export interface Service {
   icon: 'bulb' | 'heart' | 'target' | 'chart' | 'users';
   title: string;
   short: string;
+  lead: string;
   long: string;
   duration: string;
   format: string;
@@ -28,6 +29,7 @@ export const services: Service[] = [
     icon: 'bulb',
     title: 'Problem Solving',
     short: 'Clear thinking tools that turn everyday stuck moments into confident decisions.',
+    lead: 'Problem Solving coaching at Femine teaches you a calm, repeatable way to make decisions. In 60-minute online sessions you learn a 4-step framework to break any problem down, separate facts from fears, and choose without replaying the decision for days. From ₹1,999 per session, with a free 30-minute first call.',
     long: 'When every option feels wrong, the problem is rarely the choice — it is the noise around it. In this programme you learn a calm, repeatable way to break a problem down, weigh what actually matters, and decide without second-guessing yourself for days.',
     duration: '60 minutes',
     format: '1-to-1 · Online',
@@ -47,6 +49,7 @@ export const services: Service[] = [
     icon: 'heart',
     title: 'Relationships',
     short: 'Communicate with warmth and boundaries, and build connections that actually last.',
+    lead: 'Relationships coaching at Femine helps you say what you mean kindly, listen without getting defensive, and set boundaries without guilt. In 60-minute online sessions you practise real conversations — saying no, handling conflict, rebuilding trust — so your relationships feel closer and less draining. From ₹1,999 per session.',
     long: 'Good relationships are not built on grand gestures — they are built on small, honest conversations done well. This programme helps you say what you mean kindly, listen without getting defensive, and set boundaries without guilt.',
     duration: '60 minutes',
     format: '1-to-1 · Online',
@@ -66,6 +69,7 @@ export const services: Service[] = [
     icon: 'target',
     title: 'Identifying Passion',
     short: 'Find what energises you — then shape a life and career around it.',
+    lead: 'Identifying Passion coaching at Femine turns “follow your passion” into a process. In 60-minute online sessions we map your strengths, interests and values, then test small real steps before any big change — ending with a realistic 90-day plan. From ₹1,999 per session, with a free 30-minute first call.',
     long: '“Follow your passion” is easy advice and hard to act on. This programme turns it into a process: we map what you are good at, what you enjoy, and what the world will pay for — then test small, real steps before you make any big change.',
     duration: '60 minutes',
     format: '1-to-1 · Online',
@@ -85,6 +89,7 @@ export const services: Service[] = [
     icon: 'chart',
     title: 'Growth Career',
     short: 'Present yourself with confidence and grow, step by step, in your career.',
+    lead: 'Growth Career coaching at Femine builds the professional side of personality: presenting your work clearly, speaking up in meetings, and negotiating with confidence. In 60-minute online sessions you practise the exact situations you face at work. From ₹1,999 per session, with a free 30-minute first call.',
     long: 'Talent alone does not get promoted — visibility, communication and negotiation do. This programme builds the professional side of personality: how you present your work, speak in rooms that matter, and ask for what you deserve.',
     duration: '60 minutes',
     format: '1-to-1 · Online',
@@ -104,6 +109,7 @@ export const services: Service[] = [
     icon: 'users',
     title: 'Corporate Workshops',
     short: 'Half-day and full-day workshops that help teams communicate, lead and collaborate better.',
+    lead: 'Corporate Workshops from Femine are half-day, 3-hour sessions that help teams communicate, lead and collaborate better. We design each workshop around your team’s real challenges, with practical role-play and a follow-up report. For teams of 8–40, online or on-site, from ₹14,999.',
     long: 'One confident person changes a team — a confident team changes a company. Our workshops bring Femine\'s practical coaching into the workplace: communication, presentation skills, feedback without friction, and leadership presence. Designed with your HR team, delivered online or on-site for teams of 8 to 40.',
     duration: 'Half-day · 3 hours',
     format: 'Teams of 8–40 · Online or on-site',

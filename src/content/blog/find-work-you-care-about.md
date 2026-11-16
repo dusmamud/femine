@@ -8,6 +8,8 @@ imageAlt: "Woman running at sunrise, full of energy"
 readingMinutes: 5
 ---
 
+<p class="lead-answer">You do not find work you care about by waiting for a revelation — you find it by testing small. Track what gives you energy for a week, check where your skills, enjoyment and paid work overlap, run one small experiment, then make a 90-day plan. That process, not a dramatic leap, is how a direction appears.</p>
+
 "Follow your passion" sounds inspiring until you try to do it. What if you do not know what your passion is? What if it does not pay the rent? What if you are good at something you do not love?
 
 You do not need a lightning-bolt revelation. You need a process — and permission to start small.
@@ -29,6 +31,8 @@ A direction worth pursuing usually sits where three things overlap:
 - **What the world will pay for** — a real need, not just a hobby.
 
 You do not need all three perfectly aligned today. Two out of three is enough to start. The third can be built.
+
+This overlap is close to the Japanese idea of [ikigai](https://en.wikipedia.org/wiki/Ikigai) — the intersection of what you love, what you are good at, what the world needs, and what you can be paid for.
 
 ## Test small before you leap
 

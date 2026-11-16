@@ -1,0 +1,31 @@
+# Femine
+
+> Femine is an online personality coaching service for confidence, relationships, passion and career growth. Sessions are 1-to-1 over video call, Monday to Saturday, 10am–7pm IST, for clients across India. The first 30-minute call is free. Prices start at ₹1,999 per 60-minute session.
+
+## Services
+
+- [Problem Solving Coaching](https://femine.pages.dev/services/problem-solving/): Clear thinking tools that turn everyday stuck moments into confident decisions. From ₹1,999 per 60-minute session.
+- [Relationships Coaching](https://femine.pages.dev/services/relationships/): Communicate with warmth and boundaries, and build connections that actually last. From ₹1,999 per 60-minute session.
+- [Identifying Passion Coaching](https://femine.pages.dev/services/identifying-passion/): Find what energises you, then shape a life and career around it. From ₹1,999 per 60-minute session.
+- [Growth Career Coaching](https://femine.pages.dev/services/growth-career/): Present yourself with confidence and grow, step by step, in your career. From ₹1,999 per 60-minute session.
+- [Corporate Workshops](https://femine.pages.dev/services/corporate-workshops/): Half-day and full-day workshops that help teams communicate, lead and collaborate better. For teams of 8–40, online or on-site. From ₹14,999.
+
+## Pages
+
+- [About](https://femine.pages.dev/about/): Meet the coach, the Femine approach, and what a session feels like.
+- [Pricing](https://femine.pages.dev/pricing/): Single Session ₹1,999, Growth Pack ₹6,999 for 4 sessions, Transform Pack ₹12,999 for 8 sessions. Gift cards from ₹1,999.
+- [Book a Free Session](https://femine.pages.dev/book/): What happens on the free 30-minute call, and how to pick a time.
+- [Results](https://femine.pages.dev/results/): Before-and-after client stories and outcomes.
+- [Testimonials](https://femine.pages.dev/testimonials/): What clients say about working with Femine.
+- [Blog](https://femine.pages.dev/blog/): Practical articles on confidence, conversations, decisions and career growth.
+- [FAQ](https://femine.pages.dev/faq/): How sessions work, prices, rescheduling, refunds and privacy.
+- [Free Guide](https://femine.pages.dev/free-guide/): A free 5-chapter guide to building confidence, with a downloadable PDF.
+- [Contact](https://femine.pages.dev/contact/): Email, phone and WhatsApp.
+
+## Contact
+
+- Email: hello@femine.in
+- Phone: +91 98765 43210
+- WhatsApp: https://wa.me/919876543210
+- Hours: Mon–Sat, 10am–7pm IST
+- Location: Online, serving clients across India

@@ -12,8 +12,26 @@ export function getStaticPaths() {
 
 const { service: s } = Astro.props;
 const others = services.filter((x) => x.slug !== s.slug);
+const priceNum = Number(s.priceFrom.replace(/[^0-9]/g, ''));
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: `${s.title} Coaching`,
+  description: s.long,
+  provider: { '@type': 'ProfessionalService', name: 'Femine', url: 'https://femine.pages.dev' },
+  areaServed: 'India',
+  serviceType: s.title,
+  offers: {
+    '@type': 'Offer',
+    price: priceNum,
+    priceCurrency: 'INR',
+    availability: 'https://schema.org/InStock',
+    url: new URL(Astro.url.pathname, Astro.site).href,
+  },
+  speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.lead-answer'] },
+};
 ---
-<Layout title={`${s.title} Coaching — Femine`} description={s.short} ogImage={new URL(s.image.src, Astro.site).href} ogImageWidth={s.image.width} ogImageHeight={s.image.height}>
+<Layout title={`${s.title} Coaching — Femine`} description={s.short} jsonLd={serviceLd} ogImage={new URL(s.image.src, Astro.site).href} ogImageWidth={s.image.width} ogImageHeight={s.image.height}>
   <Header />
   <main id="main">
     <PageHero eyebrow="Service" title={s.title} text={s.short} crumb={s.title} />
@@ -25,6 +43,7 @@ const others = services.filter((x) => x.slug !== s.slug);
             <Picture src={s.image} alt={s.imageAlt} widths={[480, 960]} sizes="(max-width: 1024px) 100vw, 60vw" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="eager" fetchpriority="high" class="aspect-[16/9] w-full object-cover" />
           </div>
           <h2 class="fluid-h2 mt-8 font-display font-semibold text-ink">What this programme covers</h2>
+          <p class="lead-answer mt-5 text-lg font-medium leading-relaxed text-ink">{s.lead}</p>
           <p class="mt-5 text-base leading-relaxed text-muted">{s.long}</p>
           <ul class="mt-8 space-y-3.5">
             {s.benefits.map((b) => (

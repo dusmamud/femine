@@ -8,6 +8,8 @@ imageAlt: "Notebook and laptop with a planning session in progress"
 readingMinutes: 4
 ---
 
+<p class="lead-answer">The hardest part of a difficult conversation is the first two minutes, and three sentences get you through them: name the topic, say how you feel, and say what you want. Then stop talking and let the other person respond — silence for five seconds feels respectful, not awkward.</p>
+
 The hardest part of a difficult conversation is the first two minutes. After that, you are just talking. Before that, you are standing at the edge of a cold pool, negotiating with yourself.
 
 Our coaches use a simple method for those two minutes. It has three sentences, and it works because it does something most openings do not: it tells the other person what kind of conversation this is going to be.
@@ -22,7 +24,7 @@ One sentence, no blame, no history. You are simply naming the subject, the way y
 
 "I have been feeling stretched thin, and a bit resentful, to be honest."
 
-Feelings are the most disarming thing you can share, because they cannot be argued with. Nobody can tell you that you do not feel stretched thin. Compare that with "You keep dumping work on me" — which is an accusation, and accusations get a defence, not a conversation.
+Feelings are the most disarming thing you can share, because they cannot be argued with. This is the heart of [Nonviolent Communication](https://en.wikipedia.org/wiki/Nonviolent_Communication) — observe without evaluating, then state your feelings and needs. Nobody can tell you that you do not feel stretched thin. Compare that with "You keep dumping work on me" — which is an accusation, and accusations get a defence, not a conversation.
 
 ## Sentence 3: say what you want
 

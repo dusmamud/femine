@@ -20,8 +20,26 @@ const others = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 const slug = (id: string) => id.replace(/\.md$/, '');
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.excerpt,
+  image: new URL(post.data.image.src, Astro.site).href,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: post.data.pubDate.toISOString(),
+  author: { '@type': 'Organization', name: 'Femine', url: 'https://femine.pages.dev' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Femine',
+    url: 'https://femine.pages.dev',
+    logo: { '@type': 'ImageObject', url: 'https://femine.pages.dev/logo-mark.svg' },
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': new URL(Astro.url.pathname, Astro.site).href },
+  speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.lead-answer'] },
+};
 ---
-<Layout title={`${post.data.title} — Femine Blog`} description={post.data.excerpt} ogImage={new URL(post.data.image.src, Astro.site).href} ogImageWidth={post.data.image.width} ogImageHeight={post.data.image.height}>
+<Layout title={`${post.data.title} — Femine Blog`} description={post.data.excerpt} jsonLd={articleLd} ogImage={new URL(post.data.image.src, Astro.site).href} ogImageWidth={post.data.image.width} ogImageHeight={post.data.image.height}>
   <Header />
   <main id="main">
     <section class="bg-cream pb-10 pt-28 sm:pt-32 lg:pt-36">

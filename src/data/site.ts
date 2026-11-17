@@ -29,3 +29,21 @@ export const contact = {
 
 // Mock Google presence — replace with the real Business Profile URL.
 export const googleUrl = 'https://www.google.com/maps/search/Femine+personality+coaching';
+
+// Mock next in-person workshop — demo placeholder. Dus will replace the
+// date, venue and details with the real workshop before launch.
+export const nextWorkshop = {
+  title: 'Speak Up: A Morning of Brave Conversations',
+  date: 'Saturday, 28 November 2026',
+  time: '10:00 am – 1:00 pm',
+  duration: '3 hours',
+  city: 'Mumbai',
+  venue: 'TBD — confirmed after booking',
+  seats: 12,
+  includes: [
+    'A live practice session — rehearse the conversation you keep avoiding',
+    'The 3-sentence method for speaking up in meetings',
+    'The decision filter for choices you have been postponing',
+    'A printed workbook and the 7-day confidence plan to take home',
+  ],
+};

@@ -1,0 +1,265 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+
+// The quiz lives entirely in the browser: no data leaves the page, and the
+// questions live in the plain-JS data at the bottom of the page. Each option
+// maps to one of three styles — quiet, overthinker, pleaser.
+const quizLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': 'https://femine.pages.dev/quiz/',
+  speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.lead-answer'] },
+};
+---
+<Layout title="Find Your Confidence Style — Femine" description="A free 2-minute quiz from Femine: 10 questions that show whether you are a Quiet Achiever, an Overthinker or a People-Pleaser — and which programme fits you best. No email needed." jsonLd={quizLd}>
+  <Header />
+  <main id="main">
+    <PageHero eyebrow="Free Quiz" title="Find your confidence style" text="10 questions · 2 minutes — and a clear answer at the end." crumb="Quiz" />
+
+    <section class="bg-white py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-3xl px-5 lg:px-8">
+        <div data-reveal>
+          <p class="lead-answer text-lg font-medium leading-relaxed text-ink">Femine&rsquo;s confidence quiz is 10 questions and takes about 2 minutes. It shows whether your confidence style is a Quiet Achiever, an Overthinker or a People-Pleaser — and points you to the coaching programme that fits that style best. No email needed, and nothing you answer leaves your browser.</p>
+
+          <div class="mt-10 rounded-[2rem] bg-cream px-6 py-8 sm:px-8">
+            <h2 class="font-display text-2xl font-semibold text-ink">Before you start</h2>
+            <ul class="mt-5 space-y-3 text-[15px] leading-relaxed text-muted">
+              <li class="flex gap-3"><span class="text-rose-deep" aria-hidden="true">✓</span>Answer honestly — there are no right or wrong answers, only patterns.</li>
+              <li class="flex gap-3"><span class="text-rose-deep" aria-hidden="true">✓</span>Go with your first instinct. The quiz is about how you usually behave, not how you wish you behaved.</li>
+              <li class="flex gap-3"><span class="text-rose-deep" aria-hidden="true">✓</span>Your answers stay in this browser. We do not ask for your email, and nothing is sent anywhere.</li>
+              <li class="flex gap-3"><span class="text-rose-deep" aria-hidden="true">✓</span>At the end you get your style, a short description, and the programme we would recommend.</li>
+            </ul>
+            <button id="quiz-start" type="button" class="mt-7 inline-flex min-h-12 cursor-pointer items-center rounded-full bg-rose px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Start the quiz — 2 minutes →</button>
+          </div>
+        </div>
+
+        <!-- ============ QUIZ ============ -->
+        <div id="quiz-box" class="mt-10 hidden rounded-[2rem] bg-cream px-6 py-8 sm:px-8" data-reveal>
+          <div class="flex items-center justify-between gap-4">
+            <p id="quiz-progress-label" class="text-sm font-medium text-muted">Question 1 of 10</p>
+            <p class="text-sm font-medium text-rose-deep">10 questions · 2 minutes</p>
+          </div>
+          <div class="mt-3 h-2 overflow-hidden rounded-full bg-blush-soft" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="10" id="quiz-progress-bar">
+            <div id="quiz-progress-fill" class="h-full w-[10%] rounded-full bg-rose transition-all duration-300"></div>
+          </div>
+
+          <fieldset id="quiz-question" class="mt-8">
+            <legend id="quiz-question-text" class="font-display text-2xl font-semibold leading-snug text-ink"></legend>
+            <div id="quiz-options" class="mt-6 space-y-3"></div>
+          </fieldset>
+
+          <p id="quiz-hint" class="mt-4 hidden text-sm font-medium text-rose-deep" role="alert">Please pick an option to continue.</p>
+          <button id="quiz-next" type="button" class="mt-7 inline-flex min-h-12 cursor-pointer items-center rounded-full bg-rose px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Next →</button>
+        </div>
+
+        <!-- ============ RESULT ============ -->
+        <div id="quiz-result" class="mt-10 hidden rounded-[2rem] bg-cream px-6 py-8 sm:px-8" data-reveal>
+          <p class="text-[13px] font-semibold uppercase tracking-[0.18em] text-rose-deep">Your Confidence Style</p>
+          <h2 id="quiz-result-name" class="fluid-h2 mt-2 font-display font-semibold text-ink"></h2>
+          <p id="quiz-result-desc" class="mt-4 text-base leading-relaxed text-muted"></p>
+          <div class="mt-7 rounded-[1.5rem] bg-white px-6 py-6 shadow-sm">
+            <h3 class="font-display text-xl font-semibold text-ink">Recommended for you</h3>
+            <p id="quiz-result-programme" class="mt-2 text-[15px] leading-relaxed text-muted"></p>
+            <a id="quiz-result-link" href="/services/growth-career" class="mt-4 inline-flex min-h-12 items-center rounded-full bg-rose px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">See the programme →</a>
+          </div>
+          <div class="mt-7 flex flex-wrap gap-3">
+            <a href="/book" class="inline-flex min-h-12 items-center rounded-full bg-wine px-8 text-[15px] font-medium text-white shadow-md shadow-wine/30 transition hover:bg-ink">Book a free call →</a>
+            <button id="quiz-retake" type="button" class="inline-flex min-h-12 cursor-pointer items-center rounded-full border border-ink/15 bg-white px-8 text-[15px] font-medium text-ink transition hover:border-wine hover:text-wine">Retake the quiz</button>
+          </div>
+          <p class="mt-6 text-sm text-muted">This quiz is a starting point, not a diagnosis. The free call is where we turn the result into a real plan.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline data-astro-rerun>
+  // Plain JS only — no TypeScript casts, no Astro script directives.
+  // Questions are rendered from the data embedded in the page below.
+  var QUESTIONS = [
+    { q: 'You finish a piece of work you are proud of. What do you do?', options: [
+      { text: 'Keep it to myself — the work should speak for itself.', style: 'quiet' },
+      { text: 'Re-read it five times, looking for what is wrong with it.', style: 'overthinker' },
+      { text: 'Share it, but soften it first: "It is just a rough draft…"', style: 'pleaser' },
+      { text: 'Mention it once, then move on to the next thing.', style: 'quiet' }
+    ] },
+    { q: 'Your manager asks who wants to lead the next project. What is your first thought?', options: [
+      { text: 'I could do it, but someone else probably wants it more.', style: 'pleaser' },
+      { text: 'I start listing everything that could go wrong.', style: 'overthinker' },
+      { text: 'I would be good at it — but I will wait to be asked.', style: 'quiet' },
+      { text: 'I wonder what everyone else thinks of me if I volunteer.', style: 'pleaser' }
+    ] },
+    { q: 'A friend asks you for a favour you do not have time for. What happens?', options: [
+      { text: 'I say yes, then quietly resent the lost evening.', style: 'pleaser' },
+      { text: 'I say yes, then spend days rehearsing how to undo it.', style: 'overthinker' },
+      { text: 'I say no politely — and feel fine about it.', style: 'quiet' },
+      { text: 'I say maybe, hoping the question goes away on its own.', style: 'pleaser' }
+    ] },
+    { q: 'You have a decision to make and two good options. How do you decide?', options: [
+      { text: 'I make a list, ask three people, and still feel unsure.', style: 'overthinker' },
+      { text: 'I choose quickly, then worry about it for a week.', style: 'overthinker' },
+      { text: 'I pick the one that keeps everyone else happiest.', style: 'pleaser' },
+      { text: 'I decide on my own and get on with it.', style: 'quiet' }
+    ] },
+    { q: 'In a meeting, you have an idea. What do you do with it?', options: [
+      { text: 'Keep it to myself — it is probably obvious anyway.', style: 'quiet' },
+      { text: 'Wait until someone else says something similar, then agree.', style: 'quiet' },
+      { text: 'Spend so long wording it perfectly that the moment passes.', style: 'overthinker' },
+      { text: 'Share it only if I am sure nobody will disagree.', style: 'pleaser' }
+    ] },
+    { q: 'Someone gives you a compliment. What is your honest reaction?', options: [
+      { text: 'I brush it off — "Oh, it was nothing."', style: 'pleaser' },
+      { text: 'I accept it, but quietly wonder if they really mean it.', style: 'overthinker' },
+      { text: 'I say thank you and mean it — then change the subject.', style: 'quiet' },
+      { text: 'I feel awkward and quickly compliment them back.', style: 'pleaser' }
+    ] },
+    { q: 'It is 2am and you are still awake. What is most likely keeping you up?', options: [
+      { text: 'Replaying a conversation, word by word.', style: 'overthinker' },
+      { text: 'Rehearsing a conversation that has not happened yet.', style: 'overthinker' },
+      { text: 'Feeling guilty about something I said — or did not say.', style: 'pleaser' },
+      { text: 'Thinking about a chance I did not take.', style: 'quiet' }
+    ] },
+    { q: 'A colleague takes credit for your work. What do you do?', options: [
+      { text: 'Nothing — making a fuss is not worth it.', style: 'quiet' },
+      { text: 'Nothing, but I keep thinking about it for days.', style: 'overthinker' },
+      { text: 'I tell myself it does not matter, because keeping the peace matters more.', style: 'pleaser' },
+      { text: 'I correct it calmly, once, and move on.', style: 'quiet' }
+    ] },
+    { q: 'What is the hardest sentence for you to say out loud?', options: [
+      { text: '"No, I cannot do that."', style: 'pleaser' },
+      { text: '"I disagree."', style: 'quiet' },
+      { text: '"I need help."', style: 'quiet' },
+      { text: '"I have decided — let us go with this."', style: 'overthinker' }
+    ] },
+    { q: 'If you could change one thing about how you show up, what would it be?', options: [
+      { text: 'Speak up sooner, instead of waiting to be invited.', style: 'quiet' },
+      { text: 'Trust my first decision instead of re-checking it.', style: 'overthinker' },
+      { text: 'Put my own needs first sometimes, without guilt.', style: 'pleaser' },
+      { text: 'Let people see what I am actually capable of.', style: 'quiet' }
+    ] }
+  ];
+
+  var RESULTS = {
+    quiet: {
+      name: 'Quiet Achiever',
+      desc: 'You are capable — you just keep it quiet. You do good work, think things through, and rarely ask for the credit or the room. The cost is visibility: people cannot promote, praise or pay for what they never see. Confidence, for you, is about showing up before you feel fully ready.',
+      programme: 'Growth Career',
+      programmeText: 'Growth Career coaching helps you present your work clearly, speak up in meetings and ask for what you deserve — the exact skills a Quiet Achiever needs.',
+      href: '/services/growth-career'
+    },
+    overthinker: {
+      name: 'Overthinker',
+      desc: 'Your mind runs every scenario before you act — which makes you careful, but also exhausted. Decisions that take others five minutes can take you five days, and the replay at 2am is the real tax. Confidence, for you, is not thinking less — it is trusting a decision once it is made.',
+      programme: 'Problem Solving',
+      programmeText: 'Problem Solving coaching teaches a calm, repeatable 4-step framework for decisions — so you stop replaying choices and start moving.',
+      href: '/services/problem-solving'
+    },
+    pleaser: {
+      name: 'People-Pleaser',
+      desc: 'You are the person everyone relies on — because you rarely say no. You keep the peace, smooth things over, and put others first, even when it costs you your evenings, your energy or your own plans. Confidence, for you, is learning that a clear no can be kind.',
+      programme: 'Relationships',
+      programmeText: 'Relationships coaching helps you say what you mean kindly, set boundaries without guilt, and have honest conversations that stay calm.',
+      href: '/services/relationships'
+    }
+  };
+
+  var ORDER = ['quiet', 'overthinker', 'pleaser'];
+  var current = 0;
+  var scores = { quiet: 0, overthinker: 0, pleaser: 0 };
+  var selected = null;
+
+  var startBtn = document.getElementById('quiz-start');
+  var quizBox = document.getElementById('quiz-box');
+  var resultBox = document.getElementById('quiz-result');
+  var questionText = document.getElementById('quiz-question-text');
+  var optionsBox = document.getElementById('quiz-options');
+  var progressLabel = document.getElementById('quiz-progress-label');
+  var progressFill = document.getElementById('quiz-progress-fill');
+  var progressBar = document.getElementById('quiz-progress-bar');
+  var nextBtn = document.getElementById('quiz-next');
+  var hint = document.getElementById('quiz-hint');
+  var retakeBtn = document.getElementById('quiz-retake');
+
+  function renderQuestion() {
+    var item = QUESTIONS[current];
+    selected = null;
+    questionText.textContent = item.q;
+    optionsBox.innerHTML = '';
+    item.options.forEach(function (opt, i) {
+      var label = document.createElement('label');
+      label.className = 'flex cursor-pointer items-start gap-3 rounded-2xl border border-ink/10 bg-white px-5 py-4 text-[15px] leading-relaxed text-ink transition hover:border-rose';
+      var input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'quiz-option';
+      input.value = opt.style;
+      input.className = 'mt-1 h-4 w-4 shrink-0 accent-[#6E2434]';
+      input.addEventListener('change', function () {
+        selected = opt.style;
+        hint.classList.add('hidden');
+      });
+      var span = document.createElement('span');
+      span.textContent = opt.text;
+      label.appendChild(input);
+      label.appendChild(span);
+      optionsBox.appendChild(label);
+    });
+    progressLabel.textContent = 'Question ' + (current + 1) + ' of ' + QUESTIONS.length;
+    var pct = Math.round(((current + 1) / QUESTIONS.length) * 100);
+    progressFill.style.width = pct + '%';
+    progressBar.setAttribute('aria-valuenow', String(pct));
+    nextBtn.textContent = current === QUESTIONS.length - 1 ? 'See my result →' : 'Next →';
+  }
+
+  function showResult() {
+    var winner = ORDER[0];
+    ORDER.forEach(function (key) {
+      if (scores[key] > scores[winner]) winner = key;
+    });
+    var r = RESULTS[winner];
+    document.getElementById('quiz-result-name').textContent = r.name;
+    document.getElementById('quiz-result-desc').textContent = r.desc;
+    document.getElementById('quiz-result-programme').textContent = r.programmeText;
+    var link = document.getElementById('quiz-result-link');
+    link.href = r.href;
+    link.textContent = 'See the ' + r.programme + ' programme →';
+    quizBox.classList.add('hidden');
+    resultBox.classList.remove('hidden');
+    resultBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  startBtn.addEventListener('click', function () {
+    current = 0;
+    scores = { quiet: 0, overthinker: 0, pleaser: 0 };
+    resultBox.classList.add('hidden');
+    quizBox.classList.remove('hidden');
+    renderQuestion();
+    quizBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  nextBtn.addEventListener('click', function () {
+    if (!selected) {
+      hint.classList.remove('hidden');
+      return;
+    }
+    scores[selected] = scores[selected] + 1;
+    if (current === QUESTIONS.length - 1) {
+      showResult();
+    } else {
+      current = current + 1;
+      renderQuestion();
+    }
+  });
+
+  retakeBtn.addEventListener('click', function () {
+    current = 0;
+    scores = { quiet: 0, overthinker: 0, pleaser: 0 };
+    resultBox.classList.add('hidden');
+    quizBox.classList.remove('hidden');
+    renderQuestion();
+    quizBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>

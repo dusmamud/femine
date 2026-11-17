@@ -100,6 +100,15 @@ Refund policy: single sessions refundable up to 12 hours before the session; unu
 - What to do when you feel stuck in your career
 - The 2-minute rule for difficult conversations
 
+## Pages
+
+- Quiz (https://femine.pages.dev/quiz/): A short quiz that points you to the coaching programme that fits you best.
+- Start Here (https://femine.pages.dev/start-here/): New to Femine? Where to begin, what coaching is, and how to book your free call.
+- Our Method (https://femine.pages.dev/method/): How Femine coaching works — listen first, find the pattern, practise it live in the session, then one small thing to do each week.
+- Resources (https://femine.pages.dev/resources/): Articles, the free guide, videos and tools — everything free from Femine in one place.
+- Events & Workshops (https://femine.pages.dev/events/): Small in-person workshops in Mumbai (3 hours, maximum 12 seats) and corporate workshops for teams of 8 to 40, online or on-site.
+- 7-Day Confidence Challenge (https://femine.pages.dev/challenges/): One small brave thing a day for seven days, from the free guide's 7-day plan, with one short email a day.
+
 ## Contact
 
 - Email: hello@femine.in

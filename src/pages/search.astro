@@ -54,24 +54,27 @@ const pages = [
 </Layout>
 
 <script>
-  // Client-side search over the static index above — no server needed.
-  const input = document.getElementById('search-input') as HTMLInputElement | null;
-  const items = [...document.querySelectorAll<HTMLElement>('.search-item')];
-  const count = document.getElementById('search-count');
-  const empty = document.getElementById('search-empty');
-  const run = () => {
-    const q = (input?.value ?? '').trim().toLowerCase();
-    let shown = 0;
-    items.forEach((el) => {
-      const hit = !q || (el.dataset.title + ' ' + el.dataset.text).includes(q);
-      el.classList.toggle('hidden', !hit);
-      if (hit) shown++;
-    });
-    if (count) count.textContent = q ? `${shown} result${shown === 1 ? '' : 's'} for “${input?.value.trim()}”.` : `Showing all ${items.length} pages and articles.`;
-    empty?.classList.toggle('hidden', shown > 0);
-  };
-  input?.addEventListener('input', run);
-  // Support ?q= links from anywhere on the site.
-  const preset = new URLSearchParams(location.search).get('q');
-  if (preset && input) { input.value = preset; run(); }
+  // Re-binds after every view-transition navigation (bundled module scripts run only once).
+  document.addEventListener('astro:page-load', () => {
+    // Client-side search over the static index above — no server needed.
+    const input = document.getElementById('search-input') as HTMLInputElement | null;
+    const items = [...document.querySelectorAll<HTMLElement>('.search-item')];
+    const count = document.getElementById('search-count');
+    const empty = document.getElementById('search-empty');
+    const run = () => {
+      const q = (input?.value ?? '').trim().toLowerCase();
+      let shown = 0;
+      items.forEach((el) => {
+        const hit = !q || (el.dataset.title + ' ' + el.dataset.text).includes(q);
+        el.classList.toggle('hidden', !hit);
+        if (hit) shown++;
+      });
+      if (count) count.textContent = q ? `${shown} result${shown === 1 ? '' : 's'} for “${input?.value.trim()}”.` : `Showing all ${items.length} pages and articles.`;
+      empty?.classList.toggle('hidden', shown > 0);
+    };
+    input?.addEventListener('input', run);
+    // Support ?q= links from anywhere on the site.
+    const preset = new URLSearchParams(location.search).get('q');
+    if (preset && input) { input.value = preset; run(); }
+  });
 </script>

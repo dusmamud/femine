@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+
+const steps = [
+  {
+    n: '01',
+    title: 'Take the 2-minute quiz',
+    text: 'Ten quick questions show whether you are a Quiet Achiever, an Overthinker or a People-Pleaser — and which programme fits that style best. No email needed.',
+    cta: 'Take the quiz →',
+    href: '/quiz',
+  },
+  {
+    n: '02',
+    title: 'Get the free guide',
+    text: 'The Confidence First-Aid Kit is five practical tools you can use today — for meetings, difficult conversations and decisions. Free, 8 pages, no fluff.',
+    cta: 'Get the free guide →',
+    href: '/free-guide',
+  },
+  {
+    n: '03',
+    title: 'Book a free call',
+    text: 'A relaxed 30-minute chat about where you are and what you want to change. No pressure, no sales pitch — just an honest conversation about whether Femine fits.',
+    cta: 'Book a free call →',
+    href: '/book',
+  },
+];
+
+const startLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': 'https://femine.pages.dev/start-here/',
+  speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.lead-answer'] },
+};
+---
+<Layout title="Start Here — Femine" description="New to Femine? Start with the 2-minute quiz, get the free confidence guide, then book a free 30-minute call. Three simple steps, no pressure." jsonLd={startLd}>
+  <Header />
+  <main id="main">
+    <PageHero eyebrow="Start Here" title="Start Here" text="Three small steps. No pressure, no sales pitch." crumb="Start Here" />
+
+    <section class="bg-white py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-3xl px-5 lg:px-8">
+        <div data-reveal>
+          <p class="lead-answer text-lg font-medium leading-relaxed text-ink">New to Femine? Start with the 2-minute quiz to find your confidence style, then get the free guide for tools you can use today, and finish with a free 30-minute call to talk about your next step. Each step takes only a few minutes, and you can stop after any of them.</p>
+        </div>
+
+        <ol class="mt-12 space-y-6" data-reveal-group>
+          {steps.map((s) => (
+            <li class="flex flex-col gap-5 rounded-[2rem] bg-cream px-6 py-8 sm:flex-row sm:items-start sm:gap-7 sm:px-8">
+              <span class="font-display text-3xl font-bold text-rose-deep" aria-hidden="true">{s.n}</span>
+              <div>
+                <h2 class="font-display text-2xl font-semibold text-ink">{s.title}</h2>
+                <p class="mt-2 text-[15px] leading-relaxed text-muted">{s.text}</p>
+                <a href={s.href} class="mt-4 inline-flex min-h-12 items-center rounded-full bg-rose px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">{s.cta}</a>
+              </div>
+            </li>
+          ))}
+        </ol>
+
+        <div class="mt-14 rounded-[2rem] bg-cream px-6 py-8 text-center sm:px-8" data-reveal>
+          <h2 class="font-display text-2xl font-semibold text-ink">Not sure yet?</h2>
+          <p class="mx-auto mt-2 max-w-md text-[15px] leading-relaxed text-muted">That is completely fine. Read about who we are and how coaching works, or look through the questions other people asked first.</p>
+          <div class="mt-5 flex flex-wrap justify-center gap-3">
+            <a href="/about" class="inline-flex min-h-12 items-center rounded-full bg-rose px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">About Femine →</a>
+            <a href="/faq" class="inline-flex min-h-12 items-center rounded-full border border-ink/15 bg-white px-8 text-[15px] font-medium text-ink transition hover:border-wine hover:text-wine">Questions, answered →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

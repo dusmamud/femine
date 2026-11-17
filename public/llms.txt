@@ -20,6 +20,12 @@
 - [Blog](https://femine.pages.dev/blog/): Practical articles on confidence, conversations, decisions and career growth.
 - [FAQ](https://femine.pages.dev/faq/): How sessions work, prices, rescheduling, refunds and privacy.
 - [Free Guide](https://femine.pages.dev/free-guide/): A free 5-chapter guide to building confidence, with a downloadable PDF.
+- [Quiz](https://femine.pages.dev/quiz/): A short quiz that points you to the coaching programme that fits you best.
+- [Start Here](https://femine.pages.dev/start-here/): New to Femine? Where to begin, what coaching is, and how to book your free call.
+- [Our Method](https://femine.pages.dev/method/): How Femine coaching works — listen first, find the pattern, practise live, one small thing a week.
+- [Resources](https://femine.pages.dev/resources/): Articles, the free guide, videos and tools — everything free from Femine in one place.
+- [Events & Workshops](https://femine.pages.dev/events/): Small in-person workshops in Mumbai and corporate workshops for teams.
+- [7-Day Confidence Challenge](https://femine.pages.dev/challenges/): One small brave thing a day for seven days, with one short email a day.
 - [Contact](https://femine.pages.dev/contact/): Email, phone and WhatsApp.
 
 ## Contact

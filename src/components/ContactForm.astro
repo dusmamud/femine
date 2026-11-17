@@ -135,192 +135,195 @@ import { services } from '../data/services';
 </form>
 
 <script>
-  // Custom programme picker — a styled listbox (button + options with icons),
-  // replacing the native <select>. The chosen value lives in the hidden
-  // #cf-service input, so the submit handler below reads it unchanged.
-  const svcBtn = document.getElementById('cf-service-btn') as HTMLButtonElement | null;
-  const svcList = document.getElementById('cf-service-list') as HTMLUListElement | null;
-  const svcInput = document.getElementById('cf-service') as HTMLInputElement | null;
-  const svcLabel = document.getElementById('cf-service-btn-label') as HTMLSpanElement | null;
-  const svcChevron = document.getElementById('cf-service-chevron') as SVGSVGElement | null;
-  const svcOptions = svcList ? [...svcList.querySelectorAll<HTMLElement>('[role="option"]')] : [];
-  let svcOpen = false;
+  // Re-binds after every view-transition navigation (bundled module scripts run only once).
+  document.addEventListener('astro:page-load', () => {
+    // Custom programme picker — a styled listbox (button + options with icons),
+    // replacing the native <select>. The chosen value lives in the hidden
+    // #cf-service input, so the submit handler below reads it unchanged.
+    const svcBtn = document.getElementById('cf-service-btn') as HTMLButtonElement | null;
+    const svcList = document.getElementById('cf-service-list') as HTMLUListElement | null;
+    const svcInput = document.getElementById('cf-service') as HTMLInputElement | null;
+    const svcLabel = document.getElementById('cf-service-btn-label') as HTMLSpanElement | null;
+    const svcChevron = document.getElementById('cf-service-chevron') as SVGSVGElement | null;
+    const svcOptions = svcList ? [...svcList.querySelectorAll<HTMLElement>('[role="option"]')] : [];
+    let svcOpen = false;
 
-  function setSvcOpen(open: boolean) {
-    svcOpen = open;
-    svcList?.classList.toggle('hidden', !open);
-    svcBtn?.setAttribute('aria-expanded', String(open));
-    svcBtn?.classList.toggle('border-wine', open);
-    if (svcChevron) svcChevron.style.transform = open ? 'rotate(180deg)' : '';
-  }
-  function selectSvc(opt: HTMLElement, focusBtn = true) {
-    svcOptions.forEach((o) => {
-      const on = o === opt;
-      o.setAttribute('aria-selected', String(on));
-      o.classList.toggle('bg-cream', on);
-      o.querySelector('.svc-check')?.classList.toggle('hidden', !on);
-    });
-    if (svcInput) svcInput.value = opt.dataset.value ?? '';
-    if (svcLabel) {
-      svcLabel.textContent = opt.dataset.value === 'Not sure yet' ? 'Not sure yet — help me decide' : (opt.dataset.value ?? '');
-      svcLabel.classList.remove('text-muted');
+    function setSvcOpen(open: boolean) {
+      svcOpen = open;
+      svcList?.classList.toggle('hidden', !open);
+      svcBtn?.setAttribute('aria-expanded', String(open));
+      svcBtn?.classList.toggle('border-wine', open);
+      if (svcChevron) svcChevron.style.transform = open ? 'rotate(180deg)' : '';
     }
-    svcBtn?.classList.remove('border-rose-deep');
-    setSvcOpen(false);
-    if (focusBtn) svcBtn?.focus();
-  }
-  svcBtn?.addEventListener('click', () => setSvcOpen(!svcOpen));
-  svcOptions.forEach((opt) => opt.addEventListener('click', () => selectSvc(opt)));
-  document.addEventListener('click', (e) => {
-    if (svcOpen && svcBtn && svcList && !svcBtn.contains(e.target as Node) && !svcList.contains(e.target as Node)) setSvcOpen(false);
-  });
-  svcBtn?.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      if (!svcOpen) { setSvcOpen(true); svcOptions[0]?.focus(); }
-    } else if (e.key === 'Escape' && svcOpen) {
-      e.preventDefault(); setSvcOpen(false); svcBtn.focus();
-    }
-  });
-  svcList?.addEventListener('keydown', (e) => {
-    const i = svcOptions.indexOf(document.activeElement as HTMLElement);
-    if (e.key === 'ArrowDown') { e.preventDefault(); svcOptions[Math.min(i + 1, svcOptions.length - 1)]?.focus(); }
-    else if (e.key === 'ArrowUp') { e.preventDefault(); if (i <= 0) svcBtn?.focus(); else svcOptions[i - 1]?.focus(); }
-    else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (i >= 0) selectSvc(svcOptions[i]); }
-    else if (e.key === 'Escape') { e.preventDefault(); setSvcOpen(false); svcBtn?.focus(); }
-    else if (e.key === 'Tab') setSvcOpen(false);
-  });
-
-  // Shared custom picker for the two simple fields (Preferred time, How did
-  // you hear about us?) — same button + listbox pattern as the programme
-  // picker, so all three dropdowns look and behave identically. The chosen
-  // value lives in the hidden input with the field's id, so the submit
-  // handler below reads it unchanged (it only ever used .value).
-  function setupPicker(cfg: { btn: string; list: string; input: string; label: string; chevron: string }) {
-    const btn = document.getElementById(cfg.btn) as HTMLButtonElement | null;
-    const list = document.getElementById(cfg.list) as HTMLUListElement | null;
-    const input = document.getElementById(cfg.input) as HTMLInputElement | null;
-    const label = document.getElementById(cfg.label) as HTMLSpanElement | null;
-    const chevron = document.getElementById(cfg.chevron) as SVGSVGElement | null;
-    const options = list ? [...list.querySelectorAll<HTMLElement>('[role="option"]')] : [];
-    let open = false;
-    function setOpen(o: boolean) {
-      open = o;
-      list?.classList.toggle('hidden', !o);
-      btn?.setAttribute('aria-expanded', String(o));
-      btn?.classList.toggle('border-wine', o);
-      if (chevron) chevron.style.transform = o ? 'rotate(180deg)' : '';
-    }
-    function select(opt: HTMLElement, focusBtn = true) {
-      options.forEach((o) => {
+    function selectSvc(opt: HTMLElement, focusBtn = true) {
+      svcOptions.forEach((o) => {
         const on = o === opt;
         o.setAttribute('aria-selected', String(on));
         o.classList.toggle('bg-cream', on);
-        o.querySelector('.pk-check')?.classList.toggle('hidden', !on);
+        o.querySelector('.svc-check')?.classList.toggle('hidden', !on);
       });
-      const val = opt.dataset.value ?? '';
-      if (input) input.value = val;
-      if (label) {
-        label.textContent = opt.textContent?.trim() ?? '';
-        label.classList.toggle('text-muted', val === '');
+      if (svcInput) svcInput.value = opt.dataset.value ?? '';
+      if (svcLabel) {
+        svcLabel.textContent = opt.dataset.value === 'Not sure yet' ? 'Not sure yet — help me decide' : (opt.dataset.value ?? '');
+        svcLabel.classList.remove('text-muted');
       }
-      setOpen(false);
-      if (focusBtn) btn?.focus();
+      svcBtn?.classList.remove('border-rose-deep');
+      setSvcOpen(false);
+      if (focusBtn) svcBtn?.focus();
     }
-    btn?.addEventListener('click', () => setOpen(!open));
-    options.forEach((opt) => opt.addEventListener('click', () => select(opt)));
+    svcBtn?.addEventListener('click', () => setSvcOpen(!svcOpen));
+    svcOptions.forEach((opt) => opt.addEventListener('click', () => selectSvc(opt)));
     document.addEventListener('click', (e) => {
-      if (open && btn && list && !btn.contains(e.target as Node) && !list.contains(e.target as Node)) setOpen(false);
+      if (svcOpen && svcBtn && svcList && !svcBtn.contains(e.target as Node) && !svcList.contains(e.target as Node)) setSvcOpen(false);
     });
-    btn?.addEventListener('keydown', (e) => {
+    svcBtn?.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        if (!open) { setOpen(true); options[0]?.focus(); }
-      } else if (e.key === 'Escape' && open) {
-        e.preventDefault(); setOpen(false); btn.focus();
+        if (!svcOpen) { setSvcOpen(true); svcOptions[0]?.focus(); }
+      } else if (e.key === 'Escape' && svcOpen) {
+        e.preventDefault(); setSvcOpen(false); svcBtn.focus();
       }
     });
-    list?.addEventListener('keydown', (e) => {
-      const i = options.indexOf(document.activeElement as HTMLElement);
-      if (e.key === 'ArrowDown') { e.preventDefault(); options[Math.min(i + 1, options.length - 1)]?.focus(); }
-      else if (e.key === 'ArrowUp') { e.preventDefault(); if (i <= 0) btn?.focus(); else options[i - 1]?.focus(); }
-      else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (i >= 0) select(options[i]); }
-      else if (e.key === 'Escape') { e.preventDefault(); setOpen(false); btn?.focus(); }
-      else if (e.key === 'Tab') setOpen(false);
+    svcList?.addEventListener('keydown', (e) => {
+      const i = svcOptions.indexOf(document.activeElement as HTMLElement);
+      if (e.key === 'ArrowDown') { e.preventDefault(); svcOptions[Math.min(i + 1, svcOptions.length - 1)]?.focus(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); if (i <= 0) svcBtn?.focus(); else svcOptions[i - 1]?.focus(); }
+      else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (i >= 0) selectSvc(svcOptions[i]); }
+      else if (e.key === 'Escape') { e.preventDefault(); setSvcOpen(false); svcBtn?.focus(); }
+      else if (e.key === 'Tab') setSvcOpen(false);
     });
-    // Mark the pre-selected option (only Preferred time has one: "Any time").
-    const def = options.find((o) => o.getAttribute('aria-selected') === 'true');
-    if (def) {
-      def.classList.add('bg-cream');
-      def.querySelector('.pk-check')?.classList.remove('hidden');
-    }
-  }
-  setupPicker({ btn: 'cf-pref-time-btn', list: 'cf-pref-time-list', input: 'cf-pref-time', label: 'cf-pref-time-btn-label', chevron: 'cf-pref-time-chevron' });
-  setupPicker({ btn: 'cf-source-btn', list: 'cf-source-list', input: 'cf-source', label: 'cf-source-btn-label', chevron: 'cf-source-chevron' });
 
-  // Plan preselect from ?plan= (linked from /pricing and gift cards).
-  // Runs client-side: the site is static, so the query string only exists
-  // in the browser. Unknown values are ignored.
-  const planNames: Record<string, string> = {
-    single: 'Single Session',
-    growth: 'Growth Pack',
-    transform: 'Transform Pack',
-    'gift-1999': 'Gift Card · ₹1,999',
-    'gift-3999': 'Gift Card · ₹3,999',
-    'gift-6999': 'Gift Card · ₹6,999',
-  };
-  const planInput = document.getElementById('cf-plan') as HTMLInputElement | null;
-  const planNote = document.getElementById('cf-plan-note');
-  const planQ = new URLSearchParams(location.search).get('plan');
-  if (planQ && planNames[planQ]) {
-    if (planInput) planInput.value = planNames[planQ];
-    if (planNote) {
-      planNote.textContent = `You picked the ${planNames[planQ]} — we will confirm it on your free call.`;
-      planNote.classList.remove('hidden');
-    }
-  }
-
-  // Contact form — no backend on this static site, so a valid submission
-  // opens the visitor's own email app with everything prefilled.
-  const form = document.getElementById('contact-form') as HTMLFormElement | null;
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const err = document.getElementById('cf-error');
-    const get = (id: string) => (document.getElementById(id) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement)?.value.trim() ?? '';
-    const name = get('cf-name'), email = get('cf-email'), phone = get('cf-phone'), service = get('cf-service'), message = get('cf-message');
-    const plan = get('cf-plan'), prefTime = get('cf-pref-time'), source = get('cf-source');
-    const date = get('cf-date'), time = get('cf-time');
-    const showErr = (text: string, focusId: string) => {
-      if (!err) return;
-      err.textContent = text;
-      err.classList.remove('hidden');
-      if (focusId === 'cf-service') {
-        // Hidden input can't take focus — focus the picker button instead.
-        svcBtn?.focus();
-        svcBtn?.classList.add('border-rose-deep');
-      } else {
-        (document.getElementById(focusId) as HTMLElement)?.focus();
+    // Shared custom picker for the two simple fields (Preferred time, How did
+    // you hear about us?) — same button + listbox pattern as the programme
+    // picker, so all three dropdowns look and behave identically. The chosen
+    // value lives in the hidden input with the field's id, so the submit
+    // handler below reads it unchanged (it only ever used .value).
+    function setupPicker(cfg: { btn: string; list: string; input: string; label: string; chevron: string }) {
+      const btn = document.getElementById(cfg.btn) as HTMLButtonElement | null;
+      const list = document.getElementById(cfg.list) as HTMLUListElement | null;
+      const input = document.getElementById(cfg.input) as HTMLInputElement | null;
+      const label = document.getElementById(cfg.label) as HTMLSpanElement | null;
+      const chevron = document.getElementById(cfg.chevron) as SVGSVGElement | null;
+      const options = list ? [...list.querySelectorAll<HTMLElement>('[role="option"]')] : [];
+      let open = false;
+      function setOpen(o: boolean) {
+        open = o;
+        list?.classList.toggle('hidden', !o);
+        btn?.setAttribute('aria-expanded', String(o));
+        btn?.classList.toggle('border-wine', o);
+        if (chevron) chevron.style.transform = o ? 'rotate(180deg)' : '';
       }
+      function select(opt: HTMLElement, focusBtn = true) {
+        options.forEach((o) => {
+          const on = o === opt;
+          o.setAttribute('aria-selected', String(on));
+          o.classList.toggle('bg-cream', on);
+          o.querySelector('.pk-check')?.classList.toggle('hidden', !on);
+        });
+        const val = opt.dataset.value ?? '';
+        if (input) input.value = val;
+        if (label) {
+          label.textContent = opt.textContent?.trim() ?? '';
+          label.classList.toggle('text-muted', val === '');
+        }
+        setOpen(false);
+        if (focusBtn) btn?.focus();
+      }
+      btn?.addEventListener('click', () => setOpen(!open));
+      options.forEach((opt) => opt.addEventListener('click', () => select(opt)));
+      document.addEventListener('click', (e) => {
+        if (open && btn && list && !btn.contains(e.target as Node) && !list.contains(e.target as Node)) setOpen(false);
+      });
+      btn?.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          if (!open) { setOpen(true); options[0]?.focus(); }
+        } else if (e.key === 'Escape' && open) {
+          e.preventDefault(); setOpen(false); btn.focus();
+        }
+      });
+      list?.addEventListener('keydown', (e) => {
+        const i = options.indexOf(document.activeElement as HTMLElement);
+        if (e.key === 'ArrowDown') { e.preventDefault(); options[Math.min(i + 1, options.length - 1)]?.focus(); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); if (i <= 0) btn?.focus(); else options[i - 1]?.focus(); }
+        else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (i >= 0) select(options[i]); }
+        else if (e.key === 'Escape') { e.preventDefault(); setOpen(false); btn?.focus(); }
+        else if (e.key === 'Tab') setOpen(false);
+      });
+      // Mark the pre-selected option (only Preferred time has one: "Any time").
+      const def = options.find((o) => o.getAttribute('aria-selected') === 'true');
+      if (def) {
+        def.classList.add('bg-cream');
+        def.querySelector('.pk-check')?.classList.remove('hidden');
+      }
+    }
+    setupPicker({ btn: 'cf-pref-time-btn', list: 'cf-pref-time-list', input: 'cf-pref-time', label: 'cf-pref-time-btn-label', chevron: 'cf-pref-time-chevron' });
+    setupPicker({ btn: 'cf-source-btn', list: 'cf-source-list', input: 'cf-source', label: 'cf-source-btn-label', chevron: 'cf-source-chevron' });
+
+    // Plan preselect from ?plan= (linked from /pricing and gift cards).
+    // Runs client-side: the site is static, so the query string only exists
+    // in the browser. Unknown values are ignored.
+    const planNames: Record<string, string> = {
+      single: 'Single Session',
+      growth: 'Growth Pack',
+      transform: 'Transform Pack',
+      'gift-1999': 'Gift Card · ₹1,999',
+      'gift-3999': 'Gift Card · ₹3,999',
+      'gift-6999': 'Gift Card · ₹6,999',
     };
-    if (!name) return showErr('Please enter your name.', 'cf-name');
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showErr('Please enter a valid email address.', 'cf-email');
-    if (!service) return showErr('Please choose a programme — or “Not sure yet”.', 'cf-service');
-    if (!message) return showErr('Please tell us a little about what you would like to work on.', 'cf-message');
-    err?.classList.add('hidden');
-    const subject = encodeURIComponent(`Femine enquiry — ${service} (${name})`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone || '—'}\nProgramme: ${service}\nPlan: ${plan || '—'}\nPreferred day: ${date || '—'}\nPreferred time slot: ${time || '—'}\nPreferred time of day: ${prefTime || '—'}\nHeard about us: ${source || '—'}\n\n${message}`);
-    // Show the confirmation first, then open the mail app — setting
-    // location.href first can interrupt the DOM update.
-    const ok = document.getElementById('cf-success');
-    if (ok) {
-      ok.textContent = 'Thank you, ' + name.split(' ')[0] + ' — your email app should have opened with the message ready. Just press send, and we will reply within 24 hours.';
-      ok.classList.remove('hidden');
+    const planInput = document.getElementById('cf-plan') as HTMLInputElement | null;
+    const planNote = document.getElementById('cf-plan-note');
+    const planQ = new URLSearchParams(location.search).get('plan');
+    if (planQ && planNames[planQ]) {
+      if (planInput) planInput.value = planNames[planQ];
+      if (planNote) {
+        planNote.textContent = `You picked the ${planNames[planQ]} — we will confirm it on your free call.`;
+        planNote.classList.remove('hidden');
+      }
     }
-    setTimeout(() => {
-      // MOCK email — keep in sync with src/data/site.ts. (Was define:vars,
-      // but define:vars scripts are not type-stripped, so the `as` casts
-      // in this script threw a SyntaxError and killed the whole form.)
-      window.location.href = `mailto:hello@femine.in?subject=${subject}&body=${body}`;
-    }, 300);
+
+    // Contact form — no backend on this static site, so a valid submission
+    // opens the visitor's own email app with everything prefilled.
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const err = document.getElementById('cf-error');
+      const get = (id: string) => (document.getElementById(id) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement)?.value.trim() ?? '';
+      const name = get('cf-name'), email = get('cf-email'), phone = get('cf-phone'), service = get('cf-service'), message = get('cf-message');
+      const plan = get('cf-plan'), prefTime = get('cf-pref-time'), source = get('cf-source');
+      const date = get('cf-date'), time = get('cf-time');
+      const showErr = (text: string, focusId: string) => {
+        if (!err) return;
+        err.textContent = text;
+        err.classList.remove('hidden');
+        if (focusId === 'cf-service') {
+          // Hidden input can't take focus — focus the picker button instead.
+          svcBtn?.focus();
+          svcBtn?.classList.add('border-rose-deep');
+        } else {
+          (document.getElementById(focusId) as HTMLElement)?.focus();
+        }
+      };
+      if (!name) return showErr('Please enter your name.', 'cf-name');
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showErr('Please enter a valid email address.', 'cf-email');
+      if (!service) return showErr('Please choose a programme — or “Not sure yet”.', 'cf-service');
+      if (!message) return showErr('Please tell us a little about what you would like to work on.', 'cf-message');
+      err?.classList.add('hidden');
+      const subject = encodeURIComponent(`Femine enquiry — ${service} (${name})`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone || '—'}\nProgramme: ${service}\nPlan: ${plan || '—'}\nPreferred day: ${date || '—'}\nPreferred time slot: ${time || '—'}\nPreferred time of day: ${prefTime || '—'}\nHeard about us: ${source || '—'}\n\n${message}`);
+      // Show the confirmation first, then open the mail app — setting
+      // location.href first can interrupt the DOM update.
+      const ok = document.getElementById('cf-success');
+      if (ok) {
+        ok.textContent = 'Thank you, ' + name.split(' ')[0] + ' — your email app should have opened with the message ready. Just press send, and we will reply within 24 hours.';
+        ok.classList.remove('hidden');
+      }
+      setTimeout(() => {
+        // MOCK email — keep in sync with src/data/site.ts. (Was define:vars,
+        // but define:vars scripts are not type-stripped, so the `as` casts
+        // in this script threw a SyntaxError and killed the whole form.)
+        window.location.href = `mailto:hello@femine.in?subject=${subject}&body=${body}`;
+      }, 300);
+    });
   });
 </script>

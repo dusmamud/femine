@@ -11,6 +11,8 @@ const posts = (await getCollection('blog')).sort(
 );
 const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 const slug = (id: string) => id.replace(/\.md$/, '');
+const categories = [...new Set(posts.map((p) => p.data.category))];
+const filters = ['All', ...categories];
 ---
 <Layout title="Blog — Femine" description="Practical, honest writing on confidence, relationships and career growth from the Femine coaching team." ogImage="https://femine.pages.dev/og-blog.png">
   <Header />
@@ -19,9 +21,22 @@ const slug = (id: string) => id.replace(/\.md$/, '');
 
     <section class="bg-white py-16 sm:py-20 lg:py-24">
       <div class="mx-auto max-w-6xl px-5 lg:px-8">
-        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3" data-reveal-group>
+        <div class="flex flex-wrap gap-2" role="group" aria-label="Filter articles by category" data-reveal>
+          {filters.map((f) => (
+            <button
+              type="button"
+              data-filter={f}
+              aria-pressed={f === 'All' ? 'true' : 'false'}
+              class={'min-h-11 rounded-full border px-5 text-sm font-medium transition ' + (f === 'All' ? 'border-wine bg-wine text-white shadow-md shadow-wine/25' : 'border-ink/10 bg-white text-ink hover:border-wine')}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+
+        <div class="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3" data-reveal-group>
           {posts.map((p) => (
-            <article class="flex flex-col overflow-hidden rounded-[2rem] bg-cream shadow-sm transition hover:shadow-lg">
+            <article data-category={p.data.category} class="flex flex-col overflow-hidden rounded-[2rem] bg-cream shadow-sm transition hover:shadow-lg">
               <a href={`/blog/${slug(p.id)}`} class="block" aria-label={p.data.title}>
                 <Picture src={p.data.image} alt={p.data.imageAlt} widths={[480, 960]} sizes="(max-width: 768px) 100vw, 33vw" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="lazy" class="aspect-[16/10] w-full object-cover" />
               </a>
@@ -50,3 +65,26 @@ const slug = (id: string) => id.replace(/\.md$/, '');
   </main>
   <Footer />
 </Layout>
+
+<script is:inline data-astro-rerun>
+  // Category filter chips — plain JS only, no define:vars, no `as` casts.
+  var chips = document.querySelectorAll('[data-filter]');
+  var cards = document.querySelectorAll('[data-category]');
+  var activeChipClasses = ['border-wine', 'bg-wine', 'text-white', 'shadow-md', 'shadow-wine/25'];
+  var idleChipClasses = ['border-ink/10', 'bg-white', 'text-ink'];
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var filter = chip.getAttribute('data-filter');
+      chips.forEach(function (c) {
+        var active = c === chip;
+        c.setAttribute('aria-pressed', String(active));
+        activeChipClasses.forEach(function (cls) { c.classList.toggle(cls, active); });
+        idleChipClasses.forEach(function (cls) { c.classList.toggle(cls, !active); });
+      });
+      cards.forEach(function (card) {
+        var show = filter === 'All' || card.getAttribute('data-category') === filter;
+        card.classList.toggle('hidden', !show);
+      });
+    });
+  });
+</script>

@@ -82,31 +82,34 @@ const guideLd = {
 </Layout>
 
 <script>
-  // Lead-magnet form (demo): no backend on this static site, so a valid
-  // submission reveals the PDF download. The visitor's email is not stored
-  // anywhere — Dus will wire a real email list later.
-  const form = document.getElementById('guide-form') as HTMLFormElement | null;
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const err = document.getElementById('guide-error');
-    const ok = document.getElementById('guide-success');
-    const name = (document.getElementById('guide-name') as HTMLInputElement)?.value.trim() ?? '';
-    const email = (document.getElementById('guide-email') as HTMLInputElement)?.value.trim() ?? '';
-    if (!name) {
-      if (err) { err.textContent = 'Please enter your name.'; err.classList.remove('hidden'); }
-      (document.getElementById('guide-name') as HTMLElement)?.focus();
-      return;
-    }
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      if (err) { err.textContent = 'Please enter a valid email address.'; err.classList.remove('hidden'); }
-      (document.getElementById('guide-email') as HTMLElement)?.focus();
-      return;
-    }
-    err?.classList.add('hidden');
-    if (ok) {
-      ok.innerHTML = `Thank you, ${name.split(' ')[0]} — your guide is ready. <a href="/free-guide.pdf" class="font-semibold underline underline-offset-2">Download the PDF →</a>`;
-      ok.classList.remove('hidden');
-    }
-    form.querySelector('button[type="submit"]')?.setAttribute('disabled', '');
+  // Re-binds after every view-transition navigation (bundled module scripts run only once).
+  document.addEventListener('astro:page-load', () => {
+    // Lead-magnet form (demo): no backend on this static site, so a valid
+    // submission reveals the PDF download. The visitor's email is not stored
+    // anywhere — Dus will wire a real email list later.
+    const form = document.getElementById('guide-form') as HTMLFormElement | null;
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const err = document.getElementById('guide-error');
+      const ok = document.getElementById('guide-success');
+      const name = (document.getElementById('guide-name') as HTMLInputElement)?.value.trim() ?? '';
+      const email = (document.getElementById('guide-email') as HTMLInputElement)?.value.trim() ?? '';
+      if (!name) {
+        if (err) { err.textContent = 'Please enter your name.'; err.classList.remove('hidden'); }
+        (document.getElementById('guide-name') as HTMLElement)?.focus();
+        return;
+      }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        if (err) { err.textContent = 'Please enter a valid email address.'; err.classList.remove('hidden'); }
+        (document.getElementById('guide-email') as HTMLElement)?.focus();
+        return;
+      }
+      err?.classList.add('hidden');
+      if (ok) {
+        ok.innerHTML = `Thank you, ${name.split(' ')[0]} — your guide is ready. <a href="/free-guide.pdf" class="font-semibold underline underline-offset-2">Download the PDF →</a>`;
+        ok.classList.remove('hidden');
+      }
+      form.querySelector('button[type="submit"]')?.setAttribute('disabled', '');
+    });
   });
 </script>

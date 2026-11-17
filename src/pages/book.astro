@@ -3,12 +3,19 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PageHero from '../components/PageHero.astro';
+import Faq from '../components/Faq.astro';
 import ContactForm from '../components/ContactForm.astro';
 
 const steps = [
   { n: '01', title: 'You talk, we listen', text: 'Thirty minutes about where you are and what you want to change. No forms to fill in advance, no judgement — just an honest conversation.' },
   { n: '02', title: 'We map one clear next step', text: 'Before the call ends, we agree on the one thing worth working on first — and which programme fits it best.' },
   { n: '03', title: 'You decide, no pressure', text: 'If Femine feels right, we pick a plan and a schedule together. If not, you still keep everything we discussed. The call costs nothing either way.' },
+];
+const bookingFaqs = [
+  { q: 'What happens on the free call?', a: 'Thirty minutes, relaxed chat, no pressure. We talk about where you are and what you want to change, and before the call ends we agree on one clear next step. There is no sales pitch — if Femine is not right for you, you still keep everything we discussed.' },
+  { q: 'Do I need to prepare anything?', a: 'No — just bring one thing you would like to change. No forms to fill in advance, no reading to do. A quiet room and a stable connection are all you need.' },
+  { q: 'Can I reschedule?', a: 'Yes. Reply to the confirmation email, or message us on WhatsApp, and we will find a new time. Rescheduling is free up to 12 hours before your call.' },
+  { q: 'Is the call really free?', a: 'Yes. The 30-minute call costs nothing, and you do not need a card. We only talk about prices if you decide you want to continue after the call.' },
 ];
 const howToLd = {
   '@context': 'https://schema.org',
@@ -29,6 +36,14 @@ const howToLd = {
       '@type': 'WebPage',
       '@id': 'https://femine.pages.dev/book/',
       speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.lead-answer'] },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: bookingFaqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
     },
   ],
 };
@@ -84,79 +99,95 @@ const howToLd = {
         </div>
       </div>
     </section>
+
+    <!-- ============ BOOKING FAQS ============ -->
+    <section class="bg-cream py-16 sm:py-20 lg:py-24" aria-label="Booking FAQs">
+      <div class="mx-auto max-w-3xl px-5 lg:px-8">
+        <div class="text-center" data-reveal>
+          <p class="text-[13px] font-semibold uppercase tracking-[0.18em] text-rose-deep">Booking FAQs</p>
+          <h2 class="fluid-h2 mt-2 font-display font-semibold text-ink">Before you book</h2>
+        </div>
+        <div class="mt-10" data-reveal-group>
+          <Faq id="booking-faqs" items={bookingFaqs} />
+        </div>
+      </div>
+    </section>
   </main>
   <Footer />
 </Layout>
 
 <script>
-  // Mock booking calendar (demo): builds the next 14 days (Mon–Sat) and
-  // 8 time slots client-side. A few slots are shown as taken, using a
-  // stable hash of day+slot so the same slot is taken on every load.
-  // The chosen day/time go into the hidden #cf-date / #cf-time inputs,
-  // which ContactForm includes in the message. No real calendar account
-  // is connected — Dus will wire Calendly / Cal.com later.
-  const dayRow = document.getElementById('slot-days');
-  const timeGrid = document.getElementById('slot-times');
-  const dateInput = document.getElementById('cf-date') as HTMLInputElement | null;
-  const timeInput = document.getElementById('cf-time') as HTMLInputElement | null;
-  const summary = document.getElementById('slot-summary');
-  const slots = ['10:00 AM', '11:00 AM', '12:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM'];
-  const fmtDay = (d: Date) => d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
-  const fmtLong = (d: Date) => d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
-  const hash = (s: string) => { let h = 0; for (const c of s) h = (h * 31 + c.charCodeAt(0)) >>> 0; return h; };
-  const days: Date[] = [];
-  const cursor = new Date(); cursor.setDate(cursor.getDate() + 1);
-  while (days.length < 14) { if (cursor.getDay() !== 0) days.push(new Date(cursor)); cursor.setDate(cursor.getDate() + 1); }
-  let selectedDay: Date | null = null;
-  let selectedTime: string | null = null;
+  // Re-binds after every view-transition navigation (bundled module scripts run only once).
+  document.addEventListener('astro:page-load', () => {
+    // Mock booking calendar (demo): builds the next 14 days (Mon–Sat) and
+    // 8 time slots client-side. A few slots are shown as taken, using a
+    // stable hash of day+slot so the same slot is taken on every load.
+    // The chosen day/time go into the hidden #cf-date / #cf-time inputs,
+    // which ContactForm includes in the message. No real calendar account
+    // is connected — Dus will wire Calendly / Cal.com later.
+    const dayRow = document.getElementById('slot-days');
+    const timeGrid = document.getElementById('slot-times');
+    const dateInput = document.getElementById('cf-date') as HTMLInputElement | null;
+    const timeInput = document.getElementById('cf-time') as HTMLInputElement | null;
+    const summary = document.getElementById('slot-summary');
+    const slots = ['10:00 AM', '11:00 AM', '12:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM'];
+    const fmtDay = (d: Date) => d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+    const fmtLong = (d: Date) => d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+    const hash = (s: string) => { let h = 0; for (const c of s) h = (h * 31 + c.charCodeAt(0)) >>> 0; return h; };
+    const days: Date[] = [];
+    const cursor = new Date(); cursor.setDate(cursor.getDate() + 1);
+    while (days.length < 14) { if (cursor.getDay() !== 0) days.push(new Date(cursor)); cursor.setDate(cursor.getDate() + 1); }
+    let selectedDay: Date | null = null;
+    let selectedTime: string | null = null;
 
-  function updateSummary() {
-    if (selectedDay && selectedTime && summary) {
-      summary.textContent = `Your slot: ${fmtLong(selectedDay)} · ${selectedTime} IST — it will be added to your message below.`;
+    function updateSummary() {
+      if (selectedDay && selectedTime && summary) {
+        summary.textContent = `Your slot: ${fmtLong(selectedDay)} · ${selectedTime} IST — it will be added to your message below.`;
+      }
+      if (dateInput) dateInput.value = selectedDay ? fmtLong(selectedDay) : '';
+      if (timeInput) timeInput.value = selectedTime ?? '';
     }
-    if (dateInput) dateInput.value = selectedDay ? fmtLong(selectedDay) : '';
-    if (timeInput) timeInput.value = selectedTime ?? '';
-  }
-  function renderTimes() {
-    if (!timeGrid || !selectedDay) return;
-    const iso = selectedDay.toISOString().slice(0, 10);
-    timeGrid.innerHTML = '';
-    slots.forEach((t) => {
-      const taken = hash(iso + t) % 4 === 0;
+    function renderTimes() {
+      if (!timeGrid || !selectedDay) return;
+      const iso = selectedDay.toISOString().slice(0, 10);
+      timeGrid.innerHTML = '';
+      slots.forEach((t) => {
+        const taken = hash(iso + t) % 4 === 0;
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = t;
+        b.disabled = taken;
+        b.setAttribute('aria-pressed', String(selectedTime === t));
+        b.className = 'min-h-11 rounded-full border px-2 text-sm font-medium transition ' + (taken
+          ? 'cursor-not-allowed border-ink/10 bg-white/60 text-muted/50 line-through'
+          : selectedTime === t
+            ? 'border-wine bg-wine text-white shadow-md shadow-wine/25'
+            : 'border-ink/10 bg-white text-ink hover:border-wine');
+        if (!taken) b.addEventListener('click', () => { selectedTime = t; renderTimes(); updateSummary(); });
+        timeGrid.appendChild(b);
+      });
+    }
+    days.forEach((d, i) => {
       const b = document.createElement('button');
       b.type = 'button';
-      b.textContent = t;
-      b.disabled = taken;
-      b.setAttribute('aria-pressed', String(selectedTime === t));
-      b.className = 'min-h-11 rounded-full border px-2 text-sm font-medium transition ' + (taken
-        ? 'cursor-not-allowed border-ink/10 bg-white/60 text-muted/50 line-through'
-        : selectedTime === t
-          ? 'border-wine bg-wine text-white shadow-md shadow-wine/25'
-          : 'border-ink/10 bg-white text-ink hover:border-wine');
-      if (!taken) b.addEventListener('click', () => { selectedTime = t; renderTimes(); updateSummary(); });
-      timeGrid.appendChild(b);
-    });
-  }
-  days.forEach((d, i) => {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.setAttribute('aria-pressed', String(i === 0));
-    b.className = 'shrink-0 rounded-2xl border px-4 py-3 text-center transition ' + (i === 0 ? 'border-wine bg-wine text-white shadow-md shadow-wine/25' : 'border-ink/10 bg-white text-ink hover:border-wine');
-    b.innerHTML = `<span class="block text-[12px] font-medium opacity-80">${d.toLocaleDateString('en-GB', { weekday: 'short' })}</span><span class="block font-display text-lg font-bold leading-tight">${d.getDate()}</span><span class="block text-[12px] opacity-80">${d.toLocaleDateString('en-GB', { month: 'short' })}</span>`;
-    b.addEventListener('click', () => {
-      selectedDay = d; selectedTime = null;
-      dayRow?.querySelectorAll('button').forEach((x) => {
-        x.setAttribute('aria-pressed', 'false');
-        x.className = 'shrink-0 rounded-2xl border px-4 py-3 text-center transition border-ink/10 bg-white text-ink hover:border-wine';
+      b.setAttribute('aria-pressed', String(i === 0));
+      b.className = 'shrink-0 rounded-2xl border px-4 py-3 text-center transition ' + (i === 0 ? 'border-wine bg-wine text-white shadow-md shadow-wine/25' : 'border-ink/10 bg-white text-ink hover:border-wine');
+      b.innerHTML = `<span class="block text-[12px] font-medium opacity-80">${d.toLocaleDateString('en-GB', { weekday: 'short' })}</span><span class="block font-display text-lg font-bold leading-tight">${d.getDate()}</span><span class="block text-[12px] opacity-80">${d.toLocaleDateString('en-GB', { month: 'short' })}</span>`;
+      b.addEventListener('click', () => {
+        selectedDay = d; selectedTime = null;
+        dayRow?.querySelectorAll('button').forEach((x) => {
+          x.setAttribute('aria-pressed', 'false');
+          x.className = 'shrink-0 rounded-2xl border px-4 py-3 text-center transition border-ink/10 bg-white text-ink hover:border-wine';
+        });
+        b.setAttribute('aria-pressed', 'true');
+        b.className = 'shrink-0 rounded-2xl border px-4 py-3 text-center transition border-wine bg-wine text-white shadow-md shadow-wine/25';
+        renderTimes(); updateSummary();
       });
-      b.setAttribute('aria-pressed', 'true');
-      b.className = 'shrink-0 rounded-2xl border px-4 py-3 text-center transition border-wine bg-wine text-white shadow-md shadow-wine/25';
-      renderTimes(); updateSummary();
+      dayRow?.appendChild(b);
     });
-    dayRow?.appendChild(b);
+    // Preselect the first day and its first free slot, so the demo shows a slot.
+    selectedDay = days[0];
+    selectedTime = slots.find((t) => hash(days[0].toISOString().slice(0, 10) + t) % 4 !== 0) ?? null;
+    renderTimes(); updateSummary();
   });
-  // Preselect the first day and its first free slot, so the demo shows a slot.
-  selectedDay = days[0];
-  selectedTime = slots.find((t) => hash(days[0].toISOString().slice(0, 10) + t) % 4 !== 0) ?? null;
-  renderTimes(); updateSummary();
 </script>

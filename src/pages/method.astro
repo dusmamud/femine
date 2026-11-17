@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+
+const steps = [
+  {
+    n: '01',
+    title: 'Book a free call',
+    text: 'It starts with a relaxed 30-minute chat about where you are and what you want to change. There is no pressure to continue — if Femine is not the right fit, you leave with at least one useful idea.',
+  },
+  {
+    n: '02',
+    title: 'Get your personal plan',
+    text: 'Together we pick the right programme and set small, clear goals. Your plan is built around your life, your work and your values — never a fixed mould, and never more sessions than you need.',
+  },
+  {
+    n: '03',
+    title: 'Practise, week by week',
+    text: 'Weekly 60-minute sessions, one-to-one over video call. In each session we rehearse the hard moments — the meeting, the conversation, the ask — and you leave with one simple exercise to try before next week.',
+  },
+  {
+    n: '04',
+    title: 'Review and keep growing',
+    text: 'Every few sessions we check in on what has actually changed: what felt easier, what still feels stuck, what comes next. Then we decide the next step together — more sessions, a different programme, or carrying on on your own.',
+  },
+];
+
+const methodLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': 'https://femine.pages.dev/method/',
+  speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.lead-answer'] },
+};
+---
+<Layout title="How Coaching Works at Femine — Femine" description="How coaching works at Femine: a free 30-minute call, a personal plan, weekly 60-minute sessions with simple practice between them, and regular reviews. Practical, 1-to-1, online." jsonLd={methodLd}>
+  <Header />
+  <main id="main">
+    <PageHero eyebrow="Our Method" title="How coaching works at Femine" text="Four simple steps — a conversation, a plan, weekly practice, and honest reviews." crumb="Method" />
+
+    <section class="bg-white py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-3xl px-5 lg:px-8">
+        <div data-reveal>
+          <p class="lead-answer text-lg font-medium leading-relaxed text-ink">Coaching at Femine works in four steps: a free 30-minute call to talk about where you are, a personal plan built around your goals, weekly 60-minute 1-to-1 sessions with simple practice between them, and regular reviews of what has actually changed. Sessions are online, Monday to Saturday, and every one ends with one small thing you can do that week.</p>
+        </div>
+
+        <ol class="mt-12 space-y-6" data-reveal-group>
+          {steps.map((s) => (
+            <li class="flex gap-5 rounded-[2rem] bg-cream px-6 py-8 sm:gap-7 sm:px-8">
+              <span class="font-display text-3xl font-bold text-rose-deep" aria-hidden="true">{s.n}</span>
+              <div>
+                <h2 class="font-display text-2xl font-semibold text-ink">{s.title}</h2>
+                <p class="mt-2 text-[15px] leading-relaxed text-muted">{s.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="bg-cream py-16 sm:py-20 lg:py-24" aria-label="What coaching is not">
+      <div class="mx-auto max-w-3xl px-5 lg:px-8">
+        <div data-reveal>
+          <p class="text-[13px] font-semibold uppercase tracking-[0.18em] text-rose-deep">A Clear Line</p>
+          <h2 class="fluid-h2 mt-2 font-display font-semibold text-ink">What coaching is not</h2>
+          <p class="mt-5 text-base leading-relaxed text-muted">Coaching is not therapy, and it is not a course. Therapy usually looks backward — healing what hurt, understanding where a pattern came from. That work matters, and it belongs to trained therapists. Coaching looks forward: you know roughly what you want, and we build the skill to get there.</p>
+          <p class="mt-4 text-base leading-relaxed text-muted">A course, meanwhile, gives everyone the same ten videos and hopes one of them fits. Coaching gives you one hour that is entirely about your situation — your meeting, your conversation, your decision. The tools are standard; the application is always personal.</p>
+        </div>
+        <div class="mt-10 text-center" data-reveal>
+          <a href="/book" class="inline-flex min-h-12 items-center rounded-full bg-rose px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Book your free call →</a>
+          <p class="mt-3 text-sm text-muted">Free · 30 minutes · No pressure to continue</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

@@ -1,20 +1,31 @@
 ---
 // Dried-flower branch decoration, drawn as SVG (no stock photo needed).
+// Darker, more prominent than before, with round seed pods — as in the design.
 interface Props { class?: string; flip?: boolean; }
 const { class: cls = '', flip = false } = Astro.props;
 ---
 <svg class={cls} style={flip ? 'transform: scaleX(-1)' : ''} viewBox="0 0 120 220" fill="none" aria-hidden="true">
-  <path d="M60 215 C58 150 62 90 58 20" stroke="#8a6d4b" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M59 170 C40 160 28 145 26 128 M59 170 C78 160 90 145 92 128" stroke="#8a6d4b" stroke-width="2" stroke-linecap="round"/>
-  <path d="M59 120 C42 112 32 98 30 82 M59 120 C76 112 86 98 88 82" stroke="#8a6d4b" stroke-width="2" stroke-linecap="round"/>
-  <path d="M58 70 C44 62 36 50 35 36 M58 70 C72 62 80 50 81 36" stroke="#8a6d4b" stroke-width="2" stroke-linecap="round"/>
-  <g fill="#a98a68">
-    <ellipse cx="26" cy="122" rx="7" ry="11" transform="rotate(-30 26 122)"/>
-    <ellipse cx="92" cy="122" rx="7" ry="11" transform="rotate(30 92 122)"/>
-    <ellipse cx="30" cy="76" rx="6" ry="10" transform="rotate(-30 30 76)"/>
-    <ellipse cx="88" cy="76" rx="6" ry="10" transform="rotate(30 88 76)"/>
-    <ellipse cx="35" cy="30" rx="6" ry="10" transform="rotate(-25 35 30)"/>
-    <ellipse cx="81" cy="30" rx="6" ry="10" transform="rotate(25 81 30)"/>
-    <ellipse cx="58" cy="14" rx="6" ry="10"/>
+  <path d="M60 215 C58 150 62 90 58 18" stroke="#5c4632" stroke-width="3" stroke-linecap="round"/>
+  <path d="M59 172 C40 162 28 146 26 128 M59 172 C78 162 90 146 92 128" stroke="#5c4632" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M59 122 C42 113 32 99 30 82 M59 122 C76 113 86 99 88 82" stroke="#5c4632" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M58 72 C44 64 36 51 35 36 M58 72 C72 64 80 51 81 36" stroke="#5c4632" stroke-width="2.5" stroke-linecap="round"/>
+  <g fill="#7a5c40">
+    <ellipse cx="26" cy="122" rx="8" ry="12" transform="rotate(-30 26 122)"/>
+    <ellipse cx="92" cy="122" rx="8" ry="12" transform="rotate(30 92 122)"/>
+    <ellipse cx="30" cy="76" rx="7" ry="11" transform="rotate(-30 30 76)"/>
+    <ellipse cx="88" cy="76" rx="7" ry="11" transform="rotate(30 88 76)"/>
+    <ellipse cx="35" cy="30" rx="7" ry="11" transform="rotate(-25 35 30)"/>
+    <ellipse cx="81" cy="30" rx="7" ry="11" transform="rotate(25 81 30)"/>
+    <ellipse cx="58" cy="12" rx="7" ry="11"/>
+  </g>
+  <g fill="#8a6d4b">
+    <circle cx="18" cy="140" r="3.5"/>
+    <circle cx="100" cy="140" r="3.5"/>
+    <circle cx="22" cy="96" r="3"/>
+    <circle cx="96" cy="96" r="3"/>
+    <circle cx="28" cy="50" r="3"/>
+    <circle cx="88" cy="50" r="3"/>
+    <circle cx="48" cy="22" r="3"/>
+    <circle cx="68" cy="22" r="3"/>
   </g>
 </svg>

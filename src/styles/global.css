@@ -99,12 +99,12 @@ body {
   user-select: none;
 }
 
-/* Sticky header state — shadow switches at once, never eased (afd-motion) */
+/* Sticky header state — solid cream always: the old 0.88-alpha + blur let
+   the marquee show through the nav while scrolling (the bleed-through bug).
+   Shadow switches at once, never eased (afd-motion) */
 .site-header { transition: background-color var(--dur-fast) ease, box-shadow var(--dur-fast) ease; }
 .site-header.is-scrolled {
-  background: rgb(255 246 238 / 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--color-cream);
   box-shadow: 0 1px 0 rgb(61 30 38 / 0.08), 0 8px 24px rgb(110 36 52 / 0.06);
 }
 
@@ -189,9 +189,69 @@ body {
 .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
+/* Big elliptical curve dividers, as in the design (top edge mirrors .curve-bottom) */
+.curve-top { border-radius: 50% 50% 0 0 / 3rem 3rem 0 0; }
+@media (min-width: 1024px) {
+  .curve-top { border-radius: 50% 50% 0 0 / 4.5rem 4.5rem 0 0; }
+}
+
+/* Softer watermark — closer to the design's very faint one */
+.watermark-soft { color: #f8e9de; }
+
+/* Masked headline lines: each line slides up out of its own mask (JS-driven) */
+.mask-line { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.mask-line > span { display: block; will-change: transform; }
+
+/* Hero ambient motion — twinkling sparkles, slow ken-burns, branch sway */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.35; transform: scale(0.8) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.15) rotate(12deg); }
+}
+.sparkle-twinkle { animation: twinkle 3.4s ease-in-out infinite; transform-origin: center; }
+@keyframes kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.07); }
+}
+.kenburns { animation: kenburns 18s ease-in-out infinite alternate; will-change: transform; }
+@keyframes sway {
+  from { transform: rotate(-1.2deg); }
+  to { transform: rotate(1.6deg); }
+}
+.branch-sway { animation: sway 6s ease-in-out infinite alternate; transform-origin: bottom center; }
+
+/* Nav-link underline draw */
+.nav-link { position: relative; }
+.nav-link::after {
+  content: ""; position: absolute; left: 0; bottom: 6px; height: 2px; width: 100%;
+  background: var(--color-rose); border-radius: 2px;
+  transform: scaleX(0); transform-origin: left; transition: transform var(--dur-base) var(--ease-out);
+}
+.nav-link:hover::after, .nav-link:focus-visible::after { transform: scaleX(1); }
+
+/* Arrow nudge on "Learn More →" links */
+.arrow-link span { display: inline-block; transition: transform var(--dur-base) var(--ease-out); }
+.arrow-link:hover span, .arrow-link:focus-visible span { transform: translateX(4px); }
+
+/* Image zoom inside cards on hover (blog cards) */
+.blog-card { overflow: hidden; }
+.blog-card img { transition: transform 600ms var(--ease-out); }
+.blog-card:hover img { transform: scale(1.06); }
+
+/* Solid placeholder behind images so lazy images never pop in from white */
+picture img { background-color: var(--color-blush-soft); }
+
+/* Testimonial slider track */
+.t-track { will-change: transform; }
+
+/* View Transitions — soft fade + slight rise, no hard cuts */
+::view-transition-old(root) { animation: vt-out 240ms ease-out both; }
+::view-transition-new(root) { animation: vt-in 340ms ease-out both; }
+@keyframes vt-out { to { opacity: 0; } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .marquee-track, .float-soft { animation: none; }
+  .marquee-track, .float-soft, .sparkle-twinkle, .kenburns, .branch-sway { animation: none; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;

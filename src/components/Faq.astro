@@ -33,20 +33,23 @@ const { id, items } = Astro.props;
 </div>
 
 <script define:vars={{ id }}>
-  const list = document.getElementById(id);
-  list?.querySelectorAll('.faq-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const item = btn.closest('.faq-item');
-      if (!item || !list) return;
-      const wasOpen = item.getAttribute('data-open') === 'true';
-      list.querySelectorAll('.faq-item').forEach((el) => {
-        el.setAttribute('data-open', 'false');
-        el.querySelector('.faq-btn')?.setAttribute('aria-expanded', 'false');
+  // Re-binds after every view-transition navigation (bundled module scripts run only once).
+  document.addEventListener('astro:page-load', () => {
+    const list = document.getElementById(id);
+    list?.querySelectorAll('.faq-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        if (!item || !list) return;
+        const wasOpen = item.getAttribute('data-open') === 'true';
+        list.querySelectorAll('.faq-item').forEach((el) => {
+          el.setAttribute('data-open', 'false');
+          el.querySelector('.faq-btn')?.setAttribute('aria-expanded', 'false');
+        });
+        if (!wasOpen) {
+          item.setAttribute('data-open', 'true');
+          btn.setAttribute('aria-expanded', 'true');
+        }
       });
-      if (!wasOpen) {
-        item.setAttribute('data-open', 'true');
-        btn.setAttribute('aria-expanded', 'true');
-      }
     });
   });
 </script>

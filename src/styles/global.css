@@ -40,7 +40,12 @@
   --color-blush: #f9b8b8;
   --color-blush-soft: #fbd9d3;
   --color-rose: #e78f8f;
-  --color-rose-deep: #d96f6f;
+  --color-rose-deep: #b04a4a;
+  /* Button rose — the lightest rose that still gives white text 4.5:1+
+     (4.89:1). --color-rose (#e78f8f) is only 2.41:1 with white text, so
+     every rose surface that carries white text uses this token instead.
+     Decorative fills (bars, dots, progress) keep --color-rose. */
+  --color-rose-btn: #bf4a4a;
   --color-wine: #6e2434;
   --color-ink: #3d1e26;
   --color-muted: #7a5a5e;
@@ -88,15 +93,31 @@ body {
 .arch { border-radius: 999px 999px 1.75rem 1.75rem; }
 .arch-flip { border-radius: 999px 999px 1.75rem 6rem; }
 
+/* Decorative background words ("About Us", "Our Services"). They are NOT
+   text: the word is a background-image SVG, so axe/Lighthouse cannot flag
+   it for contrast (it is meant to be faint — #f6e3d6 / #f8e9de on cream).
+   The span keeps the font-size classes of the old text version, and the
+   box sizes itself in em so it scales with those classes. */
 .watermark {
   position: absolute;
   font-family: var(--font-display);
   font-weight: 700;
-  color: #f6e3d6;
   line-height: 1;
   white-space: nowrap;
   pointer-events: none;
   user-select: none;
+  display: block;
+  width: 7em;
+  height: 1.2em;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+.watermark-about {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='140'%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia, serif' font-weight='700' font-size='108' fill='%23f8e9de'%3EAbout Us%3C/text%3E%3C/svg%3E");
+}
+.watermark-services {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='820' height='140'%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia, serif' font-weight='700' font-size='104' fill='%23f6e3d6'%3EOur Services%3C/text%3E%3C/svg%3E");
 }
 
 /* Sticky header state — solid cream always: the old 0.88-alpha + blur let
@@ -195,8 +216,17 @@ body {
   .curve-top { border-radius: 50% 50% 0 0 / 4.5rem 4.5rem 0 0; }
 }
 
-/* Softer watermark — closer to the design's very faint one */
-.watermark-soft { color: #f8e9de; }
+/* Pages dropdown — click/tap support (touch devices have no hover).
+   Hover/focus still work via group-hover / group-focus-within in the
+   markup; this rule covers the click-open state that motion.ts sets on
+   the wrapper ([data-pages-open="true"]). It mirrors the hover state:
+   visible + opaque + translate-y-0 (Tailwind v4 stores the translate in
+   --tw-translate-y, so that variable is what gets reset). */
+.group[data-pages-open="true"] .pages-panel {
+  visibility: visible;
+  opacity: 1;
+  --tw-translate-y: 0;
+}
 
 /* Masked headline lines: each line slides up out of its own mask (JS-driven) */
 .mask-line { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }

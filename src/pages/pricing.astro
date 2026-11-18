@@ -34,7 +34,11 @@ const pricingLd = {
           priceCurrency: 'INR',
           availability: 'https://schema.org/InStock',
           url: 'https://femine.pages.dev/pricing/',
-          itemOffered: { '@type': 'Service', name: 'Femine personality coaching' },
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Femine personality coaching',
+            provider: { '@type': 'ProfessionalService', name: 'Femine', url: 'https://femine.pages.dev', telephone: '+91 98765 43210', image: 'https://femine.pages.dev/og.png' },
+          },
         },
       })),
     },
@@ -58,7 +62,7 @@ const pricingLd = {
           {plans.map((p) => (
             <article class={`relative flex flex-col rounded-[2rem] px-7 py-9 ${p.featured ? 'bg-wine text-white shadow-xl shadow-wine/25 md:-translate-y-3' : 'bg-cream shadow-sm'}`}>
               {p.featured && (
-                <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-rose px-4 py-1.5 text-[13px] font-semibold text-white shadow">Most popular</span>
+                <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-rose-btn px-4 py-1.5 text-[13px] font-semibold text-white shadow">Most popular</span>
               )}
               <h2 class={`font-display text-2xl font-semibold ${p.featured ? 'text-white' : 'text-ink'}`}>{p.name}</h2>
               <p class={`mt-3 font-display text-4xl font-bold ${p.featured ? 'text-white' : 'text-ink'}`}>{p.price}</p>
@@ -71,7 +75,7 @@ const pricingLd = {
                   </li>
                 ))}
               </ul>
-              <a href={`/book?plan=${planSlug(p.name)}`} class={`mt-8 inline-flex min-h-12 items-center justify-center rounded-full text-[15px] font-medium transition ${p.featured ? 'bg-white text-wine shadow-lg hover:bg-cream' : 'bg-rose text-white shadow-md shadow-rose/30 hover:bg-rose-deep'}`}>Book a free call →</a>
+              <a href={`/book?plan=${planSlug(p.name)}`} class={`mt-8 inline-flex min-h-12 items-center justify-center rounded-full text-[15px] font-medium transition ${p.featured ? 'bg-white text-wine shadow-lg hover:bg-cream' : 'bg-rose-btn text-white shadow-md shadow-rose/30 hover:bg-rose-deep'}`}>Book a free call →</a>
             </article>
           ))}
         </div>
@@ -90,7 +94,7 @@ const pricingLd = {
               <div class="rounded-[2rem] border-2 border-dashed border-rose/40 bg-cream px-6 py-7 text-center">
                 <p class="font-display text-3xl font-bold text-wine">{g.amount}</p>
                 <p class="mt-2 text-sm leading-relaxed text-muted">{g.text}</p>
-                <a href={`/book?plan=${giftSlug(g.amount)}`} class="mt-5 inline-flex min-h-11 items-center rounded-full bg-rose px-6 text-sm font-medium text-white transition hover:bg-rose-deep">Gift {g.amount} →</a>
+                <a href={`/book?plan=${giftSlug(g.amount)}`} class="mt-5 inline-flex min-h-11 items-center rounded-full bg-rose-btn px-6 text-sm font-medium text-white transition hover:bg-rose-deep">Gift {g.amount} →</a>
               </div>
             ))}
           </div>

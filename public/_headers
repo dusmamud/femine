@@ -8,3 +8,15 @@
 # could stay stuck behind an old copy for returning visitors.
 /sw.js
   Cache-Control: no-cache
+
+# Self-hosted videos are large and never change in place — cache them for
+# a year. (Fixes PageSpeed "Use efficient cache lifetimes" on /about/:
+# coach-intro.mp4 alone is 749 KiB with no cache rule.)
+/videos/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Astro's hashed build assets (_astro/*.avif/.webp/.js/.css) are
+# content-addressed — a changed file gets a new name, so a year of
+# immutable caching is safe and removes repeat-download waste.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable

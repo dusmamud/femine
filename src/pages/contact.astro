@@ -30,7 +30,7 @@ const info: InfoCard[] = [
 
         <div class="space-y-5" data-reveal>
           <figure class="relative overflow-hidden rounded-[2rem] shadow-lg shadow-rose/10">
-            <Picture src={contactImg} alt="A warm handshake — the start of working together" widths={[480, 960]} sizes="(max-width: 1024px) 100vw, 40vw" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="eager" fetchpriority="high" class="aspect-[4/3] w-full object-cover" />
+            <Picture src={contactImg} alt="A warm handshake — the start of working together" widths={[480, 720, 960]} sizes="(max-width: 1024px) 100vw, 40vw" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="eager" fetchpriority="high" class="aspect-[4/3] w-full object-cover" />
             <figcaption class="absolute bottom-3 left-3 rounded-full bg-white px-4 py-2 text-[13px] font-medium text-ink shadow">✦ We reply within 24 hours</figcaption>
           </figure>
           {info.map((c) => (

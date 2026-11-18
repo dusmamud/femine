@@ -5,6 +5,8 @@ import Footer from '../components/Footer.astro';
 import PageHero from '../components/PageHero.astro';
 import { caseStudies, outcomeStats } from '../data/results';
 
+const monthNum: Record<string, string> = { January: '01', February: '02', March: '03', April: '04', May: '05', June: '06', July: '07', August: '08', September: '09', October: '10', November: '11', December: '12' };
+const toISO = (d: string) => { const [m, y] = d.split(' '); return `${y}-${monthNum[m]}-01`; };
 const resultsLd = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -16,7 +18,8 @@ const resultsLd = {
     },
     ...caseStudies.map((c) => ({
       '@type': 'Review',
-      author: { '@type': 'Person', name: c.name },
+      author: { '@type': 'Person', name: c.name, jobTitle: c.role },
+      datePublished: toISO(c.date),
       reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
       reviewBody: c.quote,
       itemReviewed: { '@type': 'ProfessionalService', name: 'Femine', url: 'https://femine.pages.dev' },

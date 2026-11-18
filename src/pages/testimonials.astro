@@ -1,5 +1,5 @@
 ---
-import { Picture } from 'astro:assets';
+import { Picture, getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -10,9 +10,15 @@ import { googleUrl } from '../data/site';
 import avatarAnanya from '../assets/avatar-ananya.jpg';
 import avatarPriya from '../assets/avatar-priya.jpg';
 
+// Video posters as small generated AVIFs, NOT the full original avatar
+// JPGs (338 KB + 343 KB). The old poster={avatar.src} was the whole
+// 609 KiB image-delivery saving on /testimonials/ (PageSpeed mobile).
+const posterAnanya = await getImage({ src: avatarAnanya, width: 640, format: 'avif' });
+const posterPriya = await getImage({ src: avatarPriya, width: 640, format: 'avif' });
+
 const videoStories = [
-  { title: 'From quiet to confident', name: 'Sneha Desai', programme: 'Growth Career', poster: avatarAnanya.src },
-  { title: 'Saying no, without the guilt', name: 'Ritu Malhotra', programme: 'Relationships', poster: avatarPriya.src },
+  { title: 'From quiet to confident', name: 'Sneha Desai', programme: 'Growth Career', poster: posterAnanya.src },
+  { title: 'Saying no, without the guilt', name: 'Ritu Malhotra', programme: 'Relationships', poster: posterPriya.src },
 ];
 const monthNum: Record<string, string> = { January: '01', February: '02', March: '03', April: '04', May: '05', June: '06', July: '07', August: '08', September: '09', October: '10', November: '11', December: '12' };
 const toISO = (d: string) => { const [m, y] = d.split(' '); return `${y}-${monthNum[m]}-01`; };
@@ -27,7 +33,8 @@ const reviewsLd = {
     },
     ...testimonials.map((t) => ({
       '@type': 'Review',
-      author: { '@type': 'Person', name: t.name },
+      author: { '@type': 'Person', name: t.name, jobTitle: t.role },
+      datePublished: toISO(t.date),
       reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
       reviewBody: t.quote,
       itemReviewed: { '@type': 'ProfessionalService', name: 'Femine', url: 'https://femine.pages.dev' },
@@ -46,7 +53,7 @@ const reviewsLd = {
       description: 'Sneha Desai, Growth Career — what changed, in her own words.',
       thumbnailUrl: 'https://femine.pages.dev/og.png',
       contentUrl: 'https://femine.pages.dev/videos/client-story.mp4',
-      uploadDate: '2026-11-15',
+      uploadDate: '2026-11-15T00:00:00+05:30',
       duration: 'PT6S',
     },
     {
@@ -55,7 +62,7 @@ const reviewsLd = {
       description: 'Ritu Malhotra, Relationships — what changed, in her own words.',
       thumbnailUrl: 'https://femine.pages.dev/og.png',
       contentUrl: 'https://femine.pages.dev/videos/client-story.mp4',
-      uploadDate: '2026-11-15',
+      uploadDate: '2026-11-15T00:00:00+05:30',
       duration: 'PT6S',
     },
   ],

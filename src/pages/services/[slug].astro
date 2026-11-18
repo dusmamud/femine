@@ -15,20 +15,35 @@ const others = services.filter((x) => x.slug !== s.slug);
 const priceNum = Number(s.priceFrom.replace(/[^0-9]/g, ''));
 const serviceLd = {
   '@context': 'https://schema.org',
-  '@type': 'Service',
-  name: `${s.title} Coaching`,
-  description: s.long,
-  provider: { '@type': 'ProfessionalService', name: 'Femine', url: 'https://femine.pages.dev' },
-  areaServed: 'India',
-  serviceType: s.title,
-  offers: {
-    '@type': 'Offer',
-    price: priceNum,
-    priceCurrency: 'INR',
-    availability: 'https://schema.org/InStock',
-    url: new URL(Astro.url.pathname, Astro.site).href,
-  },
-  speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.lead-answer'] },
+  '@graph': [
+    {
+      '@type': 'Service',
+      name: `${s.title} Coaching`,
+      description: s.long,
+      provider: {
+        '@type': 'ProfessionalService',
+        name: 'Femine',
+        url: 'https://femine.pages.dev',
+        telephone: '+91 98765 43210',
+        email: 'hello@femine.in',
+        image: 'https://femine.pages.dev/og.png',
+      },
+      areaServed: 'India',
+      serviceType: s.title,
+      offers: {
+        '@type': 'Offer',
+        price: priceNum,
+        priceCurrency: 'INR',
+        availability: 'https://schema.org/InStock',
+        url: new URL(Astro.url.pathname, Astro.site).href,
+      },
+    },
+    {
+      '@type': 'WebPage',
+      '@id': new URL(Astro.url.pathname, Astro.site).href,
+      speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.lead-answer'] },
+    },
+  ],
 };
 ---
 <Layout title={`${s.title} Coaching — Femine`} description={s.short} jsonLd={serviceLd} ogImage={new URL(s.image.src, Astro.site).href} ogImageWidth={s.image.width} ogImageHeight={s.image.height}>
@@ -40,7 +55,7 @@ const serviceLd = {
       <div class="mx-auto grid max-w-6xl gap-12 px-5 lg:grid-cols-[1.5fr_1fr] lg:gap-16 lg:px-8">
         <div data-reveal>
           <div class="overflow-hidden rounded-[2rem] shadow-lg shadow-rose/10">
-            <Picture src={s.image} alt={s.imageAlt} widths={[480, 960]} sizes="(max-width: 1024px) 100vw, 60vw" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="eager" fetchpriority="high" class="aspect-[16/9] w-full object-cover" />
+            <Picture src={s.image} alt={s.imageAlt} widths={[480, 720, 960]} sizes="(max-width: 1024px) 100vw, 60vw" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="eager" fetchpriority="high" class="aspect-[16/9] w-full object-cover" />
           </div>
           <h2 class="fluid-h2 mt-8 font-display font-semibold text-ink">What this programme covers</h2>
           <p class="lead-answer mt-5 text-lg font-medium leading-relaxed text-ink">{s.lead}</p>
@@ -48,7 +63,7 @@ const serviceLd = {
           <ul class="mt-8 space-y-3.5">
             {s.benefits.map((b) => (
               <li class="flex gap-3 rounded-2xl bg-cream px-5 py-4 text-[15px] leading-relaxed text-ink">
-                <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-rose text-[13px] font-bold text-white" aria-hidden="true">✓</span>{b}
+                <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-rose-btn text-[13px] font-bold text-white" aria-hidden="true">✓</span>{b}
               </li>
             ))}
           </ul>
@@ -69,7 +84,7 @@ const serviceLd = {
               <div class="flex justify-between gap-4"><dt class="text-muted">Price</dt><dd class="font-medium text-ink">From {s.priceFrom}</dd></div>
               <div class="flex justify-between gap-4"><dt class="text-muted">First call</dt><dd class="font-medium text-ink">30 min · Free</dd></div>
             </dl>
-            <a href="/book" class="mt-7 flex min-h-12 items-center justify-center rounded-full bg-rose px-6 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Book a free call →</a>
+            <a href="/book" class="mt-7 flex min-h-12 items-center justify-center rounded-full bg-rose-btn px-6 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Book a free call →</a>
             <p class="mt-4 text-center text-[13px] text-muted">Reschedule free up to 12 hours before.</p>
           </div>
         </aside>

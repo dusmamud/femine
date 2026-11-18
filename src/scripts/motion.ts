@@ -82,8 +82,24 @@ function initPage() {
   menuBtn?.addEventListener('click', () => setMenuOpen(menu?.dataset.open !== 'true'));
   menu?.addEventListener('click', (e) => { if (e.target === menu) setMenuOpen(false); });
   menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenuOpen(false)));
-  // "Pages" is a dropdown label, not a page — don't navigate on click.
-  document.querySelector('[data-pages-toggle]')?.addEventListener('click', (e) => e.preventDefault());
+  // "Pages" is a dropdown label, not a page — the button toggles the panel
+  // (touch devices have no hover). Closes on Escape, on outside click, and
+  // when a link inside it is chosen.
+  const pagesToggle = document.querySelector<HTMLElement>('[data-pages-toggle]');
+  const pagesGroup = pagesToggle?.closest<HTMLElement>('[data-pages-group]');
+  function setPagesOpen(open: boolean) {
+    if (!pagesGroup || !pagesToggle) return;
+    pagesGroup.dataset.pagesOpen = String(open);
+    pagesToggle.setAttribute('aria-expanded', String(open));
+  }
+  pagesToggle?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setPagesOpen(pagesGroup?.dataset.pagesOpen !== 'true');
+  });
+  pagesGroup?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setPagesOpen(false)));
+  document.addEventListener('click', (e) => {
+    if (pagesGroup && !pagesGroup.contains(e.target as Node)) setPagesOpen(false);
+  });
 
   // ---- Video lightbox (hero play button) ----
   const modal = document.getElementById('video-modal');
@@ -110,6 +126,7 @@ function initPage() {
     if (e.key === 'Escape') {
       setVideoOpen(false);
       setMenuOpen(false);
+      setPagesOpen(false);
     }
   };
   document.addEventListener('keydown', keyHandler);
@@ -174,7 +191,7 @@ function initPage() {
     if (!input || !msg) return;
     if (!input.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
       msg.textContent = 'Please enter a valid email address.';
-      msg.className = 'mt-3 text-sm text-rose-deep';
+      msg.className = 'mt-3 text-sm font-medium text-white';
       input.focus();
       return;
     }

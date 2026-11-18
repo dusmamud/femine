@@ -13,6 +13,21 @@ const eventsLd = {
       '@id': 'https://femine.pages.dev/events/',
       speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.lead-answer'] },
     },
+    {
+      '@type': 'Event',
+      name: nextWorkshop.title,
+      description: 'A 3-hour in-person Femine workshop in Mumbai — live practice, the 3-sentence method for speaking up, the decision filter, a printed workbook and the 7-day confidence plan. Maximum 12 seats.',
+      startDate: '2026-11-28T10:00:00+05:30',
+      endDate: '2026-11-28T13:00:00+05:30',
+      eventStatus: 'https://schema.org/EventScheduled',
+      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+      location: {
+        '@type': 'Place',
+        name: 'Mumbai — venue confirmed after booking',
+        address: { '@type': 'PostalAddress', addressLocality: 'Mumbai', addressCountry: 'IN' },
+      },
+      organizer: { '@type': 'ProfessionalService', name: 'Femine', url: 'https://femine.pages.dev' },
+    },
   ],
 };
 ---
@@ -50,7 +65,7 @@ const eventsLd = {
                 <li class="flex gap-3"><span class="text-rose-deep" aria-hidden="true">✓</span>{item}</li>
               ))}
             </ul>
-            <a href="/book" class="mt-7 inline-flex min-h-12 items-center rounded-full bg-rose px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Book a free call to reserve →</a>
+            <a href="/book" class="mt-7 inline-flex min-h-12 items-center rounded-full bg-rose-btn px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Book a free call to reserve →</a>
           </article>
         </div>
 
@@ -61,14 +76,14 @@ const eventsLd = {
               <h2 class="font-display text-[22px] font-semibold text-ink">Corporate workshops for your team</h2>
               <p class="mt-2 text-[15px] leading-relaxed text-muted">Half-day, 3-hour workshops for teams of 8 to 40 — communication, presentation skills, feedback without friction, and leadership presence. Designed around your team&rsquo;s real challenges, online or on-site. From ₹14,999.</p>
             </div>
-            <a href="/contact" class="inline-flex min-h-12 shrink-0 items-center rounded-full bg-rose px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Enquire for your team →</a>
+            <a href="/contact" class="inline-flex min-h-12 shrink-0 items-center rounded-full bg-rose-btn px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Enquire for your team →</a>
           </div>
         </div>
 
         <div class="mt-16 text-center" data-reveal>
           <h2 class="font-display text-2xl font-semibold text-ink">Not sure a workshop is right for you?</h2>
           <p class="mx-auto mt-3 max-w-lg text-[15px] leading-relaxed text-muted">Book a free 30-minute call first. We will talk about what you want to change and tell you honestly whether a workshop, a programme, or nothing at all is the best next step.</p>
-          <a href="/book" class="mt-6 inline-flex min-h-12 items-center rounded-full bg-rose px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Book your free call →</a>
+          <a href="/book" class="mt-6 inline-flex min-h-12 items-center rounded-full bg-rose-btn px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Book your free call →</a>
         </div>
       </div>
     </section>

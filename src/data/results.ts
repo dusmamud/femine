@@ -7,6 +7,8 @@ export interface CaseStudy {
   role: string;
   programme: string;
   duration: string;
+  // Mock review month (MOCK DATA — Dus replaces with real dates before launch).
+  date: string;
   before: string;
   after: string;
   outcomes: string[];
@@ -16,6 +18,7 @@ export interface CaseStudy {
 export const caseStudies: CaseStudy[] = [
   {
     name: 'Sneha Desai',
+    date: 'October 2026',
     role: 'Marketing Manager, Mumbai',
     programme: 'Growth Career',
     duration: '8 sessions · 4 months',
@@ -26,6 +29,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     name: 'Ritu Malhotra',
+    date: 'September 2026',
     role: 'Returning to work after a career break, Delhi',
     programme: 'Relationships',
     duration: '4 sessions · 2 months',
@@ -36,6 +40,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     name: 'Aisha Khan',
+    date: 'August 2026',
     role: 'Final-year student, Bengaluru',
     programme: 'Identifying Passion',
     duration: '4 sessions · 6 weeks',

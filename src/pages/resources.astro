@@ -61,7 +61,7 @@ const resourcesLd = {
           {posts.map((p) => (
             <article class="flex flex-col overflow-hidden rounded-[2rem] bg-cream shadow-sm transition hover:shadow-lg">
               <a href={`/blog/${slug(p.id)}`} class="block" aria-label={p.data.title}>
-                <Picture src={p.data.image} alt={p.data.imageAlt} widths={[480, 960]} sizes="(max-width: 768px) 100vw, 33vw" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="lazy" class="aspect-[16/10] w-full object-cover" />
+                <Picture src={p.data.image} alt={p.data.imageAlt} widths={[480, 720, 960]} sizes="(max-width: 768px) 100vw, 33vw" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="lazy" class="aspect-[16/10] w-full object-cover" />
               </a>
               <div class="flex flex-1 flex-col px-6 py-6">
                 <p class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] font-medium text-muted">
@@ -89,7 +89,7 @@ const resourcesLd = {
               <h3 class="font-display text-[22px] font-semibold text-ink">Five practical tools, 8 pages, free</h3>
               <p class="mt-2 text-[15px] leading-relaxed text-muted">A 2-minute confidence reset, saying no without guilt, a decision filter, speaking up in meetings, and a 7-day confidence plan. Enter your name and email, and the PDF is yours.</p>
             </div>
-            <a href="/free-guide" class="inline-flex min-h-12 shrink-0 items-center rounded-full bg-rose px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Get the free guide →</a>
+            <a href="/free-guide" class="inline-flex min-h-12 shrink-0 items-center rounded-full bg-rose-btn px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Get the free guide →</a>
           </div>
         </div>
 
@@ -122,12 +122,12 @@ const resourcesLd = {
           <article class="rounded-[2rem] bg-cream px-6 py-8">
             <h3 class="font-display text-[22px] font-semibold text-ink">Find your programme</h3>
             <p class="mt-2 text-[15px] leading-relaxed text-muted">Not sure where to start? A short quiz points you to the coaching programme that fits what you want to change.</p>
-            <a href="/quiz" class="mt-5 inline-flex min-h-12 items-center rounded-full bg-rose px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Take the quiz →</a>
+            <a href="/quiz" class="mt-5 inline-flex min-h-12 items-center rounded-full bg-rose-btn px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Take the quiz →</a>
           </article>
           <article class="rounded-[2rem] bg-cream px-6 py-8">
             <h3 class="font-display text-[22px] font-semibold text-ink">7-Day Confidence Challenge</h3>
             <p class="mt-2 text-[15px] leading-relaxed text-muted">One small brave thing a day for seven days — one short email a day to keep you going. Free, no card needed.</p>
-            <a href="/challenges" class="mt-5 inline-flex min-h-12 items-center rounded-full bg-rose px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Start the challenge →</a>
+            <a href="/challenges" class="mt-5 inline-flex min-h-12 items-center rounded-full bg-rose-btn px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Start the challenge →</a>
           </article>
         </div>
 

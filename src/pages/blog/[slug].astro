@@ -72,7 +72,7 @@ const articleLd = {
         </div>
 
         <div class="mt-10 text-center" data-reveal>
-          <a href="/book" class="inline-flex min-h-12 items-center rounded-full bg-rose px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Book your free session →</a>
+          <a href="/book" class="inline-flex min-h-12 items-center rounded-full bg-rose-btn px-8 text-[15px] font-medium text-white shadow-md shadow-rose/30 transition hover:bg-rose-deep">Book your free session →</a>
         </div>
       </div>
     </section>
@@ -85,7 +85,7 @@ const articleLd = {
             {others.map((p) => (
               <article class="flex flex-col overflow-hidden rounded-[2rem] bg-white shadow-sm transition hover:shadow-lg">
                 <a href={`/blog/${slug(p.id)}`} class="block" aria-label={p.data.title}>
-                  <Picture src={p.data.image} alt={p.data.imageAlt} widths={[480, 960]} sizes="(max-width: 768px) 100vw, 50vw" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="lazy" class="aspect-[16/10] w-full object-cover" />
+                  <Picture src={p.data.image} alt={p.data.imageAlt} widths={[480, 720, 960]} sizes="(max-width: 768px) 100vw, 50vw" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="lazy" class="aspect-[16/10] w-full object-cover" />
                 </a>
                 <div class="flex flex-1 flex-col px-6 py-6">
                   <p class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] font-medium text-muted">

@@ -48,7 +48,7 @@ const servicesLd = {
           {services.map((s) => (
             <article class="flex flex-col overflow-hidden rounded-[2rem] bg-cream shadow-sm">
               <div class="relative">
-                <Picture src={s.image} alt={s.imageAlt} widths={[480, 720, 960]} sizes="(max-width: 768px) 100vw, 50vw" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="lazy" class="aspect-[16/10] w-full object-cover" />
+                <Picture src={s.image} alt={s.imageAlt} widths={[480, 720, 960]} sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1023px) 468px, 532px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={72} loading="lazy" class="aspect-[16/10] w-full object-cover" />
                 <span class="absolute bottom-3 right-3 rounded-full bg-white px-3 py-1.5 text-[13px] font-semibold text-wine shadow">{s.priceFrom} / session</span>
               </div>
               <div class="flex flex-1 flex-col px-7 py-8">

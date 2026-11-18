@@ -13,7 +13,7 @@ import { coach } from '../data/site';
 // (446 KB). The old poster={heroImg.src} loaded the unoptimised original
 // and was the single biggest image on /about/ (PageSpeed image delivery
 // 596 KiB on mobile).
-const heroPoster = await getImage({ src: heroImg, width: 720, format: 'avif' });
+const heroPoster = await getImage({ src: heroImg, width: 560, format: 'avif', quality: 50 });
 
 const values = [
   { title: 'Practical, never preachy', text: 'Every session ends with one small thing you can actually do this week — not a lecture you forget by dinner.' },
@@ -71,10 +71,10 @@ const personLd = {
       <div class="mx-auto grid max-w-6xl items-center gap-10 px-5 sm:gap-12 lg:grid-cols-2 lg:gap-16 lg:px-8">
         <div class="relative mx-auto w-full max-w-[340px] pb-10 pr-6 sm:max-w-[420px] sm:pb-12" data-reveal>
           <div class="arch relative overflow-hidden bg-blush shadow-xl shadow-rose/20">
-            <Picture src={welcomeImg} alt="Woman looking up with confidence" widths={[360, 560, 720]} sizes="(max-width: 640px) 340px, 420px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="eager" fetchpriority="high" class="aspect-[4/5] w-full object-cover object-top" />
+            <Picture src={welcomeImg} alt="Woman looking up with confidence" widths={[360, 420, 560, 720]} sizes="(max-width: 640px) 340px, 420px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={72} loading="eager" fetchpriority="high" class="aspect-[4/5] w-full object-cover object-top" />
           </div>
           <figure class="absolute bottom-0 right-0 w-40 rounded-3xl border-4 border-white bg-white shadow-xl sm:w-48">
-            <Picture src={coachImg} alt="Two women in a warm coaching conversation" widths={[200, 400]} sizes="200px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="lazy" class="aspect-[4/3] w-full rounded-[1.25rem] object-cover" />
+            <Picture src={coachImg} alt="Two women in a warm coaching conversation" widths={[200, 320, 400]} sizes="(max-width: 640px) 152px, 184px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={72} loading="lazy" class="aspect-[4/3] w-full rounded-[1.25rem] object-cover" />
             <figcaption class="px-3 py-2.5 text-center text-[12px] font-medium leading-tight text-ink">Your coach,<br /><span class="text-muted">in every session</span></figcaption>
           </figure>
         </div>
@@ -105,7 +105,7 @@ const personLd = {
       <div class="mx-auto grid max-w-6xl items-center gap-10 px-5 sm:gap-12 lg:grid-cols-2 lg:gap-16 lg:px-8">
         <div data-reveal>
           <div class="arch relative mx-auto w-full max-w-[340px] overflow-hidden bg-blush shadow-xl shadow-rose/20 sm:max-w-[420px]">
-            <Picture src={heroImg} alt={`${coach.name}, founder and lead coach at Femine`} widths={[360, 560, 720]} sizes="(max-width: 640px) 340px, 420px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="lazy" class="aspect-[3/4] w-full object-cover object-top" />
+            <Picture src={heroImg} alt={`${coach.name}, founder and lead coach at Femine`} widths={[360, 420, 560, 720]} sizes="(max-width: 640px) 340px, 420px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={72} loading="lazy" class="aspect-[3/4] w-full object-cover object-top" />
           </div>
           <p class="mt-6 text-center text-sm text-muted"><strong class="font-semibold text-ink">{coach.name}</strong> · {coach.role}</p>
           <figure class="mx-auto mt-8 max-w-[420px]">

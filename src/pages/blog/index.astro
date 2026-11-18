@@ -38,7 +38,7 @@ const filters = ['All', ...categories];
           {posts.map((p) => (
             <article data-category={p.data.category} class="flex flex-col overflow-hidden rounded-[2rem] bg-cream shadow-sm transition hover:shadow-lg">
               <a href={`/blog/${slug(p.id)}`} class="block" aria-label={p.data.title}>
-                <Picture src={p.data.image} alt={p.data.imageAlt} widths={[480, 720, 960]} sizes="(max-width: 768px) 100vw, 33vw" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="lazy" class="aspect-[16/10] w-full object-cover" />
+                <Picture src={p.data.image} alt={p.data.imageAlt} widths={[480, 720, 960]} sizes="(max-width: 767px) calc(100vw - 40px), 349px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={72} loading="lazy" class="aspect-[16/10] w-full object-cover" />
               </a>
               <div class="flex flex-1 flex-col px-6 py-6">
                 <p class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] font-medium text-muted">

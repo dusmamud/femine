@@ -152,7 +152,7 @@ const pageLd = {
 
       <div data-hero-img class="relative mx-auto w-full max-w-[340px] sm:max-w-[420px]">
         <div class="arch relative overflow-hidden bg-blush shadow-xl shadow-rose/20">
-          <Picture src={heroImg} alt="Smiling woman holding a notebook" widths={[360, 560, 720]} sizes="(max-width: 640px) 340px, 420px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="eager" fetchpriority="high" class="kenburns aspect-[3/4] w-full object-cover object-top" data-parallax />
+          <Picture src={heroImg} alt="Smiling woman holding a notebook" widths={[360, 420, 560, 720]} sizes="(max-width: 640px) 340px, 420px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={72} loading="eager" fetchpriority="high" class="kenburns aspect-[3/4] w-full object-cover object-top" data-parallax />
         </div>
         <Branch class="branch-sway absolute -left-10 bottom-2 hidden h-64 w-auto sm:block lg:-left-16" />
         <div class="absolute -right-2 top-1/2 flex -translate-y-1/2 flex-col gap-3 lg:-right-6" aria-hidden="true">
@@ -187,7 +187,7 @@ const pageLd = {
     <div class="relative mx-auto grid max-w-6xl items-center gap-10 px-5 sm:gap-12 lg:grid-cols-2 lg:gap-16 lg:px-8">
       <div class="relative mx-auto w-full max-w-[340px] sm:max-w-[420px]" data-reveal>
         <div class="arch relative overflow-hidden bg-blush shadow-xl shadow-rose/20">
-          <Picture src={welcomeImg} alt="Woman looking up with confidence" widths={[360, 560, 720]} sizes="(max-width: 640px) 340px, 420px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="lazy" class="clip-reveal-img aspect-[4/5] w-full object-cover object-top" />
+          <Picture src={welcomeImg} alt="Woman looking up with confidence" widths={[360, 420, 560, 720]} sizes="(max-width: 640px) 340px, 420px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={72} loading="lazy" class="clip-reveal-img aspect-[4/5] w-full object-cover object-top" />
         </div>
         <Branch class="branch-sway absolute -left-8 bottom-2 hidden h-60 w-auto sm:block lg:-left-14" />
         <div class="absolute -left-2 top-1/2 flex -translate-y-1/2 flex-col gap-3 lg:-left-6" aria-hidden="true">
@@ -420,7 +420,7 @@ const pageLd = {
         {latestPosts.map((p) => (
           <article class="blog-card flex flex-col overflow-hidden rounded-[2rem] bg-white shadow-sm transition hover:shadow-lg">
             <a href={`/blog/${postSlug(p.id)}`} class="block" aria-label={p.data.title}>
-              <Picture src={p.data.image} alt={p.data.imageAlt} widths={[480, 720, 960]} sizes="(max-width: 768px) 100vw, 33vw" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="lazy" class="aspect-[16/10] w-full object-cover" />
+              <Picture src={p.data.image} alt={p.data.imageAlt} widths={[480, 720, 960]} sizes="(max-width: 767px) calc(100vw - 40px), 349px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={72} loading="lazy" class="aspect-[16/10] w-full object-cover" />
             </a>
             <div class="flex flex-1 flex-col px-6 py-6">
               <p class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] font-medium text-muted">
@@ -468,7 +468,7 @@ const pageLd = {
 
       <div class="relative mx-auto w-full max-w-[340px] sm:max-w-[420px]" data-reveal>
         <div class="arch relative overflow-hidden bg-blush shadow-xl shadow-rose/20">
-          <Picture src={expertiseImg} alt="Woman in a pink knit sweater smiling" widths={[360, 560, 720]} sizes="(max-width: 640px) 340px, 420px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="lazy" class="clip-reveal-img aspect-[3/4] w-full object-cover object-top" data-parallax />
+          <Picture src={expertiseImg} alt="Woman in a pink knit sweater smiling" widths={[360, 420, 560, 720]} sizes="(max-width: 640px) 340px, 420px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={72} loading="lazy" class="clip-reveal-img aspect-[3/4] w-full object-cover object-top" data-parallax />
         </div>
         <Branch class="branch-sway absolute -left-10 bottom-2 hidden h-56 w-auto sm:block lg:-left-16" />
         <div class="absolute -right-2 top-1/2 flex -translate-y-1/2 flex-col gap-3 lg:-right-6" aria-hidden="true">

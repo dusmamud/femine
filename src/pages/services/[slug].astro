@@ -55,7 +55,7 @@ const serviceLd = {
       <div class="mx-auto grid max-w-6xl gap-12 px-5 lg:grid-cols-[1.5fr_1fr] lg:gap-16 lg:px-8">
         <div data-reveal>
           <div class="overflow-hidden rounded-[2rem] shadow-lg shadow-rose/10">
-            <Picture src={s.image} alt={s.imageAlt} widths={[480, 720, 960]} sizes="(max-width: 1024px) 100vw, 60vw" formats={['avif', 'webp']} fallbackFormat="jpg" quality={80} loading="eager" fetchpriority="high" class="aspect-[16/9] w-full object-cover" />
+            <Picture src={s.image} alt={s.imageAlt} widths={[480, 720, 960]} sizes="(max-width: 1023px) calc(100vw - 40px), 614px" formats={['avif', 'webp']} fallbackFormat="jpg" quality={72} loading="eager" fetchpriority="high" class="aspect-[16/9] w-full object-cover" />
           </div>
           <h2 class="fluid-h2 mt-8 font-display font-semibold text-ink">What this programme covers</h2>
           <p class="lead-answer mt-5 text-lg font-medium leading-relaxed text-ink">{s.lead}</p>
